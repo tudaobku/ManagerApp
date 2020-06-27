@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_margin="5dp"
-    android:background="@color/colorAccent"
+    android:background="#A2D3E3"
     android:orientation="horizontal"
     android:weightSum="2">
 
@@ -25,7 +25,9 @@
         android:gravity="center"
         android:text="Name of Food"
         android:textColor="@color/design_default_color_on_secondary"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
 
 
 </LinearLayout>
