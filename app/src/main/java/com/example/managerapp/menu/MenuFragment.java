@@ -128,30 +128,33 @@ public class MenuFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
-                        Food.class,
-                        R.layout.food_item,
-                        FoodViewHolder.class,
-                        foodList.orderByChild("name").equalTo(s)) {
-                    @Override
-                    protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
+                if(s.isEmpty()) recyclerMenu.setAdapter(adapterMenu);
+                else{
+                            searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
+                            Food.class,
+                            R.layout.food_item,
+                            FoodViewHolder.class,
+                            foodList.orderByChild("name").equalTo(s)) {
+                        @Override
+                        protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
 
-                        foodViewHolder.txtName.setText(food.getName());
-                        Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
+                            foodViewHolder.txtName.setText(food.getName());
+                            Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
 
-                        final Food clickItem = food;
-                        foodViewHolder.setItemClickListener(new ItemClickListener() {
-                            @Override
-                            public void onClick(View view, int position) {
-                                Intent foodDetail = new Intent(getContext(), FoodDetail.class);
-                                foodDetail.putExtra("foodID", searchAdapter.getRef(position).getKey());
-                                startActivity(foodDetail);
-                            }
-                        });
-                    }
-                };
-               adapterMenu.notifyDataSetChanged();
-               recyclerMenu.setAdapter(searchAdapter);
+                            final Food clickItem = food;
+                            foodViewHolder.setItemClickListener(new ItemClickListener() {
+                                @Override
+                                public void onClick(View view, int position) {
+                                    Intent foodDetail = new Intent(getContext(), FoodDetail.class);
+                                    foodDetail.putExtra("foodID", searchAdapter.getRef(position).getKey());
+                                    startActivity(foodDetail);
+                                }
+                            });
+                        }
+                    };
+                    adapterMenu.notifyDataSetChanged();
+                    recyclerMenu.setAdapter(searchAdapter);
+                }
                 return false;
             }
         });
