@@ -8,27 +8,23 @@
     tools:context=".SupplierLogin">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="305dp"
+        android:layout_height="650dp"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
         android:paddingTop="100dp">
 
         <ImageView
             android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_height="140dp"
             android:layout_gravity="center"
             android:src="@drawable/icon" />
 
-        <TextView
-            android:id="@+id/txtWelcome"
-            android:layout_width="300dp"
+        <ImageView
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:text="Welcome to Manager App"
-            android:textColor="@android:color/holo_green_light"
-            android:textSize="25dp" />
+            android:layout_gravity="center"
+            android:src="@drawable/a1001" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,33 +32,42 @@
             android:layout_marginTop="30dp"
             android:text="Phone Number"
             android:textColor="@android:color/holo_blue_bright"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="1111"
-            android:textSize="20dp" app:met_maxCharacters="11" />
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            app:met_maxCharacters="11" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password"
             android:textColor="@android:color/holo_blue_bright"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
+            android:inputType="textPassword"
             android:text="1111"
             android:textSize="20dp"
-            android:inputType="textPassword"
+            android:textStyle="bold"
+            android:typeface="serif"
             android:visibility="visible"
-            app:met_singleLineEllipsis="true"
-            app:met_baseColor="@android:color/white" />
+            app:met_baseColor="@android:color/white"
+            app:met_singleLineEllipsis="true" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -71,7 +76,9 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:backgroundTint="@android:color/holo_orange_light"
-            android:text="Login" />
+            android:text="Login"
+            android:textStyle="bold"
+            android:typeface="serif" />
 
     </LinearLayout>
 
