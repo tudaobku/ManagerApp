@@ -14,7 +14,8 @@
         android:paddingTop="100dp">
 
         <ImageView
-            android:layout_width="408dp"
+            android:layout_width="350dp"
+            android:layout_gravity="center"
             android:layout_height="188dp"
             android:scaleType="fitEnd"
             android:src="@drawable/nameapp"
