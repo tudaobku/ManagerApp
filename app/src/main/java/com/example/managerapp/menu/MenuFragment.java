@@ -54,7 +54,7 @@ public class MenuFragment extends Fragment {
 
     DatabaseReference foodList;
 
-    List<String> suggestList;
+
 
     public static MenuFragment newInstance() {
         return new MenuFragment();
@@ -66,6 +66,7 @@ public class MenuFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View root = inflater.inflate(R.layout.menu_fragment, container, false);
+
         recyclerMenu = root.findViewById(R.id.recycler_menu);
         recyclerMenu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
@@ -87,7 +88,6 @@ public class MenuFragment extends Fragment {
                 foodViewHolder.txtName.setText(food.getName());
                 Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
 
-                final Food clickItem = food;
                 foodViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position) {
@@ -120,6 +120,7 @@ public class MenuFragment extends Fragment {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView)searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -137,12 +138,10 @@ public class MenuFragment extends Fragment {
                             foodList.orderByChild("name").equalTo(s)) {
                         @Override
                         protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
-
                             foodViewHolder.txtName.setText(food.getName());
                             Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
 
-                            final Food clickItem = food;
-                            foodViewHolder.setItemClickListener(new ItemClickListener() {
+                             foodViewHolder.setItemClickListener(new ItemClickListener() {
                                 @Override
                                 public void onClick(View view, int position) {
                                     Intent foodDetail = new Intent(getContext(), FoodDetail.class);

@@ -1,9 +1,18 @@
 package com.example.managerapp.Model;
 
 public class Supplier {
+    private String image;
     private String name;
     private String password;
     private String supplierID;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getName() {
         return name;
@@ -32,7 +41,8 @@ public class Supplier {
     public Supplier() {
     }
 
-    public Supplier(String name, String password, String supplierID) {
+    public Supplier(String image, String name, String password, String supplierID) {
+        this.image = image;
         this.name = name;
         this.password = password;
         this.supplierID = supplierID;
