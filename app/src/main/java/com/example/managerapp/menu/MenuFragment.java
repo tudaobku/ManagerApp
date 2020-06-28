@@ -44,7 +44,6 @@ import java.util.List;
 
 public class MenuFragment extends Fragment {
 
-    MenuViewModel mViewModel;
 
     RecyclerView recyclerMenu;
     RecyclerView.LayoutManager layoutManager;
@@ -107,13 +106,7 @@ public class MenuFragment extends Fragment {
         return super.onContextItemSelected(item);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MenuViewModel.class);
-        // TODO: Use the ViewModel
 
-    }
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.food_search, menu);
