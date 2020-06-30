@@ -16,6 +16,7 @@ import com.example.managerapp.R;
 
 public class StallReportFragment extends Fragment {
 
+    private StallReportViewModel mViewModel;
 
     public static StallReportFragment newInstance() {
         return new StallReportFragment();
@@ -28,6 +29,11 @@ public class StallReportFragment extends Fragment {
         return inflater.inflate(R.layout.stall_report_fragment, container, false);
     }
 
-
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(StallReportViewModel.class);
+        // TODO: Use the ViewModel
+    }
 
 }

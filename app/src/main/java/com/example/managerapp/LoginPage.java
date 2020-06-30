@@ -30,7 +30,7 @@ public class LoginPage extends AppCompatActivity {
         btnCourt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(LoginPage.this, ManagerLogin.class));
             }
         });
     }
