@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.managerapp.Service.CommingOrder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -32,6 +33,7 @@ public class HomePage extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private TextView txtStall;
     private ImageView imgIcon;
+    Intent service;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,6 @@ public class HomePage extends AppCompatActivity {
                 startActivity(new Intent(HomePage.this, NewFood.class));
             }
         });
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -84,6 +85,8 @@ public class HomePage extends AppCompatActivity {
         imgIcon = headerView.findViewById(R.id.imgIcon);
         txtStall.setText(Common.currentSupplier.getName());
         Picasso.with(getBaseContext()).load(Common.currentSupplier.getImage()).into(imgIcon);
+        service = new Intent (HomePage.this, CommingOrder.class);
+        startService(service);
     }
 
     @Override
@@ -98,5 +101,11 @@ public class HomePage extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(service);
     }
 }

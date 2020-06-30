@@ -1,5 +1,8 @@
 package com.example.managerapp.order;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,7 +20,9 @@ import com.example.managerapp.Adapter.OrderFoodAdapter;
 import com.example.managerapp.Common;
 import com.example.managerapp.Model.Order;
 import com.example.managerapp.Model.OrderFood;
+import com.example.managerapp.NewFood;
 import com.example.managerapp.R;
+import com.example.managerapp.Service.CommingOrder;
 import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -50,6 +55,7 @@ public class OrderFragment extends Fragment {
         orderList = FirebaseDatabase.getInstance().getReference("Order");
         loadOrder();
 
+/*
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -63,7 +69,9 @@ public class OrderFragment extends Fragment {
                     adapterOrder.notifyDataSetChanged();
             }
         });
-        helper.attachToRecyclerView(recyclerOrder);
+
+        helper.attachToRecyclerView(recyclerOrder);*/
+
         return root;
 
     }
@@ -93,9 +101,27 @@ public class OrderFragment extends Fragment {
 
                 orderViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
-                    public void onClick(View view, int position) {
-                        if(order.getStatus().equals("0")) adapterOrder.getRef(position).child("status").setValue("1");
-                        else  adapterOrder.getRef(position).child("status").setValue("0");
+                    public void onClick(View view, final int position) {
+                        if(order.getStatus().equals("0")){
+                            final AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
+                            alertDialog.setTitle("Food is ready?")
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    })
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                            adapterOrder.getRef(position).child("status").setValue("1");
+                                        }
+                                    })
+                                    .setIcon(R.drawable.food)
+                                    .create();
+                            alertDialog.show();
+                        }
                     }
                 });
             }
