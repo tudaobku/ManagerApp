@@ -13,8 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.example.managerapp.Common;
+import com.example.managerapp.HomePage;
 import com.example.managerapp.Model.Order;
 import com.example.managerapp.R;
+import com.example.managerapp.menu.MenuFragment;
 import com.example.managerapp.order.OrderFragment;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -48,8 +50,10 @@ public class CommingOrder extends Service implements ChildEventListener {
 
     @Override
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-        if(snapshot.child("supplierID").getValue().equals(Common.currentSupplier.getSupplierID())){
-            Intent startIntent = new Intent(getBaseContext(), OrderFragment.class);
+        if(snapshot.child("supplierID").getValue().equals(Common.currentSupplier.getSupplierID())
+        && snapshot.child("status").getValue().equals("0")){
+            Intent startIntent = new Intent(getBaseContext(), HomePage.class);
+            startIntent.putExtra("key", "order");
             PendingIntent content = PendingIntent.getActivity(getBaseContext(), 0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder((getBaseContext()));
@@ -65,7 +69,6 @@ public class CommingOrder extends Service implements ChildEventListener {
                     .getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(1, builder.build());
         }
-
     }
 
     @Override
