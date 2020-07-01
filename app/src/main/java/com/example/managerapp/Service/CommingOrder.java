@@ -14,10 +14,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.managerapp.Common;
 import com.example.managerapp.HomePage;
-import com.example.managerapp.Model.Order;
 import com.example.managerapp.R;
-import com.example.managerapp.menu.MenuFragment;
-import com.example.managerapp.order.OrderFragment;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

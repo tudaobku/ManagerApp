@@ -1,12 +1,9 @@
-package com.example.managerapp.menu;
+package com.example.managerapp.Fragment;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,9 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Adapter;
-import android.widget.EditText;
-import android.widget.ImageView;
+
 import com.example.managerapp.Common;
 import com.example.managerapp.FoodDetail;
 import com.example.managerapp.Model.Food;
@@ -32,19 +27,14 @@ import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.FoodViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class MenuFragment extends Fragment {
 
-    MenuViewModel mViewModel;
 
     RecyclerView recyclerMenu;
     RecyclerView.LayoutManager layoutManager;
@@ -110,8 +100,7 @@ public class MenuFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MenuViewModel.class);
-        // TODO: Use the ViewModel
+
 
     }
     @Override

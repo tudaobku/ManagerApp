@@ -49,7 +49,8 @@ public class SupplierLogin extends AppCompatActivity {
                             Supplier supplier = snapshot.child(edtPhone.getText().toString()).getValue(Supplier.class);
                             if (supplier.getPassword().equals(edtPassword.getText().toString())) {
                                 Common.currentSupplier = supplier;
-                               startActivity(new Intent(SupplierLogin.this, HomePage.class));
+                                Common.currentAccount = edtPhone.getText().toString();
+                                startActivity(new Intent(SupplierLogin.this, HomePage.class));
                                 finish();
                             } else {
                                 Toast.makeText(SupplierLogin.this, "Wrong password", Toast.LENGTH_LONG).show();

@@ -1,14 +1,12 @@
-package com.example.managerapp.order;
+package com.example.managerapp.Fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,9 +18,7 @@ import com.example.managerapp.Adapter.OrderFoodAdapter;
 import com.example.managerapp.Common;
 import com.example.managerapp.Model.Order;
 import com.example.managerapp.Model.OrderFood;
-import com.example.managerapp.NewFood;
 import com.example.managerapp.R;
-import com.example.managerapp.Service.CommingOrder;
 import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
