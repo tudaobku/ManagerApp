@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.managerapp.Common;
+import com.example.managerapp.HomePage;
 import com.example.managerapp.Model.Supplier;
 import com.example.managerapp.NewSupplier;
 import com.example.managerapp.R;
@@ -92,7 +93,7 @@ public class AccountFragment extends Fragment {
     private void showCurrentInf() {
         edtName.setText(Common.currentSupplier.getName());
         edtPassword.setText(Common.currentSupplier.getPassword());
-        Picasso.with(getContext()).load(Common.currentSupplier.getImage()).into(imgLogo);
+        if(!Common.currentSupplier.getImage().isEmpty()) Picasso.with(getContext()).load(Common.currentSupplier.getImage()).into(imgLogo);
     }
 
     @Override
@@ -145,20 +146,22 @@ public class AccountFragment extends Fragment {
                         }
                     });
         }
-        else {
+        else if(Common.currentSupplier.getImage().isEmpty()){
             showUploadImageDialog();
         }
+        else updateAccount();
     }
 
     private void updateAccount() {
         Common.currentSupplier.setName(edtName.getText().toString());
         Common.currentSupplier.setPassword(edtPassword.getText().toString());
         supplierList.child(Common.currentAccount).setValue(Common.currentSupplier);
+        startActivity(new Intent(getContext(), HomePage.class));
     }
 
     private void showUploadImageDialog() {
         final AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
-        alertDialog.setMessage("You should choose image for my stall")
+        alertDialog.setMessage("You should choose image for your stall")
                 .setTitle("Warning !!!")
                 .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     @Override

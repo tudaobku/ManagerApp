@@ -31,7 +31,7 @@
                 android:layout_height="300dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/bg_start" />
+                android:src="@drawable/icon" />
         </androidx.cardview.widget.CardView>
 
         <LinearLayout

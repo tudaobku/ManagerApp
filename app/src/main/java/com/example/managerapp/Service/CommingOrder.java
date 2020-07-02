@@ -48,10 +48,9 @@ public class CommingOrder extends Service implements ChildEventListener {
     @Override
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
         if(snapshot.child("supplierID").getValue().equals(Common.currentSupplier.getSupplierID())
-        && snapshot.child("status").getValue().equals("0")){
+                && snapshot.child("status").getValue().equals("0")){
             Intent startIntent = new Intent(getBaseContext(), HomePage.class);
-            startIntent.putExtra("key", "order");
-            PendingIntent content = PendingIntent.getActivity(getBaseContext(), 0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+           PendingIntent content = PendingIntent.getActivity(getBaseContext(), 0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder((getBaseContext()));
             builder.setAutoCancel((true))

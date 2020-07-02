@@ -39,7 +39,7 @@ public class HomePage extends AppCompatActivity {
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton addFood = findViewById(R.id.addFood);
+        final FloatingActionButton addFood = findViewById(R.id.addFood);
         addFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,14 +67,10 @@ public class HomePage extends AppCompatActivity {
                     startActivity(login);
                 }
                 if(menuId == R.id.nav_menu){
-                    String key = getIntent().getStringExtra("key");
-                    if(key != null){
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, OrderFragment.newInstance()).commit();
-                        toolbar.setTitle("Order");
-                        navigationView.setCheckedItem(R.id.nav_order);
-                    }
+
                 }
+                if(menuId == R.id.nav_menu) addFood.show();
+                else addFood.hide();
             }
         });
 
@@ -83,7 +79,7 @@ public class HomePage extends AppCompatActivity {
 
         imgLogo = headerView.findViewById(R.id.imgLogo);
         txtStall.setText(Common.currentSupplier.getName());
-        Picasso.with(getBaseContext()).load(Common.currentSupplier.getImage()).into(imgLogo);
+        if(!Common.currentSupplier.getImage().isEmpty()) Picasso.with(getBaseContext()).load(Common.currentSupplier.getImage()).into(imgLogo);
         service = new Intent (HomePage.this, CommingOrder.class);
         startService(service);
 

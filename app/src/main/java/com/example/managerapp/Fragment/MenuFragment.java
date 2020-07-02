@@ -1,9 +1,12 @@
 package com.example.managerapp.Fragment;
 
 import androidx.appcompat.widget.SearchView;
+import androidx.cursoradapter.widget.CursorAdapter;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.database.MatrixCursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +22,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.example.managerapp.Common;
 import com.example.managerapp.FoodDetail;
@@ -29,8 +35,10 @@ import com.example.managerapp.ViewHolder.FoodViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuFragment extends Fragment {
@@ -43,8 +51,8 @@ public class MenuFragment extends Fragment {
     FirebaseRecyclerAdapter<Food, FoodViewHolder> searchAdapter;
 
     DatabaseReference foodList;
-
-    List<String> suggestList;
+    SimpleCursorAdapter mAdapter;
+    List<String> foodNameList = new ArrayList<>();
 
     public static MenuFragment newInstance() {
         return new MenuFragment();
@@ -76,7 +84,7 @@ public class MenuFragment extends Fragment {
 
                 foodViewHolder.txtName.setText(food.getName());
                 Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
-
+                foodNameList.add(food.getName());
                 final Food clickItem = food;
                 foodViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
@@ -107,47 +115,65 @@ public class MenuFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.food_search, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
+
         SearchView searchView = (SearchView)searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setQueryHint("Search with your food");
+
+        final SearchView.SearchAutoComplete searchAutoComplete = searchView.findViewById(R.id.search_src_text);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, foodNameList);
+        searchAutoComplete.setAdapter(adapter);
+        searchAutoComplete.setDropDownBackgroundResource(R.color.white);
+        searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                searchAutoComplete.setText("" + adapterView.getItemAtPosition(i));
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-              return false;
+                showResult(s);
+                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if(s.isEmpty()) recyclerMenu.setAdapter(adapterMenu);
-                else{
-                            searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
-                            Food.class,
-                            R.layout.food_item,
-                            FoodViewHolder.class,
-                            foodList.orderByChild("name").equalTo(s)) {
-                        @Override
-                        protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
 
-                            foodViewHolder.txtName.setText(food.getName());
-                            Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
-
-                            final Food clickItem = food;
-                            foodViewHolder.setItemClickListener(new ItemClickListener() {
-                                @Override
-                                public void onClick(View view, int position) {
-                                    Intent foodDetail = new Intent(getContext(), FoodDetail.class);
-                                    foodDetail.putExtra("foodID", searchAdapter.getRef(position).getKey());
-                                    startActivity(foodDetail);
-                                }
-                            });
-                        }
-                    };
-                    adapterMenu.notifyDataSetChanged();
-                    recyclerMenu.setAdapter(searchAdapter);
-                }
                 return false;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void showResult(String s) {
+        if(s.isEmpty()) recyclerMenu.setAdapter(adapterMenu);
+        else{
+            searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
+                    Food.class,
+                    R.layout.food_item,
+                    FoodViewHolder.class,
+                    foodList.orderByChild("name").equalTo(s)) {
+                @Override
+                protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
+
+                    foodViewHolder.txtName.setText(food.getName());
+                    Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
+
+                    final Food clickItem = food;
+                    foodViewHolder.setItemClickListener(new ItemClickListener() {
+                        @Override
+                        public void onClick(View view, int position) {
+                            Intent foodDetail = new Intent(getContext(), FoodDetail.class);
+                            foodDetail.putExtra("foodID", searchAdapter.getRef(position).getKey());
+                            startActivity(foodDetail);
+                        }
+                    });
+                }
+            };
+            adapterMenu.notifyDataSetChanged();
+            recyclerMenu.setAdapter(searchAdapter);
+        }
     }
 
 
