@@ -1,7 +1,5 @@
 package com.example.managerapp.Fragment;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -23,16 +21,11 @@ import android.widget.Toast;
 
 import com.example.managerapp.Common;
 import com.example.managerapp.HomePage;
-import com.example.managerapp.Model.Supplier;
-import com.example.managerapp.NewSupplier;
 import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -46,14 +39,11 @@ import static android.app.Activity.RESULT_OK;
 public class AccountFragment extends Fragment {
     final private int RESULT_LOAD_IMAGE = 1;
     Uri tempUri;
-    EditText edtName, edtPassword, edtPhone;
+    EditText edtName, edtPassword;
     Button btnUpload, btnUpdate;
     ImageView imgLogo;
     DatabaseReference supplierList;
     StorageReference storage;
-    public static AccountFragment newInstance() {
-        return new AccountFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -72,51 +62,35 @@ public class AccountFragment extends Fragment {
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
+                uploadLogo();
             }
         });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateImage();
+                updateAccount();
             }
         });
 
-        showCurrentInf();
+        showAccount();
         return root;
     }
-
-    private void showCurrentInf() {
-        edtName.setText(Common.currentSupplier.getName());
-        edtPassword.setText(Common.currentSupplier.getPassword());
-        if(!Common.currentSupplier.getImage().isEmpty()) Picasso.with(getContext()).load(Common.currentSupplier.getImage()).into(imgLogo);
+    private void uploadLogo(){
+        Intent intent  = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
-            tempUri = data.getData();
-            Picasso.with(getContext()).load(tempUri).into(imgLogo);
-        }
-    }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
-    private void updateImage() {
+    private void updateAccount() {
         if(tempUri != null){
             final ProgressDialog mDialog = new ProgressDialog(getContext());
-            mDialog.setMessage("Uploading Image...");
+            mDialog.setMessage("Uploading Logo...");
             mDialog.show();
 
             String imageName = UUID.randomUUID().toString();
-            final StorageReference imageFolder = storage.child("image" + imageName);
+            final StorageReference imageFolder = storage.child("logo" + imageName);
             imageFolder.putFile(tempUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -126,7 +100,6 @@ public class AccountFragment extends Fragment {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Common.currentSupplier.setImage(uri.toString());
-                                    updateAccount();
                                 }
                             });
                         }
@@ -141,33 +114,52 @@ public class AccountFragment extends Fragment {
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mDialog.setMessage("Uploaded Image" + progress + "%");
+                            int progress = (int)(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            mDialog.setMessage("Uploaded Logo " + progress + "%");
                         }
                     });
         }
         else if(Common.currentSupplier.getImage().isEmpty()){
-            showUploadImageDialog();
+            showUploadLogoDialog();
         }
-        else updateAccount();
+        else updateInformation();
     }
 
-    private void updateAccount() {
+    private void showAccount() {
+        edtName.setText(Common.currentSupplier.getName());
+        edtPassword.setText(Common.currentSupplier.getPassword());
+        if(!Common.currentSupplier.getImage().isEmpty()) Picasso.with(getContext()).load(Common.currentSupplier.getImage()).into(imgLogo);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
+            tempUri = data.getData();
+            Picasso.with(getContext()).load(tempUri).into(imgLogo);
+        }
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
+    private void updateInformation() {
         Common.currentSupplier.setName(edtName.getText().toString());
         Common.currentSupplier.setPassword(edtPassword.getText().toString());
         supplierList.child(Common.currentAccount).setValue(Common.currentSupplier);
         startActivity(new Intent(getContext(), HomePage.class));
     }
 
-    private void showUploadImageDialog() {
+    private void showUploadLogoDialog() {
         final AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
-        alertDialog.setMessage("You should choose image for your stall")
+        alertDialog.setMessage("You should choose logo for your stall")
                 .setTitle("Warning !!!")
                 .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        updateAccount();
+                        updateInformation();
                     }
                 })
                 .setNegativeButton("Come back", new DialogInterface.OnClickListener() {

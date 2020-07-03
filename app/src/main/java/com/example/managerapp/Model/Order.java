@@ -3,19 +3,18 @@ package com.example.managerapp.Model;
 import java.util.List;
 
 public class Order {
-    List<OrderFood> foods;
+    List<OrderItem> foods;
     String phone;
     String status;
     String total;
-
     public Order() {
     }
 
-    public List<OrderFood> getFoods() {
+    public List<OrderItem> getFoods() {
         return foods;
     }
 
-    public void setFoods(List<OrderFood> foods) {
+    public void setFoods(List<OrderItem> foods) {
         this.foods = foods;
     }
 
@@ -43,7 +42,7 @@ public class Order {
         this.total = total;
     }
 
-    public Order(List<OrderFood> foods, String phone, String status, String total) {
+    public Order(List<OrderItem> foods, String phone, String status, String total) {
         this.foods = foods;
         this.phone = phone;
         this.status = status;

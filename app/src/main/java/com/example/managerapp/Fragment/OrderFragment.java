@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.example.managerapp.Adapter.OrderFoodAdapter;
 import com.example.managerapp.Common;
 import com.example.managerapp.Model.Order;
-import com.example.managerapp.Model.OrderFood;
+import com.example.managerapp.Model.OrderItem;
 import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.OrderViewHolder;
@@ -92,7 +92,7 @@ public class OrderFragment extends Fragment {
                 }
 
                 orderViewHolder.recyclerOrderFood.setLayoutManager(new LinearLayoutManager(getContext()));
-                List<OrderFood> t = order.getFoods();
+                List<OrderItem> t = order.getFoods();
                 orderViewHolder.recyclerOrderFood.setAdapter(new OrderFoodAdapter(t , getContext()));
 
                 orderViewHolder.setItemClickListener(new ItemClickListener() {

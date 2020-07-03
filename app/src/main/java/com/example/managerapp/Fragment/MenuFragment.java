@@ -3,10 +3,8 @@ package com.example.managerapp.Fragment;
 import androidx.appcompat.widget.SearchView;
 import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
-import android.database.MatrixCursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
@@ -35,7 +32,6 @@ import com.example.managerapp.ViewHolder.FoodViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -45,18 +41,10 @@ public class MenuFragment extends Fragment {
 
 
     RecyclerView recyclerMenu;
-    RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<Food, FoodViewHolder> adapterMenu;
-
     FirebaseRecyclerAdapter<Food, FoodViewHolder> searchAdapter;
-
     DatabaseReference foodList;
-    SimpleCursorAdapter mAdapter;
     List<String> foodNameList = new ArrayList<>();
-
-    public static MenuFragment newInstance() {
-        return new MenuFragment();
-    }
 
     @Nullable
     @Override
@@ -66,8 +54,7 @@ public class MenuFragment extends Fragment {
         View root = inflater.inflate(R.layout.menu_fragment, container, false);
         recyclerMenu = root.findViewById(R.id.recycler_menu);
         recyclerMenu.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerMenu.setLayoutManager(layoutManager);
+        recyclerMenu.setLayoutManager(new LinearLayoutManager(getContext()));
         foodList = FirebaseDatabase.getInstance().getReference("Food");
         loadMenu();
         return root;

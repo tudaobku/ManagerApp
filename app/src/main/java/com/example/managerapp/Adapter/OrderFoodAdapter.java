@@ -7,21 +7,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.managerapp.Model.Food;
-import com.example.managerapp.Model.OrderFood;
+import com.example.managerapp.Model.OrderItem;
 import com.example.managerapp.R;
-import com.example.managerapp.ViewHolder.FoodViewHolder;
 import com.example.managerapp.ViewHolder.OrderFoodViewHolder;
-import com.example.managerapp.ViewHolder.OrderViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderFoodAdapter extends RecyclerView.Adapter<OrderFoodViewHolder> {
-    List<OrderFood> foodList = new ArrayList<>();
+    List<OrderItem> foodList = new ArrayList<>();
     Context context;
 
-    public OrderFoodAdapter(List<OrderFood> foodList, Context context) {
+    public OrderFoodAdapter(List<OrderItem> foodList, Context context) {
         this.foodList = foodList;
         this.context = context;
     }

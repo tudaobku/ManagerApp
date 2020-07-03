@@ -1,10 +1,10 @@
 package com.example.managerapp.Model;
 
-public class OrderFood {
+public class OrderItem {
     String name;
     String quantity;
 
-    public OrderFood() {
+    public OrderItem() {
     }
 
     public String getName() {
@@ -23,7 +23,7 @@ public class OrderFood {
         this.quantity = quantity;
     }
 
-    public OrderFood(String name, String quantity) {
+    public OrderItem(String name, String quantity) {
         this.name = name;
         this.quantity = quantity;
     }
