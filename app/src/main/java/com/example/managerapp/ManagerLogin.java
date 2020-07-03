@@ -52,7 +52,7 @@ public class ManagerLogin extends AppCompatActivity {
                             courtManager.setPhone(edtPhone.getText().toString());
                             if (courtManager.getPassword() != null && edtPassword.getText() != null && courtManager.getPassword().equals(edtPassword.getText().toString())) {
                                 Common.currentCourtManager = courtManager;
-                                startActivity(new Intent(ManagerLogin.this, NewSupplier.class));
+                                startActivity(new Intent(ManagerLogin.this, ManagerHomePage.class));
                                 finish();
                             } else {
                                 Toast.makeText(ManagerLogin.this, "Failed to sign in!", Toast.LENGTH_SHORT).show();

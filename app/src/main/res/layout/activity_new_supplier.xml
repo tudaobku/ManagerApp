@@ -99,19 +99,6 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnUploadImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/holo_blue_bright"
-            android:text="Choose Logo Image"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:typeface="serif" />
-
-        <Button
             android:id="@+id/btnAddSupplier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
