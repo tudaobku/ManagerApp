@@ -19,8 +19,13 @@ import com.example.managerapp.Model.Food;
 import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -36,7 +41,7 @@ public class NewFood extends AppCompatActivity {
     Uri tempUri;
     EditText edtName, edtPrice, edtDiscount, edtDes;
     Button btnUpload, btnAdd;
-
+    Integer maxKey = 0;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -76,10 +81,37 @@ public class NewFood extends AppCompatActivity {
                 submitFood();
             }
         });
-
+        getMaxKey();
 
     }
+    private  void getMaxKey(){
+        foodList.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                maxKey = Integer.parseInt(snapshot.getKey());
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void submitFood() {
         if(tempUri != null){
             final ProgressDialog mDialog = new ProgressDialog(NewFood.this);
@@ -98,8 +130,8 @@ public class NewFood extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     Food newFood = new Food(edtDes.getText().toString(), edtDiscount.getText().toString(), uri.toString(),
                                             edtName.getText().toString(),edtPrice.getText().toString(), Common.currentSupplier.getSupplierID());
-                                    foodList.push().setValue(newFood);
-                                    finish();
+                                    foodList.child(String.valueOf(maxKey + 1)).setValue(newFood);
+
                                 }
                             });
                         }

@@ -6,4 +6,5 @@ import com.example.managerapp.Model.Supplier;
 public class Common {
     static public Supplier currentSupplier;
     static public CourtManager currentCourtManager;
+    static public String currentAccount;
 }

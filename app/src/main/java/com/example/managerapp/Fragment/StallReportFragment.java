@@ -1,4 +1,4 @@
-package com.example.managerapp.stall.report;
+package com.example.managerapp.Fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -16,7 +16,6 @@ import com.example.managerapp.R;
 
 public class StallReportFragment extends Fragment {
 
-    private StallReportViewModel mViewModel;
 
     public static StallReportFragment newInstance() {
         return new StallReportFragment();
@@ -32,8 +31,7 @@ public class StallReportFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(StallReportViewModel.class);
-        // TODO: Use the ViewModel
+
     }
 
 }
