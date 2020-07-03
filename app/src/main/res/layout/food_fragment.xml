@@ -5,7 +5,7 @@
     android:id="@+id/menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.MenuFragment">
+    tools:context=".Fragment.FoodFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView

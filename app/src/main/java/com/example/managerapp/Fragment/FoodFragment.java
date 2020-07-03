@@ -1,8 +1,6 @@
 package com.example.managerapp.Fragment;
 
 import androidx.appcompat.widget.SearchView;
-import androidx.cursoradapter.widget.CursorAdapter;
-import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,12 +35,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuFragment extends Fragment {
+public class FoodFragment extends Fragment {
 
 
     RecyclerView recyclerMenu;
-    FirebaseRecyclerAdapter<Food, FoodViewHolder> adapterMenu;
-    FirebaseRecyclerAdapter<Food, FoodViewHolder> searchAdapter;
+    FirebaseRecyclerAdapter<Food, FoodViewHolder> adapterFood;
+    FirebaseRecyclerAdapter<Food, FoodViewHolder> adapterSearchFood;
     DatabaseReference foodList;
     List<String> foodNameList = new ArrayList<>();
 
@@ -51,7 +49,7 @@ public class MenuFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View root = inflater.inflate(R.layout.menu_fragment, container, false);
+        View root = inflater.inflate(R.layout.food_fragment, container, false);
         recyclerMenu = root.findViewById(R.id.recycler_menu);
         recyclerMenu.setHasFixedSize(true);
         recyclerMenu.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -61,60 +59,55 @@ public class MenuFragment extends Fragment {
     }
 
     private void loadMenu() {
-        adapterMenu = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
+        adapterFood = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
                 Food.class,
                 R.layout.food_item,
                 FoodViewHolder.class,
-                foodList.orderByChild("supplierID").equalTo(Common.currentSupplier.getSupplierID())) {
+                foodList.orderByChild("supplierID").equalTo(Common.supplier.getSupplierID())) {
             @Override
             protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
-
                 foodViewHolder.txtName.setText(food.getName());
                 Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
                 foodNameList.add(food.getName());
-                final Food clickItem = food;
                 foodViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position) {
                         Intent foodDetail = new Intent(getContext(), FoodDetail.class);
-                        foodDetail.putExtra("foodID", adapterMenu.getRef(position).getKey());
+                        foodDetail.putExtra("foodID", adapterFood.getRef(position).getKey());
                         startActivity(foodDetail);
                     }
                 });
             }
         };
-        adapterMenu.notifyDataSetChanged();
-        recyclerMenu.setAdapter(adapterMenu);
+        adapterFood.notifyDataSetChanged();
+        recyclerMenu.setAdapter(adapterFood);
     }
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        if(item.getTitle().equals("Remove")) foodList.child(adapterMenu.getRef(item.getOrder()).getKey()).removeValue();
+        if(item.getTitle().equals("Remove")) adapterFood.getRef(item.getOrder()).removeValue();
         return super.onContextItemSelected(item);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
     }
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.food_search, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-
         SearchView searchView = (SearchView)searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setQueryHint("Search with your food");
 
         final SearchView.SearchAutoComplete searchAutoComplete = searchView.findViewById(R.id.search_src_text);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, foodNameList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, foodNameList);
         searchAutoComplete.setAdapter(adapter);
         searchAutoComplete.setDropDownBackgroundResource(R.color.white);
         searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                searchAutoComplete.setText("" + adapterView.getItemAtPosition(i));
+                searchAutoComplete.setText(adapterView.getItemAtPosition(i).toString());
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -126,7 +119,7 @@ public class MenuFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-
+                if(s.isEmpty()) recyclerMenu.setAdapter(adapterFood);
                 return false;
             }
         });
@@ -134,33 +127,29 @@ public class MenuFragment extends Fragment {
     }
 
     private void showResult(String s) {
-        if(s.isEmpty()) recyclerMenu.setAdapter(adapterMenu);
-        else{
-            searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
-                    Food.class,
-                    R.layout.food_item,
-                    FoodViewHolder.class,
-                    foodList.orderByChild("name").equalTo(s)) {
-                @Override
-                protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
+        adapterSearchFood = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
+                Food.class,
+                R.layout.food_item,
+                FoodViewHolder.class,
+                foodList.orderByChild("name").equalTo(s)) {
+            @Override
+            protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
+                foodViewHolder.txtName.setText(food.getName());
+                Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
 
-                    foodViewHolder.txtName.setText(food.getName());
-                    Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
-
-                    final Food clickItem = food;
-                    foodViewHolder.setItemClickListener(new ItemClickListener() {
-                        @Override
-                        public void onClick(View view, int position) {
-                            Intent foodDetail = new Intent(getContext(), FoodDetail.class);
-                            foodDetail.putExtra("foodID", searchAdapter.getRef(position).getKey());
-                            startActivity(foodDetail);
-                        }
-                    });
-                }
-            };
-            adapterMenu.notifyDataSetChanged();
-            recyclerMenu.setAdapter(searchAdapter);
-        }
+                final Food clickItem = food;
+                foodViewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Intent foodDetail = new Intent(getContext(), FoodDetail.class);
+                        foodDetail.putExtra("foodID", adapterSearchFood.getRef(position).getKey());
+                        startActivity(foodDetail);
+                    }
+                });
+            }
+        };
+        adapterFood.notifyDataSetChanged();
+        recyclerMenu.setAdapter(adapterSearchFood);
     }
 
 

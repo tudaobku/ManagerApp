@@ -1,7 +1,5 @@
 package com.example.managerapp.Fragment;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,18 +12,13 @@ import android.view.ViewGroup;
 
 import com.example.managerapp.R;
 
-public class StallReportFragment extends Fragment {
-
-
-    public static StallReportFragment newInstance() {
-        return new StallReportFragment();
-    }
+public class ReportFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.stall_report_fragment, container, false);
+        return inflater.inflate(R.layout.report_fragment, container, false);
     }
 
     @Override

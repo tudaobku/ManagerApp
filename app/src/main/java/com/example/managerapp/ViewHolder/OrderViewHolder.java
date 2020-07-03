@@ -10,7 +10,7 @@ import com.example.managerapp.UI.ItemClickListener;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
     public TextView txtPhone, txtStatus;
-    public RecyclerView recyclerOrderFood;
+    public RecyclerView recyclerOrderItem;
 
     private ItemClickListener itemClickListener;
 
@@ -18,7 +18,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements  View.On
         super(itemView);
 
         txtPhone = itemView.findViewById(R.id.txtPhone);
-        recyclerOrderFood = itemView.findViewById(R.id.orderList);
+        recyclerOrderItem = itemView.findViewById(R.id.orderList);
         txtStatus = itemView.findViewById(R.id.txtStatus);
 
         itemView.setOnClickListener(this);

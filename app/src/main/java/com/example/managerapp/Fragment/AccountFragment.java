@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.managerapp.Common;
-import com.example.managerapp.HomePage;
+import com.example.managerapp.SupplierHomePage;
 import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -99,7 +99,7 @@ public class AccountFragment extends Fragment {
                             imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Common.currentSupplier.setImage(uri.toString());
+                                    Common.supplier.setImage(uri.toString());
                                 }
                             });
                         }
@@ -119,16 +119,16 @@ public class AccountFragment extends Fragment {
                         }
                     });
         }
-        else if(Common.currentSupplier.getImage().isEmpty()){
+        else if(Common.supplier.getImage().isEmpty()){
             showUploadLogoDialog();
         }
         else updateInformation();
     }
 
     private void showAccount() {
-        edtName.setText(Common.currentSupplier.getName());
-        edtPassword.setText(Common.currentSupplier.getPassword());
-        if(!Common.currentSupplier.getImage().isEmpty()) Picasso.with(getContext()).load(Common.currentSupplier.getImage()).into(imgLogo);
+        edtName.setText(Common.supplier.getName());
+        edtPassword.setText(Common.supplier.getPassword());
+        if(!Common.supplier.getImage().isEmpty()) Picasso.with(getContext()).load(Common.supplier.getImage()).into(imgLogo);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -145,10 +145,10 @@ public class AccountFragment extends Fragment {
     }
 
     private void updateInformation() {
-        Common.currentSupplier.setName(edtName.getText().toString());
-        Common.currentSupplier.setPassword(edtPassword.getText().toString());
-        supplierList.child(Common.currentAccount).setValue(Common.currentSupplier);
-        startActivity(new Intent(getContext(), HomePage.class));
+        Common.supplier.setName(edtName.getText().toString());
+        Common.supplier.setPassword(edtPassword.getText().toString());
+        supplierList.child(Common.supplierPhone).setValue(Common.supplier);
+        startActivity(new Intent(getContext(), SupplierHomePage.class));
     }
 
     private void showUploadLogoDialog() {

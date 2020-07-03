@@ -60,39 +60,41 @@ public class NewSupplier extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                final ProgressDialog mDialog = new ProgressDialog(NewSupplier.this);
-                mDialog.setMessage("Please waiting...");
-                mDialog.show();
-
-                supplierList.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.child(edtPhone.getText().toString()).exists()) {
-                            mDialog.dismiss();
-                            Toast.makeText(NewSupplier.this, "Phone number exist!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            for (DataSnapshot item : snapshot.getChildren()) {
-                                Supplier supplier = item.getValue(Supplier.class);
-                                if (Integer.parseInt(supplier.getSupplierID()) > maxId) maxId = Integer.parseInt(supplier.getSupplierID());
-                            }
-                            mDialog.dismiss();
-                            Supplier newSupplier = new Supplier(edtName.getText().toString(), edtPassword.getText().toString(),
-                                    String.valueOf(maxId+1), "");
-                            supplierList.child(edtPhone.getText().toString()).setValue(newSupplier);
-                            Toast.makeText(NewSupplier.this, "Add new supplier successfully!", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+               addSupplier();
             }
         });
 
 
+    }
+
+    private void addSupplier() {
+        final ProgressDialog mDialog = new ProgressDialog(NewSupplier.this);
+        mDialog.setMessage("Please waiting...");
+        mDialog.show();
+        supplierList.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(edtPhone.getText().toString()).exists()) {
+                    mDialog.dismiss();
+                    Toast.makeText(NewSupplier.this, "Phone number exist!", Toast.LENGTH_SHORT).show();
+                } else {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        Supplier supplier = item.getValue(Supplier.class);
+                        if (Integer.parseInt(supplier.getSupplierID()) > maxId) maxId = Integer.parseInt(supplier.getSupplierID());
+                    }
+                    mDialog.dismiss();
+                    Supplier newSupplier = new Supplier(edtName.getText().toString(), edtPassword.getText().toString(),
+                            String.valueOf(maxId+1), "");
+                    supplierList.child(edtPhone.getText().toString()).setValue(newSupplier);
+                    Toast.makeText(NewSupplier.this, "Add new supplier successfully!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

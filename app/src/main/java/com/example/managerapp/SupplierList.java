@@ -37,15 +37,15 @@ public class SupplierList extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         supplierList = database.getReference("Supplier");
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_supplier);
+        recyclerView = findViewById(R.id.recycler_supplier);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-       loadListSupplier();
+       loadSupplierList();
     }
 
-    private void loadListSupplier() {
+    private void loadSupplierList() {
         adapter = new FirebaseRecyclerAdapter<Supplier, SupplierViewHolder>(Supplier.class,
                 R.layout.supplier_item,
                 SupplierViewHolder.class,
@@ -74,7 +74,7 @@ public class SupplierList extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        if(item.getTitle().equals("Remove")) supplierList.child(adapter.getRef(item.getOrder()).getKey()).removeValue();
+        if(item.getTitle().equals("Remove")) adapter.getRef(item.getOrder()).removeValue();
         return super.onContextItemSelected(item);
     }
 }

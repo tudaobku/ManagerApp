@@ -7,17 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managerapp.R;
 
-public class OrderFoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class OrderItemViewHolder extends RecyclerView.ViewHolder  {
     public TextView txtName, txtQuantity;
-
-    public OrderFoodViewHolder(View itemView){
+    public OrderItemViewHolder(View itemView){
         super(itemView);
         txtName = itemView.findViewById(R.id.txtName);
         txtQuantity = itemView.findViewById(R.id.txtQuantity);
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 }

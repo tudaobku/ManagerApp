@@ -7,15 +7,13 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.managerapp.Service.CommingOrder;
-import com.example.managerapp.Fragment.OrderFragment;
+import com.example.managerapp.Service.ComingOrder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -25,11 +23,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class HomePage extends AppCompatActivity {
+public class SupplierHomePage extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private TextView txtStall;
-    private ImageView imgLogo;
     Intent service;
 
     @Override
@@ -43,7 +39,7 @@ public class HomePage extends AppCompatActivity {
         addFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomePage.this, NewFood.class));
+                startActivity(new Intent(SupplierHomePage.this, NewFood.class));
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -51,7 +47,7 @@ public class HomePage extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_menu,R.id.nav_order, R.id.nav_report, R.id.nav_account, R.id.nav_logout)
+                R.id.nav_food,R.id.nav_order, R.id.nav_report, R.id.nav_account, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -62,29 +58,23 @@ public class HomePage extends AppCompatActivity {
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 int menuId = destination.getId();
                 if(menuId == R.id.nav_logout){
-                    Intent login = new Intent(HomePage.this, LoginPage.class);
+                    Intent login = new Intent(SupplierHomePage.this, LoginPage.class);
                     login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(login);
                 }
-                if(menuId == R.id.nav_menu){
-
-                }
-                if(menuId == R.id.nav_menu) addFood.show();
+                if(menuId == R.id.nav_food) addFood.show();
                 else addFood.hide();
             }
         });
 
         View headerView = navigationView.getHeaderView(0);
-        txtStall = headerView.findViewById(R.id.txtStall);
+        TextView txtStall = headerView.findViewById(R.id.txtStall);
+        ImageView imgLogo = headerView.findViewById(R.id.imgLogo);
+        txtStall.setText(Common.supplier.getName());
+        if(!Common.supplier.getImage().isEmpty()) Picasso.with(getBaseContext()).load(Common.supplier.getImage()).into(imgLogo);
 
-        imgLogo = headerView.findViewById(R.id.imgLogo);
-        txtStall.setText(Common.currentSupplier.getName());
-        if(!Common.currentSupplier.getImage().isEmpty()) Picasso.with(getBaseContext()).load(Common.currentSupplier.getImage()).into(imgLogo);
-        service = new Intent (HomePage.this, CommingOrder.class);
+        service = new Intent (SupplierHomePage.this, ComingOrder.class);
         startService(service);
-
-        txtStall.setText(Common.currentSupplier.getName());
-
     }
 
     @Override

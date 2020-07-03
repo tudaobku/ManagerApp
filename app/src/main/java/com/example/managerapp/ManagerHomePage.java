@@ -43,6 +43,7 @@ public class ManagerHomePage extends AppCompatActivity {
                 Intent signIn = new Intent(ManagerHomePage.this, ManagerLogin.class);
                 signIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(signIn);
+                finish();
             }
         });
     }
