@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Supplier's Stall"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />

@@ -37,22 +37,12 @@ import java.util.UUID;
 
 public class NewSupplier extends AppCompatActivity {
 
-    final private int RESULT_LOAD_IMAGE = 1;
     DatabaseReference supplierList;
-    StorageReference storage;
-    Uri tempUri;
     EditText edtName, edtPassword, edtPhone;
-    Button btnUpload, btnAdd;
+    Button btnAdd;
     int maxId = 0;
     List<Supplier> suppliers = new ArrayList<>();
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
-            tempUri = data.getData();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,31 +52,36 @@ public class NewSupplier extends AppCompatActivity {
         edtName = findViewById(R.id.edtName);
         edtPhone = findViewById(R.id.edtPhone);
         edtPassword = findViewById(R.id.edtPassword);
-        btnUpload = findViewById(R.id.btnUploadImage);
         btnAdd = findViewById(R.id.btnAddSupplier);
 
-        supplierList = FirebaseDatabase.getInstance().getReference("Supplier");
-        storage = FirebaseStorage.getInstance().getReference();
-
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent  = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
-            }
-        });
+        final FirebaseDatabase database =FirebaseDatabase.getInstance();
+        final DatabaseReference supplierList = database.getReference("Supplier");
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final ProgressDialog mDialog = new ProgressDialog(NewSupplier.this);
+                mDialog.setMessage("Please waiting...");
+                mDialog.show();
+
                 supplierList.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot item : snapshot.getChildren()) {
-                            Supplier supplier = item.getValue(Supplier.class);
-                            if (Integer.parseInt(supplier.getSupplierID()) > maxId) maxId = Integer.parseInt(supplier.getSupplierID());
+                        if (snapshot.child(edtPhone.getText().toString()).exists()) {
+                            mDialog.dismiss();
+                            Toast.makeText(NewSupplier.this, "Phone number exist!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            for (DataSnapshot item : snapshot.getChildren()) {
+                                Supplier supplier = item.getValue(Supplier.class);
+                                if (Integer.parseInt(supplier.getSupplierID()) > maxId) maxId = Integer.parseInt(supplier.getSupplierID());
+                            }
+                            mDialog.dismiss();
+                            Supplier newSupplier = new Supplier(edtName.getText().toString(), edtPassword.getText().toString(),
+                                    String.valueOf(maxId+1), "");
+                            supplierList.child(edtPhone.getText().toString()).setValue(newSupplier);
+                            Toast.makeText(NewSupplier.this, "Add new supplier successfully!", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
 
@@ -95,71 +90,9 @@ public class NewSupplier extends AppCompatActivity {
 
                     }
                 });
-                addSupplier();
             }
         });
 
 
-    }
-
-    private void addSupplier() {
-        if(tempUri != null){
-            final ProgressDialog mDialog = new ProgressDialog(NewSupplier.this);
-            mDialog.setMessage("Uploading Image...");
-            mDialog.show();
-
-            String imageName = UUID.randomUUID().toString();
-            final StorageReference imageFolder = storage.child("image" + imageName);
-            imageFolder.putFile(tempUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            mDialog.dismiss();
-                            imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    Supplier newSupplier = new Supplier(edtName.getText().toString(), edtPassword.getText().toString(),
-                                            String.valueOf(maxId+1), uri.toString());
-                                    supplierList.child(edtPhone.getText().toString()).setValue(newSupplier);
-                                    Toast.makeText(NewSupplier.this, "Add new supplier successfully!", Toast.LENGTH_SHORT).show();
-
-                                    finish();
-                                }
-                            });
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            mDialog.dismiss();
-                            Toast.makeText(NewSupplier.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mDialog.setMessage("Uploaded Image" + progress + "%");
-                        }
-                    });
-        }
-        else {
-            showUploadImageDialog();
-        }
-    }
-
-    private void showUploadImageDialog() {
-        final AlertDialog.Builder alertDialog= new AlertDialog.Builder(NewSupplier.this);
-        alertDialog.setMessage("You have to choose image for food")
-                .setTitle("Warning !!!")
-                .setPositiveButton("Continue...", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .setIcon(R.drawable.warning)
-                .create();
-        alertDialog.show();
     }
 }
