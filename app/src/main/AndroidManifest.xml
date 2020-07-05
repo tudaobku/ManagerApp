@@ -9,11 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewFood"></activity>
+        <activity android:name=".SupplierList"></activity>
+        <activity android:name=".ManagerHomePage" />
+        <service
+            android:name=".Service.ComingOrder"
+            android:enabled="true"
+            android:exported="true"></service>
+
+
+        <activity android:name=".NewSupplier"></activity>
+
+        <activity android:name=".ManagerLogin" />
+
+        <activity android:name=".NewFood" />
         <activity android:name=".SupplierLogin" />
         <activity android:name=".FoodDetail" />
         <activity
-            android:name=".HomePage"
+            android:name=".SupplierHomePage"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginPage">

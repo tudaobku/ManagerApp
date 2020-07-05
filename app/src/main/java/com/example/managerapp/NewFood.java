@@ -16,9 +16,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.managerapp.Model.Food;
-import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -36,14 +38,7 @@ public class NewFood extends AppCompatActivity {
     Uri tempUri;
     EditText edtName, edtPrice, edtDiscount, edtDes;
     Button btnUpload, btnAdd;
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
-            tempUri = data.getData();
-        }
-    }
+    Integer maxKey = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,31 +58,72 @@ public class NewFood extends AppCompatActivity {
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
+                uploadImage();
             }
         });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitFood();
+                addFood();
             }
         });
-
+        getMaxKey();
 
     }
 
-    private void submitFood() {
+    private void uploadImage() {
+        Intent intent  = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
+            tempUri = data.getData();
+        }
+    }
+
+    private  void getMaxKey(){
+        foodList.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                maxKey = Integer.parseInt(snapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void addFood() {
         if(tempUri != null){
             final ProgressDialog mDialog = new ProgressDialog(NewFood.this);
             mDialog.setMessage("Uploading Image...");
             mDialog.show();
 
             String imageName = UUID.randomUUID().toString();
-            final StorageReference imageFolder = storage.child("image" + imageName);
+            final StorageReference imageFolder = storage.child("food" + imageName);
             imageFolder.putFile(tempUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -97,9 +133,10 @@ public class NewFood extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Food newFood = new Food(edtDes.getText().toString(), edtDiscount.getText().toString(), uri.toString(),
-                                            edtName.getText().toString(),edtPrice.getText().toString(), Common.currentSupplier.getSupplierID());
-                                    foodList.push().setValue(newFood);
+                                            edtName.getText().toString(),edtPrice.getText().toString(), Common.supplier.getSupplierID());
+                                    foodList.child(String.valueOf(maxKey + 1)).setValue(newFood);
                                     finish();
+
                                 }
                             });
                         }
@@ -114,8 +151,8 @@ public class NewFood extends AppCompatActivity {
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mDialog.setMessage("Uploaded Image" + progress + "%");
+                            int progress = (int)(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            mDialog.setMessage("Uploaded Image " + progress + "%");
                         }
                     });
         }

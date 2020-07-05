@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/common_google_signin_btn_text_light_normal_background"
+    android:padding="8dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/txtPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="08997077"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orderList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="status"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/design_default_color_primary_dark"
+        />
+
+        
+
+</LinearLayout>

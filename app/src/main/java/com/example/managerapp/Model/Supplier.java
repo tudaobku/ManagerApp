@@ -4,6 +4,7 @@ public class Supplier {
     private String name;
     private String password;
     private String supplierID;
+    private String image;
 
     public String getName() {
         return name;
@@ -29,12 +30,21 @@ public class Supplier {
         this.supplierID = supplierID;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Supplier() {
     }
 
-    public Supplier(String name, String password, String supplierID) {
+    public Supplier(String name, String password, String supplierID, String image) {
         this.name = name;
         this.password = password;
         this.supplierID = supplierID;
+        this.image = image;
     }
 }

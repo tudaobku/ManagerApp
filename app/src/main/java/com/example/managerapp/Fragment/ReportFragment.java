@@ -1,6 +1,4 @@
-package com.example.managerapp.stall.report;
-
-import androidx.lifecycle.ViewModelProviders;
+package com.example.managerapp.Fragment;
 
 import android.os.Bundle;
 
@@ -14,26 +12,19 @@ import android.view.ViewGroup;
 
 import com.example.managerapp.R;
 
-public class StallReportFragment extends Fragment {
-
-    private StallReportViewModel mViewModel;
-
-    public static StallReportFragment newInstance() {
-        return new StallReportFragment();
-    }
+public class ReportFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.stall_report_fragment, container, false);
+        return inflater.inflate(R.layout.report_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(StallReportViewModel.class);
-        // TODO: Use the ViewModel
+
     }
 
 }

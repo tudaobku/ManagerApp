@@ -54,17 +54,13 @@ public class FoodDetail extends AppCompatActivity {
         edtDes = findViewById(R.id.edtDescription);
         btnUpdate = findViewById(R.id.btnUpdate);
 
-        
         foodList = FirebaseDatabase.getInstance().getReference("Food");
         storage = FirebaseStorage.getInstance().getReference();
 
         imageFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
+                uploadImage();
             }
         });
 
@@ -76,12 +72,21 @@ public class FoodDetail extends AppCompatActivity {
         });
 
         if (getIntent(  ) != null)
-            foodID = getIntent().getStringExtra("foodID");
-
-        if (!foodID.isEmpty())
         {
-            getDetailFood(foodID);
+            foodID = getIntent().getStringExtra("foodID");
+            if (!foodID.isEmpty())
+            {
+                loadFoodDetail(foodID);
+            }
         }
+
+    }
+
+    private void uploadImage() {
+        Intent intent  = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
     }
 
     private void updateFood() {
@@ -96,7 +101,7 @@ public class FoodDetail extends AppCompatActivity {
             mDialog.show();
 
             String imageName = UUID.randomUUID().toString();
-            final StorageReference imageFolder = storage.child("image" + imageName);
+            final StorageReference imageFolder = storage.child("food" + imageName);
             imageFolder.putFile(tempUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -122,7 +127,7 @@ public class FoodDetail extends AppCompatActivity {
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            int progress = (int)(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
                             mDialog.setMessage("Uploaded Image" + progress + "%");
                         }
                     });
@@ -133,13 +138,12 @@ public class FoodDetail extends AppCompatActivity {
         }
     }
 
-    private void getDetailFood(String foodID) {
+    private void loadFoodDetail(String foodID) {
         foodList.child(foodID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     food = dataSnapshot.getValue(Food.class);
-
                     Picasso.with(getBaseContext()).load(food.getImage()).into(imageFood);
                     edtPrice.setText(food.getPrice());
                     edtName.setText(food.getName());
