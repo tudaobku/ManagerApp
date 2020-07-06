@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SupplierList"></activity>
+        <activity android:name=".SignUpManager" />
+        <activity android:name=".SupplierList" />
         <activity android:name=".ManagerHomePage" />
+
         <service
             android:name=".Service.ComingOrder"
             android:enabled="true"
@@ -19,8 +21,8 @@
 
         <activity android:name=".NewSupplier"></activity>
 
-        <activity android:name=".ManagerLogin" />
 
+        <activity android:name=".ManagerLogin" />
         <activity android:name=".NewFood" />
         <activity android:name=".SupplierLogin" />
         <activity android:name=".FoodDetail" />

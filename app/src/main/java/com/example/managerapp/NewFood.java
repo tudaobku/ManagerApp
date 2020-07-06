@@ -18,9 +18,6 @@ import android.widget.Toast;
 import com.example.managerapp.Model.Food;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,6 +35,15 @@ public class NewFood extends AppCompatActivity {
     Uri tempUri;
     EditText edtName, edtPrice, edtDiscount, edtDes;
     Button btnUpload, btnAdd;
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
+            tempUri = data.getData();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +94,11 @@ public class NewFood extends AppCompatActivity {
 
 
     private void addFood() {
+
+
+    }
+
+    private void submitFood() {
         if(tempUri != null){
             final ProgressDialog mDialog = new ProgressDialog(NewFood.this);
             mDialog.setMessage("Uploading Image...");
@@ -107,7 +118,6 @@ public class NewFood extends AppCompatActivity {
                                             edtName.getText().toString(),edtPrice.getText().toString(), Common.supplier.getSupplierID());
                                     foodList.push().setValue(newFood);
                                     finish();
-
                                 }
                             });
                         }

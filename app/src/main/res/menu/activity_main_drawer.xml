@@ -9,17 +9,9 @@
             android:icon="@drawable/ic_baseline_restaurant_menu_24"
             android:title="Menu" />
         <item
-            android:id="@+id/nav_order"
-            android:icon="@drawable/ic_baseline_announcement_24"
-            android:title="Order" />
-        <item
             android:id="@+id/nav_report"
             android:icon="@drawable/ic_baseline_assessment_24"
             android:title="Report" />
-        <item
-            android:id="@+id/nav_account"
-            android:icon="@drawable/ic_baseline_account_box_24"
-            android:title="Account" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_baseline_exit_to_app_24"

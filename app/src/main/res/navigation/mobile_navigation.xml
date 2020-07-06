@@ -8,23 +8,14 @@
     <fragment
         android:id="@+id/nav_food"
         android:name="com.example.managerapp.Fragment.FoodFragment"
+
         android:label="Menu"
         tools:layout="@layout/food_fragment" />
     <fragment
-        android:id="@+id/nav_order"
-        android:name="com.example.managerapp.Fragment.OrderFragment"
-        android:label="Order"
-        tools:layout="@layout/order_fragment" />
-    <fragment
         android:id="@+id/nav_report"
         android:name="com.example.managerapp.Fragment.ReportFragment"
-        android:label="Report"
+=      android:label="Report"
         tools:layout="@layout/report_fragment" />
-    <fragment
-        android:id="@+id/nav_account"
-        android:name="com.example.managerapp.Fragment.AccountFragment"
-        android:label="Account"
-        tools:layout="@layout/account_fragment" />
     <fragment
         android:id="@+id/nav_logout"
         android:name="com.example.managerapp.Fragment.ReportFragment"
