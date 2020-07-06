@@ -1,6 +1,5 @@
 package com.example.managerapp.ViewHolder;
 
-import android.media.Image;
 import android.view.ContextMenu;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,19 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
 
-import org.w3c.dom.Text;
-
-public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener{
-
-    public TextView txtName;
-    public ImageView imgFood;
+public class SupplierViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
+    public TextView txtName, txtId;
+    public ImageView imgSupplier;
 
     private ItemClickListener itemClickListener;
 
-    public FoodViewHolder(@NonNull View itemView) {
+    public SupplierViewHolder(@NonNull View itemView) {
         super(itemView);
         txtName = itemView.findViewById(R.id.txtName);
-        imgFood = itemView.findViewById(R.id.imgFood);
+        txtId = itemView.findViewById(R.id.txtId);
+        imgSupplier = itemView.findViewById(R.id.imgSupplier);
         itemView.setOnCreateContextMenuListener(this);
         itemView.setOnClickListener(this);
 

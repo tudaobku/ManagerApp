@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-       <activity android:name=".NewFood" />
+        <activity android:name=".SignUpManager" />
+        <activity android:name=".SupplierList" />
+        <activity android:name=".ManagerHomePage" />
+        <activity android:name=".NewSupplier" />
+        <activity android:name=".ManagerLogin" />
+        <activity android:name=".NewFood" />
         <activity android:name=".SupplierLogin" />
         <activity android:name=".FoodDetail" />
         <activity
