@@ -1,27 +1,52 @@
 package com.example.managerapp.Model;
 
+import java.util.List;
+
 public class Order {
-    String name;
-    String quantity;
+    List<OrderFood> foods;
+    String phone;
+    String status;
+    String total;
 
-    public String getName() {
-        return name;
+    public Order() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public List<OrderFood> getFoods() {
+        return foods;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public void setFoods(List<OrderFood> foods) {
+        this.foods = foods;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public String getPhone() {
+        return phone;
     }
 
-    public Order(String name, String quantity) {
-        this.name = name;
-        this.quantity = quantity;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    public Order(List<OrderFood> foods, String phone, String status, String total) {
+        this.foods = foods;
+        this.phone = phone;
+        this.status = status;
+        this.total = total;
     }
 }
