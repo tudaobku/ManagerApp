@@ -1,4 +1,4 @@
-package com.example.managerapp;
+package com.example.managerapp.Manager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.managerapp.R;
 
 
 public class ManagerHomePage extends AppCompatActivity {

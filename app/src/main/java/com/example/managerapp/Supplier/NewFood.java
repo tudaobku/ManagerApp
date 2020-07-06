@@ -1,4 +1,4 @@
-package com.example.managerapp;
+package com.example.managerapp.Supplier;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.managerapp.Common;
 import com.example.managerapp.Model.Food;
+import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -37,13 +39,7 @@ public class NewFood extends AppCompatActivity {
     Button btnUpload, btnAdd;
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
-            tempUri = data.getData();
-        }
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +53,7 @@ public class NewFood extends AppCompatActivity {
         btnUpload = findViewById(R.id.btnUploadImage);
         btnAdd = findViewById(R.id.btnAddFood);
 
-        foodList = FirebaseDatabase.getInstance().getReference("Food");
+        foodList = FirebaseDatabase.getInstance().getReference("Food/List");
         storage = FirebaseStorage.getInstance().getReference();
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +111,7 @@ public class NewFood extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Food newFood = new Food(edtDes.getText().toString(), edtDiscount.getText().toString(), uri.toString(),
-                                            edtName.getText().toString(),edtPrice.getText().toString(), Common.supplier.getSupplierID());
+                                            edtName.getText().toString(),edtPrice.getText().toString(), Common.supplier.getSupplierID(),"");
                                     foodList.push().setValue(newFood);
                                     finish();
                                 }

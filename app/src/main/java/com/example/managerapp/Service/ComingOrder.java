@@ -5,7 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Build;
@@ -17,7 +16,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.managerapp.Common;
-import com.example.managerapp.SupplierHomePage;
+import com.example.managerapp.Supplier.SupplierHomePage;
 import com.example.managerapp.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +39,7 @@ public class ComingOrder extends Service implements ChildEventListener {
     @Override
     public void onCreate() {
         super.onCreate();
-        orderList = FirebaseDatabase.getInstance().getReference("Order");
+        orderList = FirebaseDatabase.getInstance().getReference("Order/CurrentOrder/List");
     }
 
     @Override

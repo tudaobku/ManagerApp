@@ -1,4 +1,4 @@
-package com.example.managerapp.Fragment;
+package com.example.managerapp.Supplier.Fragment;
 
 import androidx.appcompat.widget.SearchView;
 
@@ -22,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.managerapp.Common;
-import com.example.managerapp.FoodDetail;
+import com.example.managerapp.Supplier.FoodDetail;
 import com.example.managerapp.Model.Food;
 import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
@@ -37,15 +37,11 @@ import java.util.List;
 
 public class FoodFragment extends Fragment {
 
-    MenuViewModel mViewModel;
 
     RecyclerView recyclerMenu;
     FirebaseRecyclerAdapter<Food, FoodViewHolder> adapterFood;
     FirebaseRecyclerAdapter<Food, FoodViewHolder> adapterSearchFood;
     DatabaseReference foodList;
-
-    List<String> suggestList;
-    SimpleCursorAdapter mAdapter;
     List<String> foodNameList = new ArrayList<>();
 
     @Nullable
@@ -120,34 +116,8 @@ public class FoodFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if(s.isEmpty()) recyclerMenu.setAdapter(adapterFood);
-                else{
-                            searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
-                            Food.class,
-                            R.layout.food_item,
-                            FoodViewHolder.class,
-                            foodList.orderByChild("name").equalTo(s)) {
-                        @Override
-                        protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
-
-                            foodViewHolder.txtName.setText(food.getName());
-                            Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
-
-                            final Food clickItem = food;
-                            foodViewHolder.setItemClickListener(new ItemClickListener() {
-                                @Override
-                                public void onClick(View view, int position) {
-                                    Intent foodDetail = new Intent(getContext(), FoodDetail.class);
-                                    foodDetail.putExtra("foodID", searchAdapter.getRef(position).getKey());
-                                    startActivity(foodDetail);
-                                }
-                            });
-                        }
-                    };
-                    adapterMenu.notifyDataSetChanged();
-                    recyclerMenu.setAdapter(searchAdapter);
-                }
-              return false;
+                recyclerMenu.setAdapter(adapterFood);
+                return false;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);

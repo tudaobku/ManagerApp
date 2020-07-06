@@ -1,4 +1,4 @@
-package com.example.managerapp.Fragment;
+package com.example.managerapp.Supplier.Fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.managerapp.Adapter.OrderItemAdapter;
+import com.example.managerapp.Supplier.Adapter.OrderItemAdapter;
 import com.example.managerapp.Common;
 import com.example.managerapp.Model.Order;
 import com.example.managerapp.R;
@@ -42,7 +42,7 @@ public class OrderFragment extends Fragment {
         recyclerOrder = root.findViewById(R.id.recycler_order);
         recyclerOrder.setHasFixedSize(true);
         recyclerOrder.setLayoutManager(new LinearLayoutManager(getContext()));
-        orderList = FirebaseDatabase.getInstance().getReference("Order/List");
+        orderList = FirebaseDatabase.getInstance().getReference("Order/CurrentOrder/List");
         loadOrder();
 
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -98,11 +98,11 @@ public class OrderFragment extends Fragment {
 
                 orderViewHolder.txtPhone.setText(order.getPhone());
                 if(order.getStatus().equals("0")){
-                    orderViewHolder.txtStatus.setText("Waiting....");
+                    orderViewHolder.txtStatus.setText("Preparing");
                     orderViewHolder.txtStatus.setBackgroundColor(0xFFC52F2F);
                 }
                 else{
-                    orderViewHolder.txtStatus.setText("Ready....");
+                    orderViewHolder.txtStatus.setText("Completed");
                     orderViewHolder.txtStatus.setBackgroundColor(0xFF72DA76);
                 }
 

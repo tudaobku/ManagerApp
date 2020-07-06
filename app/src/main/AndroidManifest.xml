@@ -9,25 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignUpManager" />
-        <activity android:name=".SupplierList" />
-        <activity android:name=".ManagerHomePage" />
+        <activity android:name=".Manager.CourtReport"></activity>
+        <activity android:name=".Manager.SignUpManager" />
+        <activity android:name=".Manager.SupplierList" />
+        <activity android:name=".Manager.ManagerHomePage" />
 
         <service
             android:name=".Service.ComingOrder"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
-
-        <activity android:name=".NewSupplier"></activity>
-
-
-        <activity android:name=".ManagerLogin" />
-        <activity android:name=".NewFood" />
-        <activity android:name=".SupplierLogin" />
-        <activity android:name=".FoodDetail" />
+        <activity android:name=".Manager.NewSupplier" />
+        <activity android:name=".Manager.ManagerLogin" />
+        <activity android:name=".Supplier.NewFood" />
+        <activity android:name=".Supplier.SupplierLogin" />
+        <activity android:name=".Supplier.FoodDetail" />
         <activity
-            android:name=".SupplierHomePage"
+            android:name=".Supplier.SupplierHomePage"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginPage">

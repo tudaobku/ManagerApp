@@ -1,4 +1,4 @@
-package com.example.managerapp;
+package com.example.managerapp.Manager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.managerapp.Model.Supplier;
+import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.SupplierViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;

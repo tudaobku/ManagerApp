@@ -1,4 +1,4 @@
-package com.example.managerapp;
+package com.example.managerapp.Supplier;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.managerapp.Common;
 import com.example.managerapp.Model.Supplier;
+import com.example.managerapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,7 +48,7 @@ public class SupplierLogin extends AppCompatActivity {
 
     private void checkAccount() {
         final ProgressDialog mDialog = new ProgressDialog(SupplierLogin.this);
-        mDialog.setMessage("Please waiting");
+        mDialog.setMessage("Please waiting...");
         mDialog.show();
 
         supplierList.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -58,8 +60,9 @@ public class SupplierLogin extends AppCompatActivity {
                     if (supplier.getPassword().equals(edtPassword.getText().toString())) {
                         Common.supplier = supplier;
                         Common.supplierPhone = edtPhone.getText().toString();
-                        finish();
                         startActivity(new Intent(SupplierLogin.this, SupplierHomePage.class));
+                        finish();
+
                     } else {
                         Toast.makeText(SupplierLogin.this, "Wrong password", Toast.LENGTH_LONG).show();
                     }

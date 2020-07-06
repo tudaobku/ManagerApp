@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/food_stall"
-    tools:context=".ManagerHomePage">
+    tools:context=".Manager.ManagerHomePage">
 
     <Button
         android:id="@+id/btnSignOut"

@@ -1,4 +1,4 @@
-package com.example.managerapp;
+package com.example.managerapp.Supplier;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.managerapp.Model.Food;
+import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -139,7 +140,7 @@ public class FoodDetail extends AppCompatActivity {
     }
 
     private void loadFoodDetail(String foodID) {
-        foodList.child(foodID).addValueEventListener(new ValueEventListener() {
+        foodList.orderByChild("foodID").equalTo(foodID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){

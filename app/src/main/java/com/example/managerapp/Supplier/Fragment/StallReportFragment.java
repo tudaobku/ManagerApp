@@ -1,4 +1,4 @@
-package com.example.managerapp.Fragment;
+package com.example.managerapp.Supplier.Fragment;
 
 import android.os.Bundle;
 
@@ -12,13 +12,13 @@ import android.view.ViewGroup;
 
 import com.example.managerapp.R;
 
-public class ReportFragment extends Fragment {
+public class StallReportFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.report_fragment, container, false);
+        return inflater.inflate(R.layout.stall_report_fragment, container, false);
     }
 
     @Override

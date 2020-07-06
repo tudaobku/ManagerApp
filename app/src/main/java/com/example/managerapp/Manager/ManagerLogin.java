@@ -1,4 +1,4 @@
-package com.example.managerapp;
+package com.example.managerapp.Manager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.managerapp.Common;
 import com.example.managerapp.Model.Manager;
-import com.example.managerapp.Model.CourtManager;
+import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class ManagerLogin extends AppCompatActivity {
 
@@ -43,11 +45,9 @@ public class ManagerLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_login);
 
-        edtPhone = findViewById(R.id.edtPhone);
-        edtPassword = findViewById(R.id.edtPassword);
-        btnLogin = findViewById(R.id.btnLogin);
 
-        managerList = FirebaseDatabase.getInstance().getReference("Manager/List");
+        managerList = FirebaseDatabase.getInstance().getReference("Manager");
+
         edtEmail = (MaterialEditText)findViewById(R.id.edtEmail);
         edtPassword = (MaterialEditText)findViewById(R.id.edtPassword);
         txtRegister = (TextView)findViewById(R.id.txtRegister);
@@ -55,9 +55,6 @@ public class ManagerLogin extends AppCompatActivity {
         btnLogin = (Button)findViewById(R.id.btnLogin);
 
         mAuth = FirebaseAuth.getInstance();
-
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_manager =database.getReference("Manager");
 
         String text = "Don't have an account? Register now";
         SpannableString ss = new SpannableString(text);
@@ -94,9 +91,9 @@ public class ManagerLogin extends AppCompatActivity {
         managerList.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child(edtPhone.getText().toString()).exists()) {
+                if (snapshot.child(edtEmail.getText().toString()).exists()) {
                     mDialog.dismiss();
-                    Manager manager = snapshot.child(edtPhone.getText().toString()).getValue(Manager.class);
+                    Manager manager = snapshot.child(edtEmail.getText().toString()).getValue(Manager.class);
                     if (manager.getPassword() != null && edtPassword.getText() != null && manager.getPassword().equals(edtPassword.getText().toString())) {
                         Common.manager = manager;
                         startActivity(new Intent(ManagerLogin.this, ManagerHomePage.class));
