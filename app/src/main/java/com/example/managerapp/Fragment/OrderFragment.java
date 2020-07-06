@@ -42,7 +42,7 @@ public class OrderFragment extends Fragment {
         recyclerOrder = root.findViewById(R.id.recycler_order);
         recyclerOrder.setHasFixedSize(true);
         recyclerOrder.setLayoutManager(new LinearLayoutManager(getContext()));
-        orderList = FirebaseDatabase.getInstance().getReference("Order");
+        orderList = FirebaseDatabase.getInstance().getReference("Order/List");
         loadOrder();
 
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

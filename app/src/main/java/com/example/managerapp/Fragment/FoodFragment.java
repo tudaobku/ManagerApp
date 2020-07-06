@@ -53,7 +53,7 @@ public class FoodFragment extends Fragment {
         recyclerMenu = root.findViewById(R.id.recycler_menu);
         recyclerMenu.setHasFixedSize(true);
         recyclerMenu.setLayoutManager(new LinearLayoutManager(getContext()));
-        foodList = FirebaseDatabase.getInstance().getReference("Food");
+        foodList = FirebaseDatabase.getInstance().getReference("Food/List");
         loadMenu();
         return root;
     }

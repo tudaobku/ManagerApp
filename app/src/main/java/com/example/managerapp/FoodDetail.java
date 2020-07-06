@@ -54,7 +54,7 @@ public class FoodDetail extends AppCompatActivity {
         edtDes = findViewById(R.id.edtDescription);
         btnUpdate = findViewById(R.id.btnUpdate);
 
-        foodList = FirebaseDatabase.getInstance().getReference("Food");
+        foodList = FirebaseDatabase.getInstance().getReference("Food/List");
         storage = FirebaseStorage.getInstance().getReference();
 
         imageFood.setOnClickListener(new View.OnClickListener() {

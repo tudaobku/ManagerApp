@@ -31,7 +31,7 @@ public class SupplierLogin extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         edtPhone = (MaterialEditText)findViewById(R.id.edtPhone);
         edtPassword = (MaterialEditText)findViewById(R.id.edtPassword);
-        supplierList = FirebaseDatabase.getInstance().getReference("Supplier");
+        supplierList = FirebaseDatabase.getInstance().getReference("Supplier/List");
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +48,7 @@ public class SupplierLogin extends AppCompatActivity {
         mDialog.setMessage("Please waiting");
         mDialog.show();
 
-        supplierList.addValueEventListener(new ValueEventListener() {
+        supplierList.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(edtPhone.getText().toString()).exists()) {
@@ -57,8 +57,8 @@ public class SupplierLogin extends AppCompatActivity {
                     if (supplier.getPassword().equals(edtPassword.getText().toString())) {
                         Common.supplier = supplier;
                         Common.supplierPhone = edtPhone.getText().toString();
-                        startActivity(new Intent(SupplierLogin.this, SupplierHomePage.class));
                         finish();
+                        startActivity(new Intent(SupplierLogin.this, SupplierHomePage.class));
                     } else {
                         Toast.makeText(SupplierLogin.this, "Wrong password", Toast.LENGTH_LONG).show();
                     }

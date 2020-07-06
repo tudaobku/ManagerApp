@@ -56,7 +56,7 @@ public class AccountFragment extends Fragment {
         btnUpload = root.findViewById(R.id.btnUpload);
         btnUpdate = root.findViewById(R.id.btnUpdate);
 
-        supplierList = FirebaseDatabase.getInstance().getReference("Supplier");
+        supplierList = FirebaseDatabase.getInstance().getReference("Supplier/List");
         storage = FirebaseStorage.getInstance().getReference();
 
         btnUpload.setOnClickListener(new View.OnClickListener() {

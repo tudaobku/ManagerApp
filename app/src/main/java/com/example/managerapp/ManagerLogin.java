@@ -33,7 +33,7 @@ public class ManagerLogin extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin);
 
-        managerList = FirebaseDatabase.getInstance().getReference("Manager");
+        managerList = FirebaseDatabase.getInstance().getReference("Manager/List");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

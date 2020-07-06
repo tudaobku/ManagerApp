@@ -53,7 +53,7 @@ public class ComingOrder extends Service implements ChildEventListener {
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
         if(snapshot.child("supplierID").getValue().equals(Common.supplier.getSupplierID())
                 && snapshot.child("status").getValue().equals("0")){
-            Intent startIntent = new Intent(getBaseContext(), SupplierHomePage.class);
+            Intent startIntent = new Intent(this, SupplierHomePage.class);
             PendingIntent content = PendingIntent.getActivity(getBaseContext(), 0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext(), "n");
             builder.setAutoCancel((true))
@@ -70,6 +70,7 @@ public class ComingOrder extends Service implements ChildEventListener {
                 notificationManager.createNotificationChannel(channel);
             }
             NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getBaseContext());
+
             managerCompat.notify(0,builder.build());
         }
     }

@@ -30,10 +30,9 @@
             <ImageView
                 android:id="@+id/imageFood"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@null"
+                android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax" />
+            />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

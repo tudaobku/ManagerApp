@@ -35,7 +35,7 @@ public class SupplierList extends AppCompatActivity {
 
         //Firebase
         database = FirebaseDatabase.getInstance();
-        supplierList = database.getReference("Supplier");
+        supplierList = database.getReference("Supplier/List");
 
         recyclerView = findViewById(R.id.recycler_supplier);
         recyclerView.setHasFixedSize(true);

@@ -38,7 +38,6 @@ public class NewFood extends AppCompatActivity {
     Uri tempUri;
     EditText edtName, edtPrice, edtDiscount, edtDes;
     Button btnUpload, btnAdd;
-    Integer maxKey = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +67,6 @@ public class NewFood extends AppCompatActivity {
                 addFood();
             }
         });
-        getMaxKey();
-
     }
 
     private void uploadImage() {
@@ -87,34 +84,8 @@ public class NewFood extends AppCompatActivity {
         }
     }
 
-    private  void getMaxKey(){
-        foodList.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                maxKey = Integer.parseInt(snapshot.getKey());
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
     private void addFood() {
         if(tempUri != null){
@@ -134,7 +105,7 @@ public class NewFood extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     Food newFood = new Food(edtDes.getText().toString(), edtDiscount.getText().toString(), uri.toString(),
                                             edtName.getText().toString(),edtPrice.getText().toString(), Common.supplier.getSupplierID());
-                                    foodList.child(String.valueOf(maxKey + 1)).setValue(newFood);
+                                    foodList.push().setValue(newFood);
                                     finish();
 
                                 }
