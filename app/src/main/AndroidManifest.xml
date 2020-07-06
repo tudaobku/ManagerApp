@@ -10,9 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Manager.CourtReport"></activity>
-        <activity android:name=".Manager.SignUpManager" />
-        <activity android:name=".Manager.SupplierList" />
-        <activity android:name=".Manager.ManagerHomePage" />
+        <activity android:name=".ViewComment"></activity>
+        <activity android:name=".ViewReport" />
+        <activity android:name=".SupplierList" />
+        <activity android:name=".ManagerHomePage" />
 
         <service
             android:name=".Service.ComingOrder"
@@ -24,6 +25,7 @@
         <activity android:name=".Supplier.NewFood" />
         <activity android:name=".Supplier.SupplierLogin" />
         <activity android:name=".Supplier.FoodDetail" />
+
         <activity
             android:name=".Supplier.SupplierHomePage"
             android:label="@string/title_activity_home"
