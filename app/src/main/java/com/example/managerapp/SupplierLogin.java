@@ -31,7 +31,7 @@ public class SupplierLogin extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         edtPhone = (MaterialEditText)findViewById(R.id.edtPhone);
         edtPassword = (MaterialEditText)findViewById(R.id.edtPassword);
-        supplierList = FirebaseDatabase.getInstance().getReference("Supplier");
+        supplierList = FirebaseDatabase.getInstance().getReference("Supplier/List");
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
