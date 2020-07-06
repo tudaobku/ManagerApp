@@ -13,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.managerapp.Adapter.OrderItemAdapter;
+import com.example.managerapp.Common;
 import com.example.managerapp.Model.Order;
 import com.example.managerapp.R;
+import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -49,8 +52,28 @@ public class ReportFragment extends Fragment {
         recyclerReport.setLayoutManager(new LinearLayoutManager(getContext()));
         reportList = FirebaseDatabase.getInstance().getReference("ConfirmedOrder");
 
+        loadReport();
 
         return root;
+    }
+
+    private void loadReport() {
+        adapterOrder = new FirebaseRecyclerAdapter<Order, OrderViewHolder>(
+                Order.class,
+                R.layout.activity_report_layout,
+                OrderViewHolder.class,
+                reportList.orderByChild("supplierID").equalTo(Common.supplier.getSupplierID())) {
+            @Override
+            protected void populateViewHolder(OrderViewHolder orderViewHolder, final Order order, int i) {
+
+                orderViewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+
+                    }
+                });
+            }
+        };
     }
 
     @Override
@@ -58,5 +81,4 @@ public class ReportFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
     }
-
 }

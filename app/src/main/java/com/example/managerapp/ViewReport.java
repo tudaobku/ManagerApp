@@ -14,7 +14,7 @@ public class ViewReport extends AppCompatActivity {
 
     TextView txtStallId, txtNumberFood, txtDeliveredOrder, txtCanceledOrder;
     TextView txtRevenue, txtNumberRating, txtNumberComment;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
