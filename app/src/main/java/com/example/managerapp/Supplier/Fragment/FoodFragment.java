@@ -74,7 +74,7 @@ public class FoodFragment extends Fragment {
                     @Override
                     public void onClick(View view, int position) {
                         Intent foodDetail = new Intent(getContext(), FoodDetail.class);
-                        foodDetail.putExtra("foodID", adapterFood.getRef(position).getKey());
+                        foodDetail.putExtra("foodRef", adapterFood.getRef(position).getKey());
                         startActivity(foodDetail);
                     }
                 });

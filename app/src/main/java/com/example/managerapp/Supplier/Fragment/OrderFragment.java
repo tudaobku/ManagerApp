@@ -53,7 +53,7 @@ public class OrderFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                    removeOrder(viewHolder.getAdapterPosition());
+                removeOrder(viewHolder.getAdapterPosition());
             }
         });
 

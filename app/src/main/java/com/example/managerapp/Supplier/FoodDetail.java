@@ -38,7 +38,7 @@ public class FoodDetail extends AppCompatActivity {
     ImageView imageFood;
     Button btnUpdate;
     Uri tempUri;
-    String foodID;
+    String foodRef;
     DatabaseReference foodList;
     StorageReference storage;
     Food food;
@@ -74,10 +74,10 @@ public class FoodDetail extends AppCompatActivity {
 
         if (getIntent(  ) != null)
         {
-            foodID = getIntent().getStringExtra("foodID");
-            if (!foodID.isEmpty())
+            foodRef = getIntent().getStringExtra("foodRef");
+            if (!foodRef.isEmpty())
             {
-                loadFoodDetail(foodID);
+                loadFoodDetail(foodRef);
             }
         }
 
@@ -112,7 +112,7 @@ public class FoodDetail extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     food.setImage(uri.toString());
-                                    foodList.child(foodID).setValue(food);
+                                    foodList.child(foodRef).setValue(food);
                                     finish();
                                 }
                             });
@@ -134,13 +134,13 @@ public class FoodDetail extends AppCompatActivity {
                     });
         }
         else {
-            foodList.child(foodID).setValue(food);
+            foodList.child(foodRef).setValue(food);
             finish();
         }
     }
 
-    private void loadFoodDetail(String foodID) {
-        foodList.orderByChild("foodID").equalTo(foodID).addValueEventListener(new ValueEventListener() {
+    private void loadFoodDetail(String foodRef) {
+        foodList.child(foodRef).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -151,7 +151,6 @@ public class FoodDetail extends AppCompatActivity {
                     edtDes.setText(food.getDescription());
                     edtDiscount.setText(food.getDiscount());
                 }
-
             }
 
             @Override

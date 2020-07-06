@@ -86,15 +86,7 @@ public class NewFood extends AppCompatActivity {
         }
     }
 
-
-
-
     private void addFood() {
-
-
-    }
-
-    private void submitFood() {
         if(tempUri != null){
             final ProgressDialog mDialog = new ProgressDialog(NewFood.this);
             mDialog.setMessage("Uploading Image...");

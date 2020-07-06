@@ -29,9 +29,6 @@ public class NewSupplier extends AppCompatActivity {
     FirebaseFunctions function;
     EditText edtName, edtPassword, edtPhone;
     Button btnAdd;
-    int maxId = 0;
-    List<Supplier> suppliers = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
