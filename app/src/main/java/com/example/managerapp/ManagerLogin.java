@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,19 @@ public class ManagerLogin extends AppCompatActivity {
     }
 
     private void checkAccount() {
+
+        final String phone = edtPhone.getText().toString();
+        final String password = edtPassword.getText().toString();
+
+        if(TextUtils.isEmpty(phone)){
+            Toast.makeText(ManagerLogin.this, "Please Enter Phone", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(TextUtils.isEmpty(password)){
+            Toast.makeText(ManagerLogin.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         final ProgressDialog mDialog = new ProgressDialog(ManagerLogin.this);
         mDialog.setMessage("Please waiting...");
         mDialog.show();

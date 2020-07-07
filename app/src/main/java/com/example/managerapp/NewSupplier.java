@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,9 +69,37 @@ public class NewSupplier extends AppCompatActivity {
     }
 
     private void addSupplier() {
+
+
+        final String name = edtName.getText().toString();
+        final String phone = edtPhone.getText().toString();
+        final String password = edtPassword.getText().toString();
+
+        if(TextUtils.isEmpty(name)){
+            Toast.makeText(NewSupplier.this, "Please Enter Name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(TextUtils.isEmpty(phone)){
+            Toast.makeText(NewSupplier.this, "Please Enter Phone", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(TextUtils.isEmpty(password)){
+            Toast.makeText(NewSupplier.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(password.length() <= 6){
+            Toast.makeText(NewSupplier.this, "Password too short", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(phone.length() != 10){
+            Toast.makeText(NewSupplier.this,"Phone is invalid", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         final ProgressDialog mDialog = new ProgressDialog(NewSupplier.this);
         mDialog.setMessage("Please waiting...");
         mDialog.show();
+
         supplierList.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
