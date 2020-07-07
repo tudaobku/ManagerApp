@@ -45,7 +45,6 @@ public class SupplierLogin extends AppCompatActivity {
 
     }
 
-
     private void checkAccount() {
         final ProgressDialog mDialog = new ProgressDialog(SupplierLogin.this);
         mDialog.setMessage("Please waiting...");

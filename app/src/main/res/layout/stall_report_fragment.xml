@@ -5,8 +5,8 @@
     android:id="@+id/report"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Supplier.Fragment.StallReportFragment">
-    android:background="#FFFFFF"
+    tools:context=".Supplier.Fragment.StallReportFragment"
+    android:background="#FFFFFF">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_report"

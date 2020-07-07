@@ -1,14 +1,13 @@
-package com.example.managerapp;
+package com.example.managerapp.Supplier;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.managerapp.Model.Report;
+import com.example.managerapp.R;
 
 public class ViewReport extends AppCompatActivity {
 

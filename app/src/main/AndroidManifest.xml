@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Manager.CourtReport"></activity>
-        <activity android:name=".ViewComment"></activity>
-        <activity android:name=".ViewReport" />
+        <activity android:name=".Supplier.ViewComment"></activity>
+        <activity android:name=".Supplier.ViewReport" />
         <activity android:name=".SupplierList" />
         <activity android:name=".ManagerHomePage" />
 

@@ -95,7 +95,7 @@ public class FoodFragment extends Fragment {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView)searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-   searchView.setQueryHint("Search with your food");
+        searchView.setQueryHint("Search with your food");
 
         final SearchView.SearchAutoComplete searchAutoComplete = searchView.findViewById(R.id.search_src_text);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, foodNameList);
