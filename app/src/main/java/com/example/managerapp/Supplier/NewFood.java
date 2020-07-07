@@ -1,85 +1,74 @@
-package com.example.managerapp;
+package com.example.managerapp.Supplier;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.managerapp.Common;
 import com.example.managerapp.Model.Food;
+import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
 
-public class FoodDetail extends AppCompatActivity {
+public class NewFood extends AppCompatActivity {
 
     final private int RESULT_LOAD_IMAGE = 1;
-    EditText edtName, edtPrice, edtDiscount, edtDes;
-    ImageView imageFood;
-    Button btnUpdate;
-    Uri tempUri;
-    String foodID;
     DatabaseReference foodList;
     StorageReference storage;
-    Food food;
+    Uri tempUri;
+    EditText edtName, edtPrice, edtDiscount, edtDes;
+    Button btnUpload, btnAdd;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food_detail);
-        
-        imageFood = findViewById(R.id.imageFood);
+        setContentView(R.layout.activity_new_food);
+
         edtName = findViewById(R.id.edtName);
         edtPrice = findViewById(R.id.edtPrice);
         edtDiscount = findViewById(R.id.edtDiscount);
         edtDes = findViewById(R.id.edtDescription);
-        btnUpdate = findViewById(R.id.btnUpdate);
+        btnUpload = findViewById(R.id.btnUploadImage);
+        btnAdd = findViewById(R.id.btnAddFood);
 
-        foodList = FirebaseDatabase.getInstance().getReference("Food");
+        foodList = FirebaseDatabase.getInstance().getReference("Food/List");
         storage = FirebaseStorage.getInstance().getReference();
 
-        imageFood.setOnClickListener(new View.OnClickListener() {
+        btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 uploadImage();
             }
         });
 
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateFood();
+                addFood();
             }
         });
-
-        if (getIntent(  ) != null)
-        {
-            foodID = getIntent().getStringExtra("foodID");
-            if (!foodID.isEmpty())
-            {
-                loadFoodDetail(foodID);
-            }
-        }
-
     }
 
     private void uploadImage() {
@@ -89,14 +78,17 @@ public class FoodDetail extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
     }
 
-    private void updateFood() {
-        food.setDescription(edtDes.getText().toString());
-        food.setName(edtName.getText().toString());
-        food.setPrice(edtPrice.getText().toString());
-        food.setDiscount(edtDiscount.getText().toString());
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
+            tempUri = data.getData();
+        }
+    }
 
+    private void addFood() {
         if(tempUri != null){
-            final ProgressDialog mDialog = new ProgressDialog(FoodDetail.this);
+            final ProgressDialog mDialog = new ProgressDialog(NewFood.this);
             mDialog.setMessage("Uploading Image...");
             mDialog.show();
 
@@ -110,8 +102,9 @@ public class FoodDetail extends AppCompatActivity {
                             imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    food.setImage(uri.toString());
-                                    foodList.child(foodID).setValue(food);
+                                    Food newFood = new Food(edtDes.getText().toString(), edtDiscount.getText().toString(), uri.toString(),
+                                            edtName.getText().toString(),edtPrice.getText().toString(), Common.supplier.getSupplierID(),"");
+                                    foodList.push().setValue(newFood);
                                     finish();
                                 }
                             });
@@ -121,51 +114,34 @@ public class FoodDetail extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             mDialog.dismiss();
-                            Toast.makeText(FoodDetail.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewFood.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                             int progress = (int)(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mDialog.setMessage("Uploaded Image" + progress + "%");
+                            mDialog.setMessage("Uploaded Image " + progress + "%");
                         }
                     });
         }
         else {
-            foodList.child(foodID).setValue(food);
-            finish();
+            showUploadImageDialog();
         }
     }
 
-    private void loadFoodDetail(String foodID) {
-        foodList.child(foodID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    food = dataSnapshot.getValue(Food.class);
-                    Picasso.with(getBaseContext()).load(food.getImage()).into(imageFood);
-                    edtPrice.setText(food.getPrice());
-                    edtName.setText(food.getName());
-                    edtDes.setText(food.getDescription());
-                    edtDiscount.setText(food.getDiscount());
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
-            tempUri = data.getData();
-            Picasso.with(FoodDetail.this).load(tempUri).into(imageFood);
-        }
+    private void showUploadImageDialog() {
+        final AlertDialog.Builder alertDialog= new AlertDialog.Builder(NewFood.this);
+        alertDialog.setMessage("You have to choose image for food")
+                .setTitle("Warning !!!")
+                .setPositiveButton("Continue...", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setIcon(R.drawable.warning)
+                .create();
+        alertDialog.show();
     }
 }

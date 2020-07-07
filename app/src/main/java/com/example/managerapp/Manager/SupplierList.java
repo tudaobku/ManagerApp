@@ -1,16 +1,16 @@
-package com.example.managerapp;
+package com.example.managerapp.Manager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.managerapp.Model.Supplier;
+import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.SupplierViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -35,14 +35,13 @@ public class SupplierList extends AppCompatActivity {
 
         //Firebase
         database = FirebaseDatabase.getInstance();
-        supplierList = database.getReference("Supplier");
+        supplierList = database.getReference("Supplier/List");
 
         recyclerView = findViewById(R.id.recycler_supplier);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-       loadSupplierList();
+        loadSupplierList();
     }
 
     private void loadSupplierList() {

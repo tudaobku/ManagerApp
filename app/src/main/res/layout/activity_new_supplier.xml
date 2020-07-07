@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/food_stall"
-    tools:context=".NewFood">
+    tools:context=".Supplier.NewFood">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,8 +1,10 @@
-package com.example.managerapp;
+package com.example.managerapp.Supplier;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.managerapp.R;
 
 public class ViewComment extends AppCompatActivity {
 

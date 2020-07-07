@@ -1,4 +1,4 @@
-package com.example.managerapp.Fragment;
+package com.example.managerapp.Supplier.Fragment;
 
 import android.os.Bundle;
 
@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.managerapp.Adapter.OrderItemAdapter;
 import com.example.managerapp.Common;
 import com.example.managerapp.Model.Order;
 import com.example.managerapp.R;
@@ -26,12 +25,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class ReportFragment extends Fragment {
+public class StallReportFragment extends Fragment {
 
 
     RecyclerView recyclerReport;
     DatabaseReference reportList;
-    FirebaseRecyclerAdapter<Order, OrderViewHolder> adapterOrder;
+    FirebaseRecyclerAdapter<Order, OrderViewHolder> adapterDeliveredOrder;
 
     FirebaseDatabase database;
     DatabaseReference reports;
@@ -42,10 +41,11 @@ public class ReportFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.report_fragment, container, false);
+
+        View root = inflater.inflate(R.layout.stall_report_fragment, container, false);
 
         database = FirebaseDatabase.getInstance();
-        reports = database.getReference("ConfirmedOrder");
+        reports = database.getReference("Order/DeliveredOrder");
 
         recyclerReport = root.findViewById(R.id.recycler_report);
         recyclerReport.setHasFixedSize(true);
@@ -58,7 +58,7 @@ public class ReportFragment extends Fragment {
     }
 
     private void loadReport() {
-        adapterOrder = new FirebaseRecyclerAdapter<Order, OrderViewHolder>(
+        adapterDeliveredOrder = new FirebaseRecyclerAdapter<Order, OrderViewHolder>(
                 Order.class,
                 R.layout.activity_report_layout,
                 OrderViewHolder.class,
@@ -79,6 +79,7 @@ public class ReportFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
 
     }
 }

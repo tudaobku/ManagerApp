@@ -1,74 +1,85 @@
-package com.example.managerapp;
+package com.example.managerapp.Supplier;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.managerapp.Model.Food;
+import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
 
-public class NewFood extends AppCompatActivity {
+public class FoodDetail extends AppCompatActivity {
 
     final private int RESULT_LOAD_IMAGE = 1;
+    EditText edtName, edtPrice, edtDiscount, edtDes;
+    ImageView imageFood;
+    Button btnUpdate;
+    Uri tempUri;
+    String foodRef;
     DatabaseReference foodList;
     StorageReference storage;
-    Uri tempUri;
-    EditText edtName, edtPrice, edtDiscount, edtDes;
-    Button btnUpload, btnAdd;
-    Integer maxKey = 0;
+    Food food;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_food);
-
+        setContentView(R.layout.activity_food_detail);
+        
+        imageFood = findViewById(R.id.imageFood);
         edtName = findViewById(R.id.edtName);
         edtPrice = findViewById(R.id.edtPrice);
         edtDiscount = findViewById(R.id.edtDiscount);
         edtDes = findViewById(R.id.edtDescription);
-        btnUpload = findViewById(R.id.btnUploadImage);
-        btnAdd = findViewById(R.id.btnAddFood);
+        btnUpdate = findViewById(R.id.btnUpdate);
 
-        foodList = FirebaseDatabase.getInstance().getReference("Food");
+        foodList = FirebaseDatabase.getInstance().getReference("Food/List");
         storage = FirebaseStorage.getInstance().getReference();
 
-        btnUpload.setOnClickListener(new View.OnClickListener() {
+        imageFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 uploadImage();
             }
         });
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addFood();
+                updateFood();
             }
         });
-        getMaxKey();
+
+        if (getIntent(  ) != null)
+        {
+            foodRef = getIntent().getStringExtra("foodRef");
+            if (!foodRef.isEmpty())
+            {
+                loadFoodDetail(foodRef);
+            }
+        }
 
     }
 
@@ -79,46 +90,14 @@ public class NewFood extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
-            tempUri = data.getData();
-        }
-    }
+    private void updateFood() {
+        food.setDescription(edtDes.getText().toString());
+        food.setName(edtName.getText().toString());
+        food.setPrice(edtPrice.getText().toString());
+        food.setDiscount(edtDiscount.getText().toString());
 
-    private  void getMaxKey(){
-        foodList.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                maxKey = Integer.parseInt(snapshot.getKey());
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void addFood() {
         if(tempUri != null){
-            final ProgressDialog mDialog = new ProgressDialog(NewFood.this);
+            final ProgressDialog mDialog = new ProgressDialog(FoodDetail.this);
             mDialog.setMessage("Uploading Image...");
             mDialog.show();
 
@@ -132,11 +111,9 @@ public class NewFood extends AppCompatActivity {
                             imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Food newFood = new Food(edtDes.getText().toString(), edtDiscount.getText().toString(), uri.toString(),
-                                            edtName.getText().toString(),edtPrice.getText().toString(), Common.supplier.getSupplierID());
-                                    foodList.child(String.valueOf(maxKey + 1)).setValue(newFood);
+                                    food.setImage(uri.toString());
+                                    foodList.child(foodRef).setValue(food);
                                     finish();
-
                                 }
                             });
                         }
@@ -145,34 +122,50 @@ public class NewFood extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             mDialog.dismiss();
-                            Toast.makeText(NewFood.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FoodDetail.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                             int progress = (int)(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mDialog.setMessage("Uploaded Image " + progress + "%");
+                            mDialog.setMessage("Uploaded Image" + progress + "%");
                         }
                     });
         }
         else {
-            showUploadImageDialog();
+            foodList.child(foodRef).setValue(food);
+            finish();
         }
     }
 
-    private void showUploadImageDialog() {
-        final AlertDialog.Builder alertDialog= new AlertDialog.Builder(NewFood.this);
-        alertDialog.setMessage("You have to choose image for food")
-                .setTitle("Warning !!!")
-                .setPositiveButton("Continue...", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .setIcon(R.drawable.warning)
-                .create();
-        alertDialog.show();
+    private void loadFoodDetail(String foodRef) {
+        foodList.child(foodRef).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    food = dataSnapshot.getValue(Food.class);
+                    Picasso.with(getBaseContext()).load(food.getImage()).into(imageFood);
+                    edtPrice.setText(food.getPrice());
+                    edtName.setText(food.getName());
+                    edtDes.setText(food.getDescription());
+                    edtDiscount.setText(food.getDiscount());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
+            tempUri = data.getData();
+            Picasso.with(FoodDetail.this).load(tempUri).into(imageFood);
+        }
     }
 }

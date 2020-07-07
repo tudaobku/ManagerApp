@@ -1,4 +1,4 @@
-package com.example.managerapp.Fragment;
+package com.example.managerapp.Supplier.Fragment;
 
 import androidx.appcompat.widget.SearchView;
 
@@ -22,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.managerapp.Common;
-import com.example.managerapp.FoodDetail;
+import com.example.managerapp.Supplier.FoodDetail;
 import com.example.managerapp.Model.Food;
 import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
@@ -53,7 +53,7 @@ public class FoodFragment extends Fragment {
         recyclerMenu = root.findViewById(R.id.recycler_menu);
         recyclerMenu.setHasFixedSize(true);
         recyclerMenu.setLayoutManager(new LinearLayoutManager(getContext()));
-        foodList = FirebaseDatabase.getInstance().getReference("Food");
+        foodList = FirebaseDatabase.getInstance().getReference("Food/List");
         loadMenu();
         return root;
     }
@@ -69,11 +69,12 @@ public class FoodFragment extends Fragment {
                 foodViewHolder.txtName.setText(food.getName());
                 Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
                 foodNameList.add(food.getName());
+
                 foodViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position) {
                         Intent foodDetail = new Intent(getContext(), FoodDetail.class);
-                        foodDetail.putExtra("foodID", adapterFood.getRef(position).getKey());
+                        foodDetail.putExtra("foodRef", adapterFood.getRef(position).getKey());
                         startActivity(foodDetail);
                     }
                 });
@@ -88,10 +89,6 @@ public class FoodFragment extends Fragment {
         return super.onContextItemSelected(item);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.food_search, menu);
@@ -119,7 +116,7 @@ public class FoodFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if(s.isEmpty()) recyclerMenu.setAdapter(adapterFood);
+                recyclerMenu.setAdapter(adapterFood);
                 return false;
             }
         });

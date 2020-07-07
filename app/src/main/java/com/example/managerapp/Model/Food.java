@@ -7,6 +7,17 @@ public class Food {
     String name;
     String price;
     String supplierID;
+    String foodID;
+
+    public Food(String description, String discount, String image, String name, String price, String supplierID, String foodID) {
+        this.description = description;
+        this.discount = discount;
+        this.image = image;
+        this.name = name;
+        this.price = price;
+        this.supplierID = supplierID;
+        this.foodID = foodID;
+    }
 
     public String getDescription() {
         return description;
@@ -59,12 +70,11 @@ public class Food {
     public Food() {
     }
 
-    public Food(String description, String discount, String image, String name, String price, String supplierID) {
-        this.description = description;
-        this.discount = discount;
-        this.image = image;
-        this.name = name;
-        this.price = price;
-        this.supplierID = supplierID;
+    public String getFoodID() {
+        return foodID;
+    }
+
+    public void setFoodID(String foodID) {
+        this.foodID = foodID;
     }
 }

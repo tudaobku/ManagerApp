@@ -1,4 +1,4 @@
-package com.example.managerapp.Fragment;
+package com.example.managerapp.Supplier.Fragment;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.managerapp.Common;
-import com.example.managerapp.SupplierHomePage;
+import com.example.managerapp.Supplier.SupplierHomePage;
 import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,7 +56,7 @@ public class AccountFragment extends Fragment {
         btnUpload = root.findViewById(R.id.btnUpload);
         btnUpdate = root.findViewById(R.id.btnUpdate);
 
-        supplierList = FirebaseDatabase.getInstance().getReference("Supplier");
+        supplierList = FirebaseDatabase.getInstance().getReference("Supplier/List");
         storage = FirebaseStorage.getInstance().getReference();
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
