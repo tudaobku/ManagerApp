@@ -4,7 +4,6 @@ import android.media.Image;
 import android.view.ContextMenu;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,6 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public TextView txtName;
     public ImageView imgFood;
-
     private ItemClickListener itemClickListener;
 
     public FoodViewHolder(@NonNull View itemView) {
@@ -28,7 +26,6 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         imgFood = itemView.findViewById(R.id.imgFood);
         itemView.setOnCreateContextMenuListener(this);
         itemView.setOnClickListener(this);
-
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -39,11 +36,8 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public void onClick(View view) {
         itemClickListener.onClick(view, getAdapterPosition());
     }
-
-
     @Override
     public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
         contextMenu.add(0,0,getAdapterPosition(),"Remove");
     }
-
 }

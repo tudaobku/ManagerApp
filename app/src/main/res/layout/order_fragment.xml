@@ -5,15 +5,13 @@
     android:id="@+id/order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".order.OrderFragment">
+    android:background="#FFFFFF"
+    tools:context=".Supplier.Fragment.OrderFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:padding="10dp"
+        android:id="@+id/recycler_order"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_order"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
         android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>
