@@ -22,12 +22,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.managerapp.Common;
+import com.example.managerapp.Model.Supplier;
 import com.example.managerapp.Supplier.FoodDetail;
 import com.example.managerapp.Model.Food;
 import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.FoodViewHolder;
+import com.example.managerapp.ViewHolder.SupplierViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -59,13 +62,18 @@ public class FoodFragment extends Fragment {
     }
 
     private void loadMenu() {
-        adapterFood = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
-                Food.class,
-                R.layout.food_item,
-                FoodViewHolder.class,
-                foodList.orderByChild("supplierID").equalTo(Common.supplier.getSupplierID())) {
+        FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>()
+                .setQuery(foodList.orderByChild("supplierID").equalTo(Common.supplier.getSupplierID()), Food.class).build();
+        adapterFood = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
+            @NonNull
             @Override
-            protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
+            public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, parent, false);
+                return new FoodViewHolder(itemView);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull FoodViewHolder foodViewHolder, int i, @NonNull Food food) {
                 foodViewHolder.txtName.setText(food.getName());
                 Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
                 foodNameList.add(food.getName());
@@ -124,13 +132,17 @@ public class FoodFragment extends Fragment {
     }
 
     private void showResult(String s) {
-        adapterSearchFood = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
-                Food.class,
-                R.layout.food_item,
-                FoodViewHolder.class,
-                foodList.orderByChild("name").equalTo(s)) {
+        FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>()
+                .setQuery(foodList.orderByChild("name").equalTo(s), Food.class).build();
+        adapterSearchFood = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
+            @NonNull
             @Override
-            protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
+            public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, parent, false);
+                return new FoodViewHolder(itemView);            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull FoodViewHolder foodViewHolder, int i, @NonNull Food food) {
                 foodViewHolder.txtName.setText(food.getName());
                 Picasso.with(getContext()).load(food.getImage()).into(foodViewHolder.imgFood);
 
@@ -145,9 +157,22 @@ public class FoodFragment extends Fragment {
                 });
             }
         };
-        adapterFood.notifyDataSetChanged();
+        adapterSearchFood.startListening();
+        adapterSearchFood.notifyDataSetChanged();
         recyclerMenu.setAdapter(adapterSearchFood);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(adapterSearchFood != null) adapterSearchFood.stopListening();
+        adapterFood.stopListening();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapterFood.startListening();
+    }
 
 }

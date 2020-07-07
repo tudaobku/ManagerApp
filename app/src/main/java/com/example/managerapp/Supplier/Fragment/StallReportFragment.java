@@ -19,6 +19,7 @@ import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -58,20 +59,18 @@ public class StallReportFragment extends Fragment {
     }
 
     private void loadReport() {
-        adapterDeliveredOrder = new FirebaseRecyclerAdapter<Order, OrderViewHolder>(
-                Order.class,
-                R.layout.activity_report_layout,
-                OrderViewHolder.class,
-                reportList.orderByChild("supplierID").equalTo(Common.supplier.getSupplierID())) {
+        FirebaseRecyclerOptions<Order> options = new FirebaseRecyclerOptions.Builder<Order>()
+                .setQuery(reports.orderByChild("supplierID").equalTo(Common.supplier.getSupplierID()), Order.class).build();
+        adapterDeliveredOrder = new FirebaseRecyclerAdapter<Order, OrderViewHolder>(options) {
+            @NonNull
             @Override
-            protected void populateViewHolder(OrderViewHolder orderViewHolder, final Order order, int i) {
+            public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return null;
+            }
 
-                orderViewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position) {
+            @Override
+            protected void onBindViewHolder(@NonNull OrderViewHolder orderViewHolder, int i, @NonNull Order order) {
 
-                    }
-                });
             }
         };
     }

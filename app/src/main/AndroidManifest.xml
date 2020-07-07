@@ -12,8 +12,8 @@
         <activity android:name=".Manager.CourtReport"></activity>
         <activity android:name=".Supplier.ViewComment"></activity>
         <activity android:name=".Supplier.ViewReport" />
-        <activity android:name=".SupplierList" />
-        <activity android:name=".ManagerHomePage" />
+        <activity android:name=".Manager.SupplierList" />
+        <activity android:name=".Manager.ManagerHomePage" />
 
         <service
             android:name=".Service.ComingOrder"

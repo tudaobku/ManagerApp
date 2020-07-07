@@ -6,14 +6,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.managerapp.Model.Supplier;
 import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
+import com.example.managerapp.ViewHolder.FoodViewHolder;
 import com.example.managerapp.ViewHolder.SupplierViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -45,20 +49,25 @@ public class SupplierList extends AppCompatActivity {
     }
 
     private void loadSupplierList() {
-        adapter = new FirebaseRecyclerAdapter<Supplier, SupplierViewHolder>(Supplier.class,
-                R.layout.supplier_item,
-                SupplierViewHolder.class,
-                supplierList) {
+        FirebaseRecyclerOptions<Supplier> options = new FirebaseRecyclerOptions.Builder<Supplier>()
+                .setQuery(supplierList, Supplier.class).build();
+        adapter = new FirebaseRecyclerAdapter<Supplier, SupplierViewHolder>(options) {
+            @NonNull
             @Override
-            protected void populateViewHolder(SupplierViewHolder supplierViewHolder, Supplier model, int i) {
-                supplierViewHolder.txtName.setText(model.getName());
-                supplierViewHolder.txtId.setText(model.getSupplierID());
-                if (!model.getImage().isEmpty()) {
-                    Picasso.with(getBaseContext()).load(model.getImage()).into(supplierViewHolder.imgSupplier);
+            public SupplierViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.supplier_item, parent, false);
+                return new SupplierViewHolder(itemView);
+            }
+            @Override
+            protected void onBindViewHolder(@NonNull SupplierViewHolder supplierViewHolder, int i, @NonNull Supplier supplier) {
+                supplierViewHolder.txtName.setText(supplier.getName());
+                supplierViewHolder.txtId.setText(supplier.getSupplierID());
+                if (!supplier.getImage().isEmpty()) {
+                    Picasso.with(getBaseContext()).load(supplier.getImage()).into(supplierViewHolder.imgSupplier);
                 }else {
                     supplierViewHolder.imgSupplier.setImageResource(R.drawable.no_image);
                 }
-                final Supplier local = model;
+                final Supplier local = supplier;
                 supplierViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position) {
@@ -75,5 +84,17 @@ public class SupplierList extends AppCompatActivity {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         if(item.getTitle().equals("Remove")) adapter.getRef(item.getOrder()).removeValue();
         return super.onContextItemSelected(item);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
     }
 }
