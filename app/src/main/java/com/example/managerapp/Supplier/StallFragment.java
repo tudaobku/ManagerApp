@@ -1,4 +1,4 @@
-package com.example.managerapp.Supplier.Fragment;
+package com.example.managerapp.Supplier;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -19,8 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.managerapp.Supplier.Common;
-import com.example.managerapp.Supplier.SupplierHomePage;
 import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,10 +34,10 @@ import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AccountFragment extends Fragment {
+public class StallFragment extends Fragment {
     final private int RESULT_LOAD_IMAGE = 1;
     Uri tempUri;
-    EditText edtName, edtPassword, edtEmail;
+    EditText edtName, edtEmail;
     Button btnUpload, btnUpdate;
     ImageView imgLogo;
     DatabaseReference supplierList;
@@ -48,10 +46,9 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.account_fragment, container, false);
+        View root = inflater.inflate(R.layout.stall_fragment, container, false);
 
         edtName = root.findViewById(R.id.edtName);
-        edtPassword = root.findViewById(R.id.edtPassword);
         edtEmail = root.findViewById(R.id.edtEmail);
         imgLogo = root.findViewById(R.id.imgLogo);
         btnUpload = root.findViewById(R.id.btnUpload);
@@ -128,7 +125,6 @@ public class AccountFragment extends Fragment {
 
     private void showAccount() {
         edtName.setText(Common.supplier.getName());
-        edtPassword.setText(Common.supplier.getPassword());
         edtEmail.setText(Common.supplier.getEmail());
         if(!Common.supplier.getImage().isEmpty()) Picasso.with(getContext()).load(Common.supplier.getImage()).into(imgLogo);
     }
@@ -148,10 +144,9 @@ public class AccountFragment extends Fragment {
 
     private void updateInformation() {
         Common.supplier.setName(edtName.getText().toString());
-        Common.supplier.setPassword(edtPassword.getText().toString());
         Common.supplier.setEmail(edtEmail.getText().toString());
         supplierList.child(Common.supplierPhone).setValue(Common.supplier);
-        startActivity(new Intent(getContext(), SupplierHomePage.class));
+        startActivity(new Intent(getContext(), HomePage.class));
     }
 
     private void showUploadLogoDialog() {

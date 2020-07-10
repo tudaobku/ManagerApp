@@ -1,4 +1,4 @@
-package com.example.managerapp.Service;
+package com.example.managerapp.Supplier.Service;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -17,7 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.managerapp.Supplier.Common;
 import com.example.managerapp.Supplier.Model.Order;
-import com.example.managerapp.Supplier.SupplierHomePage;
+import com.example.managerapp.Supplier.HomePage;
 import com.example.managerapp.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -56,7 +56,7 @@ public class ComingOrder extends Service implements ChildEventListener {
                 && snapshot.child("status").getValue().equals("0")){
             Order order = snapshot.getValue(Order.class);
             String orderDetail = "Customer placed a $" + order.getTotal() + " order";
-            Intent startIntent = new Intent(this, SupplierHomePage.class);
+            Intent startIntent = new Intent(this, HomePage.class);
             startIntent.putExtra("fragment", "menu");
             PendingIntent content = PendingIntent.getActivity(getBaseContext(), 0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext(), "n");

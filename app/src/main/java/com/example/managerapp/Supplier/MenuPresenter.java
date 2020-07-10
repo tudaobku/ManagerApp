@@ -19,14 +19,12 @@ public class MenuPresenter implements MenuContract.Presenter, MenuContract.onOpe
     public void loadMenu() {
         menuView.onProcessStart();
         menuInteractor.performLoadMenu(Common.supplier.getSupplierID());
-        menuView.onProcessEnd();
     }
 
     @Override
     public void removeFood(int position) {
         menuView.onProcessStart();
         menuInteractor.performRemoveFood(position);
-        menuView.onProcessEnd();
     }
 
     @Override
@@ -66,5 +64,6 @@ public class MenuPresenter implements MenuContract.Presenter, MenuContract.onOpe
             }
             menuView.setSuggestionList(foodNameList);
         }
+        menuView.onProcessEnd();
     }
 }

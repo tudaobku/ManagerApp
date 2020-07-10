@@ -15,19 +15,19 @@ import com.example.managerapp.R;
 import com.example.managerapp.Supplier.Interface.SupplierLoginContract;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-public class SupplierLoginPage extends AppCompatActivity implements SupplierLoginContract.View {
+public class LoginPage extends AppCompatActivity implements SupplierLoginContract.View {
 
     Button btnLogin;
     MaterialEditText edtPhone, edtPassword;
     TextView txtForgotPass;
-    SupplierLoginPresenter presenter;
+    LoginPresenter presenter;
     ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_login);
-        presenter = new SupplierLoginPresenter(this);
+        presenter = new LoginPresenter(this);
         btnLogin = findViewById(R.id.btnLogin);
         edtPhone = findViewById(R.id.edtPhone);
         edtPassword = findViewById(R.id.edtPassword);
@@ -49,12 +49,12 @@ public class SupplierLoginPage extends AppCompatActivity implements SupplierLogi
 
     @Override
     public void showToast(String message) {
-        Toast.makeText(SupplierLoginPage.this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginPage.this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void startHomePage() {
-        startActivity(new Intent(this, SupplierHomePage.class));
+        startActivity(new Intent(this, HomePage.class));
         finish();
     }
 

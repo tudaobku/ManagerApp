@@ -1,9 +1,8 @@
-package com.example.managerapp.Supplier.Fragment;
+package com.example.managerapp.Supplier;
 
 import androidx.appcompat.widget.SearchView;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -73,7 +72,7 @@ public class MenuFragment extends Fragment implements MenuContract.View, MenuAda
 
     @Override
     public boolean onContextItemSelected(@NonNull final MenuItem item) {
-        if(item.getTitle().equals(Common.SELECTED_ITEM_REMOVE)) {
+        if(item.getTitle().equals(Common.REMOVE_OPT)) {
             AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
             alertDialog.setTitle("Do you want to remove this food?")
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -94,7 +93,7 @@ public class MenuFragment extends Fragment implements MenuContract.View, MenuAda
             alertDialog.show();
 
         }
-        if(item.getTitle().equals(Common.SELECTED_ITEM_UPDATE)) {
+        if(item.getTitle().equals(Common.UPDATE_OPT)) {
             Intent editIntent = new Intent(getContext(), EditFoodActivity.class);
             editIntent.putExtra(Common.EXTRA_FOOD_POSITION, item.getOrder());
             startActivity(editIntent);

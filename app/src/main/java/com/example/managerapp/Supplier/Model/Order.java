@@ -6,10 +6,9 @@ public class Order {
     List<OrderItem> foods;
     String phone;
     String status;
+    String supplierID;
     String total;
     String type;
-    String supplierID;
-
     public String getSupplierID() {
         return supplierID;
     }

@@ -13,11 +13,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class SupplierLoginPresenter implements SupplierLoginContract.Presenter{
+public class LoginPresenter implements SupplierLoginContract.Presenter{
     Account account;
     DatabaseReference supplierList;
     SupplierLoginContract.View mILoginPage;
-    public SupplierLoginPresenter(SupplierLoginContract.View iLoginCallBack) {
+    public LoginPresenter(SupplierLoginContract.View iLoginCallBack) {
         mILoginPage = iLoginCallBack;
         supplierList = FirebaseDatabase.getInstance().getReference("Supplier/List");
     }

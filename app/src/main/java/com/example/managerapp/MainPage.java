@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.managerapp.Manager.ManagerLogin;
-import com.example.managerapp.Supplier.SupplierLoginPage;
+import com.example.managerapp.Supplier.LoginPage;
 
 public class MainPage extends AppCompatActivity {
 
@@ -37,7 +37,7 @@ public class MainPage extends AppCompatActivity {
         });
     }
     private void showSupplierLoginPage(){
-        startActivity(new Intent(MainPage.this, SupplierLoginPage.class));
+        startActivity(new Intent(MainPage.this, LoginPage.class));
     }
     private void showManagerLoginPage() {
         startActivity(new Intent(MainPage.this, ManagerLogin.class));

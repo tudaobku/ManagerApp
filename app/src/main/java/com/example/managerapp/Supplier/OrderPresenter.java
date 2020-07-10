@@ -1,15 +1,19 @@
 package com.example.managerapp.Supplier;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.managerapp.Supplier.Interface.OrderContract;
+import com.example.managerapp.Supplier.Model.Food;
 import com.example.managerapp.Supplier.Model.Order;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.CookieHandler;
 import java.util.ArrayList;
 
 public class OrderPresenter implements OrderContract.Presenter{
@@ -17,24 +21,75 @@ public class OrderPresenter implements OrderContract.Presenter{
     DatabaseReference orderReference;
     ArrayList<Order> orderList;
     ArrayList<String> keyList;
-    OrderPresenter (OrderContract.View orderView){
+    public OrderPresenter (OrderContract.View orderView){
         this.orderView = orderView;
-        orderList = new ArrayList<>();
+
         orderReference = FirebaseDatabase.getInstance().getReference("Order/CurrentOrder/List");
     }
 
     @Override
     public void loadOrder() {
-        orderReference.orderByKey().addValueEventListener(new ValueEventListener() {
+        orderList = new ArrayList<>();
+        keyList = new ArrayList<>();
+        orderReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                snapshot.getChildren()
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Order order = snapshot.getValue(Order.class);
+                if(order.getSupplierID().equals(Common.supplier.getSupplierID())){
+                    orderList.add(order);
+                    keyList.add(snapshot.getKey());
+                    orderView.showOrder(orderList);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Order order = snapshot.getValue(Order.class);
+                if(order.getSupplierID().equals(Common.supplier.getSupplierID())) {
+                    int position = keyList.indexOf(snapshot.getKey());
+                    orderList.set(position, order);
+                    orderView.showOrder(orderList);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                Order order = snapshot.getValue(Order.class);
+                if(order.getSupplierID().equals(Common.supplier.getSupplierID())) {
+                    int position = keyList.indexOf(snapshot.getKey());
+                    orderList.remove(position);
+                    keyList.remove(position);
+                    orderView.showOrder(orderList);
+                }
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        })
+        });
     }
+
+    @Override
+    public void removeOrder(int position) {
+        orderView.showConfirmDialog("Remove Order. Sure?", position, Common.REMOVE_OPT);
+    }
+
+    @Override
+    public void completeOrder(int position) {
+        Order order = orderList.get(position);
+        if(order.getStatus().equals("0")) orderView.showConfirmDialog("Order is ready?", position, Common.UPDATE_OPT);
+    }
+
+    @Override
+    public void confirmOperation(int position, String opt) {
+        if(opt == Common.UPDATE_OPT) orderReference.child(keyList.get(position)).child("status").setValue("1");
+        else orderReference.child(keyList.get(position)).removeValue();
+    }
+
 }

@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managerapp.R;
@@ -39,9 +41,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        holder.txtPhone.setText(orderList.get(position).getPhone());
-        String status = orderList.get(position).getStatus();
-        if (status.equals("0")) holder.txtStatus.setVisibility(View.INVISIBLE);
+        Order order = orderList.get(position);
+        holder.txtPhone.setText(order.getPhone());
+        holder.txtNumber.setText(String.valueOf(position + 1));
+        holder.recyclerOrderItem.setLayoutManager(new LinearLayoutManager(orderListener.getContext()));
+        holder.recyclerOrderItem.setAdapter(new OrderItemAdapter(order.getFoods() , orderListener.getContext()));
+        if(order.getStatus().equals("0")){
+            holder.txtStatus.setText("Preparing");
+            holder.txtStatus.setBackgroundColor(0xFFC52F2F);
+        }
+        else{
+            holder.txtStatus.setText("Completed");
+            holder.txtStatus.setBackgroundColor(0xFF72DA76);
+        }
+        if (order.getType().equals("0")) holder.txtTakeAway.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -50,7 +63,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
     class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private OrderListener orderListener;
-        public TextView txtPhone, txtStatus;
+        public TextView txtPhone, txtStatus, txtNumber, txtTakeAway;
         public RecyclerView recyclerOrderItem;
 
         public OrderViewHolder(View itemView, OrderListener orderListener) {
@@ -59,16 +72,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             txtPhone = itemView.findViewById(R.id.txtPhone);
             recyclerOrderItem = itemView.findViewById(R.id.orderList);
             txtStatus = itemView.findViewById(R.id.txtStatus);
+            txtNumber = itemView.findViewById(R.id.txtNumber);
+            txtTakeAway = itemView.findViewById(R.id.txtTakeAway);
             txtStatus.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.txtStatus) orderListener.onStatusChangeClick(getAdapterPosition());
+            if (view.getId() == R.id.txtStatus) orderListener.onOrderCompleteClick(getAdapterPosition());
         }
     }
     public interface OrderListener {
-        void onStatusChangeClick(int position);
+        void onOrderCompleteClick(int position);
+        Context getContext();
     }
 
 }

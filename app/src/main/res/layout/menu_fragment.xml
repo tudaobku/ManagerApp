@@ -6,12 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Supplier.Fragment.MenuFragment">
+    tools:context=".Supplier.MenuFragment">
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
+        android:visibility="invisible"
+        android:indeterminate="true"
+        android:verticalScrollbarPosition="defaultPosition"
         android:layout_height="wrap_content"
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton

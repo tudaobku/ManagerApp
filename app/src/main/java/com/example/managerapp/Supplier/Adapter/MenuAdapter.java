@@ -70,8 +70,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.FoodViewHolder
         }
         @Override
         public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
-            contextMenu.add(0,0,getAdapterPosition(), Common.SELECTED_ITEM_REMOVE);
-            contextMenu.add(0,0,getAdapterPosition(), Common.SELECTED_ITEM_UPDATE);
+            contextMenu.add(0,0,getAdapterPosition(), Common.REMOVE_OPT);
+            contextMenu.add(0,0,getAdapterPosition(), Common.UPDATE_OPT);
         }
     }
     public interface FoodListener {

@@ -2,18 +2,19 @@ package com.example.managerapp.Supplier.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managerapp.Supplier.Model.OrderItem;
 import com.example.managerapp.R;
-import com.example.managerapp.ViewHolder.OrderItemViewHolder;
 
 import java.util.List;
 
-public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemViewHolder> {
+public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.OrderItemViewHolder> {
     List<OrderItem> foodList;
     Context context;
 
@@ -36,4 +37,13 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemViewHolder> 
     public int getItemCount() {
         return foodList.size();
     }
+    class OrderItemViewHolder extends RecyclerView.ViewHolder  {
+        TextView txtName, txtQuantity;
+        OrderItemViewHolder(View itemView){
+            super(itemView);
+            txtName = itemView.findViewById(R.id.txtName);
+            txtQuantity = itemView.findViewById(R.id.txtQuantity);
+        }
+    }
+
 }
