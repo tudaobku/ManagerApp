@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_start"
-    tools:context=".LoginPage">
+    tools:context=".MainPage">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +50,6 @@
             android:layout_height="70dp"
             android:layout_marginStart="47dp"
             android:layout_marginTop="35dp"
-            android:background="@drawable/ic_launcher_background"
             android:backgroundTint="#B5A6CD"
             android:text="Court Manager"
             android:textColorHint="#FFFFFF"

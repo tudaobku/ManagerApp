@@ -9,31 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Manager.CourtReport"></activity>
-        <activity android:name=".Supplier.ViewComment"></activity>
-        <activity android:name=".Supplier.ViewReport" />
-        <activity android:name=".SupplierList" />
-        <activity android:name=".ManagerHomePage" />
+        <activity android:name=".Manager.SupplierList" />
+        <activity android:name=".Manager.ManagerHomePage" />
 
         <service
-            android:name=".Service.ComingOrder"
+            android:name=".Supplier.Service.ComingOrder"
             android:enabled="true"
             android:exported="true" />
 
         <activity android:name=".Manager.NewSupplier" />
         <activity android:name=".Manager.ManagerLogin" />
-        <activity android:name=".Supplier.NewFood" />
-        <activity android:name=".Supplier.SupplierLogin" />
-        <activity android:name=".Supplier.FoodDetail" />
+        <activity android:name=".Supplier.LoginPage" />
+        <activity android:name=".Supplier.EditFoodActivity" />
 
         <activity
-            android:name=".Supplier.SupplierHomePage"
+            android:name=".Supplier.HomePage"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginPage">
+        <activity android:name=".MainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
