@@ -93,8 +93,7 @@ public class NewSupplier extends AppCompatActivity {
                     Toast.makeText(NewSupplier.this, "Phone number exist!", Toast.LENGTH_SHORT).show();
                 } else {
                    mDialog.dismiss();
-                    Supplier newSupplier = new Supplier(edtName.getText().toString(), edtPassword.getText().toString(),
-                            "", "");
+                    Supplier newSupplier = new Supplier(phone,password, "","", "");
                     supplierList.child(edtPhone.getText().toString()).setValue(newSupplier);
                     Toast.makeText(NewSupplier.this, "Add new supplier successfully!", Toast.LENGTH_SHORT).show();
                     finish();

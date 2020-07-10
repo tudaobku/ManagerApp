@@ -13,18 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.managerapp.Common;
-import com.example.managerapp.Model.Order;
+import com.example.managerapp.Supplier.Common;
+import com.example.managerapp.Supplier.Model.Order;
 import com.example.managerapp.R;
-import com.example.managerapp.UI.ItemClickListener;
 import com.example.managerapp.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class StallReportFragment extends Fragment {
 
@@ -46,7 +42,7 @@ public class StallReportFragment extends Fragment {
         View root = inflater.inflate(R.layout.stall_report_fragment, container, false);
 
         database = FirebaseDatabase.getInstance();
-        reports = database.getReference("Order/DeliveredOrder");
+        reports = database.getReference("Order");
 
         recyclerReport = root.findViewById(R.id.recycler_report);
         recyclerReport.setHasFixedSize(true);

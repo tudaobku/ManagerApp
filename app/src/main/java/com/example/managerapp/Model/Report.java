@@ -1,5 +1,7 @@
 package com.example.managerapp.Model;
 
+import com.example.managerapp.Supplier.Model.OrderItem;
+
 import java.util.List;
 
 public class Report {

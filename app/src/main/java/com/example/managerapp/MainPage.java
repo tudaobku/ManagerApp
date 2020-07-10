@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.managerapp.Manager.ManagerLogin;
-import com.example.managerapp.Supplier.SupplierLogin;
+import com.example.managerapp.Supplier.SupplierLoginPage;
 
-public class LoginPage extends AppCompatActivity {
+public class MainPage extends AppCompatActivity {
 
     Button btnStall, btnCourt;
 
@@ -25,15 +25,21 @@ public class LoginPage extends AppCompatActivity {
         btnStall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginPage.this, SupplierLogin.class));
+                showSupplierLoginPage();
             }
         });
 
         btnCourt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginPage.this, ManagerLogin.class));
+                showManagerLoginPage();
             }
         });
+    }
+    private void showSupplierLoginPage(){
+        startActivity(new Intent(MainPage.this, SupplierLoginPage.class));
+    }
+    private void showManagerLoginPage() {
+        startActivity(new Intent(MainPage.this, ManagerLogin.class));
     }
 }

@@ -15,12 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.managerapp.Supplier.Adapter.OrderAdapter;
 import com.example.managerapp.Supplier.Adapter.OrderItemAdapter;
-import com.example.managerapp.Common;
-import com.example.managerapp.Model.Order;
+import com.example.managerapp.Supplier.Common;
+import com.example.managerapp.Supplier.Interface.OrderContract;
+import com.example.managerapp.Supplier.Model.Order;
 import com.example.managerapp.R;
 import com.example.managerapp.UI.ItemClickListener;
-import com.example.managerapp.ViewHolder.FoodViewHolder;
 import com.example.managerapp.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -29,11 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class OrderFragment extends Fragment {
 
-
+    OrderContract.Presenter presenter;
     RecyclerView recyclerOrder;
-    DatabaseReference orderList;
-    FirebaseRecyclerAdapter<Order, OrderViewHolder> adapterOrder;
-
+    OrderAdapter orderAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -44,8 +43,7 @@ public class OrderFragment extends Fragment {
         recyclerOrder = root.findViewById(R.id.recycler_order);
         recyclerOrder.setHasFixedSize(true);
         recyclerOrder.setLayoutManager(new LinearLayoutManager(getContext()));
-        orderList = FirebaseDatabase.getInstance().getReference("Order/CurrentOrder/List");
-        loadOrder();
+        presenter.loadOrder();
 
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -60,7 +58,6 @@ public class OrderFragment extends Fragment {
         });
 
         helper.attachToRecyclerView(recyclerOrder);
-
         return root;
 
     }
@@ -92,7 +89,7 @@ public class OrderFragment extends Fragment {
     private void loadOrder() {
         FirebaseRecyclerOptions<Order> options = new FirebaseRecyclerOptions.Builder<Order>()
                 .setQuery(orderList.orderByChild("supplierID").equalTo(Common.supplier.getSupplierID()), Order.class).build();
-       adapterOrder = new FirebaseRecyclerAdapter<Order, OrderViewHolder>(options) {
+        adapterOrder = new FirebaseRecyclerAdapter<Order, OrderViewHolder>(options) {
            @NonNull
            @Override
            public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -111,7 +108,6 @@ public class OrderFragment extends Fragment {
                    orderViewHolder.txtStatus.setText("Completed");
                    orderViewHolder.txtStatus.setBackgroundColor(0xFF72DA76);
                }
-
                orderViewHolder.recyclerOrderItem.setLayoutManager(new LinearLayoutManager(getContext()));
                orderViewHolder.recyclerOrderItem.setAdapter(new OrderItemAdapter(order.getFoods() , getContext()));
 

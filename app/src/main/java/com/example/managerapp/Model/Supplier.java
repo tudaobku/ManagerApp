@@ -5,6 +5,19 @@ public class Supplier {
     private String password;
     private String supplierID;
     private String image;
+    private String email;
+
+    public void setSupplierID(String supplierID) {
+        this.supplierID = supplierID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getName() {
         return name;
@@ -26,10 +39,6 @@ public class Supplier {
         return supplierID;
     }
 
-    public void setSupplierID(String supplierID) {
-        this.supplierID = supplierID;
-    }
-
     public String getImage() {
         return image;
     }
@@ -41,10 +50,11 @@ public class Supplier {
     public Supplier() {
     }
 
-    public Supplier(String name, String password, String supplierID, String image) {
+    public Supplier(String name, String password, String supplierID, String image, String email) {
         this.name = name;
         this.password = password;
         this.supplierID = supplierID;
         this.image = image;
+        this.email = email;
     }
 }

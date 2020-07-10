@@ -15,7 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.managerapp.Common;
+import com.example.managerapp.Supplier.Common;
+import com.example.managerapp.Supplier.Model.Order;
 import com.example.managerapp.Supplier.SupplierHomePage;
 import com.example.managerapp.R;
 import com.google.firebase.database.ChildEventListener;
@@ -25,7 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ComingOrder extends Service implements ChildEventListener {
-
+    NotificationManagerCompat managerCompat;
     DatabaseReference orderList;
     public ComingOrder() {
     }
@@ -48,18 +49,22 @@ public class ComingOrder extends Service implements ChildEventListener {
         return super.onStartCommand(intent, flags, startId);
     }
 
+
     @Override
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
         if(snapshot.child("supplierID").getValue().equals(Common.supplier.getSupplierID())
                 && snapshot.child("status").getValue().equals("0")){
+            Order order = snapshot.getValue(Order.class);
+            String orderDetail = "Customer placed a $" + order.getTotal() + " order";
             Intent startIntent = new Intent(this, SupplierHomePage.class);
+            startIntent.putExtra("fragment", "menu");
             PendingIntent content = PendingIntent.getActivity(getBaseContext(), 0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext(), "n");
             builder.setAutoCancel((true))
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setTicker("ManagerApp")
                     .setContentInfo("")
-                    .setContentText("You have new order")
+                    .setContentText(orderDetail)
                     .setContentIntent(content)
                     .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                     .setSmallIcon(R.drawable.food);
@@ -68,8 +73,7 @@ public class ComingOrder extends Service implements ChildEventListener {
                 NotificationManager notificationManager = getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(channel);
             }
-            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getBaseContext());
-
+            managerCompat = NotificationManagerCompat.from(getBaseContext());
             managerCompat.notify(0,builder.build());
         }
     }
@@ -77,6 +81,12 @@ public class ComingOrder extends Service implements ChildEventListener {
     @Override
     public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(managerCompat != null) managerCompat.cancelAll();
     }
 
     @Override

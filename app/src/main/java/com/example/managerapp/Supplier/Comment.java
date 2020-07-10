@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.managerapp.R;
 
-public class ViewComment extends AppCompatActivity {
+public class Comment extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

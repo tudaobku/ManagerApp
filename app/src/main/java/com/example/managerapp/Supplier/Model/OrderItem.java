@@ -1,4 +1,4 @@
-package com.example.managerapp.Model;
+package com.example.managerapp.Supplier.Model;
 
 public class OrderItem {
     String name;

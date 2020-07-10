@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/my_bg"
-    tools:context=".Supplier.SupplierLogin">
+    tools:context=".Supplier.SupplierLoginPage">
 
     <LinearLayout
         android:layout_width="305dp"
@@ -40,7 +40,7 @@
             android:id="@+id/edtPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1111"
+            android:text="111111111"
             android:textSize="20dp"
             android:textStyle="bold"
             android:typeface="serif"
@@ -68,11 +68,20 @@
             android:visibility="visible"
             app:met_baseColor="@android:color/white"
             app:met_singleLineEllipsis="true" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtForgotPass"
+            android:text="Forgot password?"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:typeface="serif" />
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="177dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:backgroundTint="@android:color/holo_orange_light"

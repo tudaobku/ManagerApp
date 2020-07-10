@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.managerapp.Model.OrderItem;
+import com.example.managerapp.Supplier.Model.OrderItem;
 import com.example.managerapp.R;
 import com.example.managerapp.ViewHolder.OrderItemViewHolder;
 

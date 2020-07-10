@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.managerapp.R;
 
-public class ViewReport extends AppCompatActivity {
+public class Report extends AppCompatActivity {
 
     TextView txtStallId, txtNumberFood, txtDeliveredOrder, txtCanceledOrder;
     TextView txtRevenue, txtNumberRating, txtNumberComment;
@@ -31,7 +31,7 @@ public class ViewReport extends AppCompatActivity {
         txtNumberComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ViewReport.this, ViewComment.class));
+                startActivity(new Intent(Report.this, Comment.class));
             }
         });
 

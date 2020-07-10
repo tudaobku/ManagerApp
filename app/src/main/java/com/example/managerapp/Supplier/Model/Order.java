@@ -1,4 +1,4 @@
-package com.example.managerapp.Model;
+package com.example.managerapp.Supplier.Model;
 
 import java.util.List;
 
@@ -7,6 +7,25 @@ public class Order {
     String phone;
     String status;
     String total;
+    String type;
+    String supplierID;
+
+    public String getSupplierID() {
+        return supplierID;
+    }
+
+    public void setSupplierID(String supplierID) {
+        this.supplierID = supplierID;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Order() {
     }
 
@@ -42,10 +61,12 @@ public class Order {
         this.total = total;
     }
 
-    public Order(List<OrderItem> foods, String phone, String status, String total) {
+    public Order(List<OrderItem> foods, String phone, String status, String total, String type, String supplierID) {
         this.foods = foods;
         this.phone = phone;
         this.status = status;
         this.total = total;
+        this.type = type;
+        this.supplierID = supplierID;
     }
 }

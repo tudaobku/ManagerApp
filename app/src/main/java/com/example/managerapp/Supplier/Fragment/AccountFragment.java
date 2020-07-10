@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.managerapp.Common;
+import com.example.managerapp.Supplier.Common;
 import com.example.managerapp.Supplier.SupplierHomePage;
 import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,7 +39,7 @@ import static android.app.Activity.RESULT_OK;
 public class AccountFragment extends Fragment {
     final private int RESULT_LOAD_IMAGE = 1;
     Uri tempUri;
-    EditText edtName, edtPassword;
+    EditText edtName, edtPassword, edtEmail;
     Button btnUpload, btnUpdate;
     ImageView imgLogo;
     DatabaseReference supplierList;
@@ -52,6 +52,7 @@ public class AccountFragment extends Fragment {
 
         edtName = root.findViewById(R.id.edtName);
         edtPassword = root.findViewById(R.id.edtPassword);
+        edtEmail = root.findViewById(R.id.edtEmail);
         imgLogo = root.findViewById(R.id.imgLogo);
         btnUpload = root.findViewById(R.id.btnUpload);
         btnUpdate = root.findViewById(R.id.btnUpdate);
@@ -128,6 +129,7 @@ public class AccountFragment extends Fragment {
     private void showAccount() {
         edtName.setText(Common.supplier.getName());
         edtPassword.setText(Common.supplier.getPassword());
+        edtEmail.setText(Common.supplier.getEmail());
         if(!Common.supplier.getImage().isEmpty()) Picasso.with(getContext()).load(Common.supplier.getImage()).into(imgLogo);
     }
     @Override
@@ -147,6 +149,7 @@ public class AccountFragment extends Fragment {
     private void updateInformation() {
         Common.supplier.setName(edtName.getText().toString());
         Common.supplier.setPassword(edtPassword.getText().toString());
+        Common.supplier.setEmail(edtEmail.getText().toString());
         supplierList.child(Common.supplierPhone).setValue(Common.supplier);
         startActivity(new Intent(getContext(), SupplierHomePage.class));
     }

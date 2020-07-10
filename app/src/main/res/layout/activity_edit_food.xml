@@ -8,7 +8,7 @@
     android:fitsSystemWindows="false"
     android:soundEffectsEnabled="false"
     app:statusBarBackground="#FFFFFF"
-    tools:context=".Supplier.FoodDetail">
+    tools:context=".Supplier.EditFoodActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -148,14 +148,17 @@
                 android:layout_height="wrap_content"
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true">
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:text="Description"/>
                 <EditText
                     android:id="@+id/edtDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:breakStrategy="simple"
-                    android:capitalize="none"
                     android:duplicateParentState="false"
                     android:ellipsize="none"
                     android:fadeScrollbars="false"
@@ -165,17 +168,17 @@
                     android:textColor="@android:color/black"
                     android:textIsSelectable="true"
                     android:textSize="18sp"
-                    android:typeface="serif"></EditText>
+                    android:typeface="serif"/>
             </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#91C4EC"
-                android:text="Update"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
+                android:background="#91C4EC"
+                android:text="Update"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
