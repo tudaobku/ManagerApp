@@ -19,8 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.managerapp.Common;
+import com.example.managerapp.Manager.Interface.ManagerLoginContract;
 import com.example.managerapp.Model.Manager;
 import com.example.managerapp.R;
+import com.example.managerapp.Supplier.LoginPage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,26 +34,28 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-public class ManagerLogin extends AppCompatActivity {
+public class ManagerLogin extends AppCompatActivity implements ManagerLoginContract.View {
 
-    EditText edtEmail, edtPassword;
+    EditText edtPhone, edtPassword;
     TextView txtRegister;
     Button btnLogin;
     DatabaseReference managerList;
     FirebaseAuth mAuth;
+    ProgressDialog mDialog;
+    ManagerLoginPresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_login);
 
-
+        presenter = new ManagerLoginPresenter(this);
         managerList = FirebaseDatabase.getInstance().getReference("Manager");
 
-        edtEmail = (MaterialEditText)findViewById(R.id.edtEmail);
+        edtPhone = (MaterialEditText)findViewById(R.id.edtPhone);
         edtPassword = (MaterialEditText)findViewById(R.id.edtPassword);
         txtRegister = (TextView)findViewById(R.id.txtRegister);
-        //txtRegister.setMovementMethod(LinkMovementMethod.getInstance());
         btnLogin = (Button)findViewById(R.id.btnLogin);
 
         mAuth = FirebaseAuth.getInstance();
@@ -79,57 +83,30 @@ public class ManagerLogin extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               checkAccount();
+               presenter.login(edtPhone.getText().toString(), edtPassword.getText().toString());
             }
         });
     }
 
-    private void checkAccount() {
-        final ProgressDialog mDialog = new ProgressDialog(ManagerLogin.this);
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(ManagerLogin.this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void startHomePage() {
+        startActivity(new Intent(this, ManagerHomePage.class));
+    }
+
+    @Override
+    public void showWaitingDialog() {
+        mDialog = new ProgressDialog(this);
         mDialog.setMessage("Please waiting...");
         mDialog.show();
-        managerList.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child(edtEmail.getText().toString()).exists()) {
-                    mDialog.dismiss();
-                    Manager manager = snapshot.child(edtEmail.getText().toString()).getValue(Manager.class);
-                    if (manager.getPassword() != null && edtPassword.getText() != null && manager.getPassword().equals(edtPassword.getText().toString())) {
-                        Common.manager = manager;
-                        startActivity(new Intent(ManagerLogin.this, ManagerHomePage.class));
-                        finish();
-                    } else {
-                        Toast.makeText(ManagerLogin.this, "Failed to sign in!", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    mDialog.dismiss();
-                    Toast.makeText(ManagerLogin.this, "Manager is not exist!", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                final ProgressDialog mDialog = new ProgressDialog(ManagerLogin.this);
-                mDialog.setMessage("Please waiting...");
-                mDialog.show();
+    }
 
-                mAuth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtPassword.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                mDialog.dismiss();
-                                if (task.isSuccessful()) {
-                                    if (mAuth.getCurrentUser().isEmailVerified()) {
-                                        startActivity(new Intent(ManagerLogin.this, ManagerHomePage.class));
-                                    }else {
-                                        Toast.makeText(ManagerLogin.this, "Please verify your email address!", Toast.LENGTH_SHORT).show();
-                                    }
-                                }else {
-                                    Toast.makeText(ManagerLogin.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-
-            }
-        });
+    @Override
+    public void closeWaitingDialog() {
+        mDialog.dismiss();
     }
 }

@@ -2,14 +2,18 @@ package com.example.managerapp.Model;
 
 public class Manager {
     private String name;
+    private String email;
     private String password;
+    private String phone;
 
     public Manager() {
     }
 
-    public Manager(String name, String password) {
+    public Manager(String name, String email, String password, String phone) {
         this.name = name;
+        this.email = email;
         this.password = password;
+        this.phone = phone;
     }
 
     public String getName() {
@@ -26,5 +30,21 @@ public class Manager {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

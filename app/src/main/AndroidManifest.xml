@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Manager.ManagerForgotPassword"></activity>
+        <activity android:name=".Manager.VerifyPhoneNo" />
         <activity android:name=".Manager.SupplierList" />
         <activity android:name=".Manager.ManagerHomePage" />
+        <activity android:name=".Manager.SignUpManager" />
 
         <service
             android:name=".Supplier.Service.ComingOrder"
@@ -29,6 +32,7 @@
         <activity android:name=".MainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
