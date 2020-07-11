@@ -8,7 +8,7 @@
     android:fitsSystemWindows="false"
     android:soundEffectsEnabled="false"
     app:statusBarBackground="#FFFFFF"
-    tools:context=".Supplier.EditFood.EditFoodActivity">
+    tools:context=".SupplierSide.EditFood.EditFoodActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"

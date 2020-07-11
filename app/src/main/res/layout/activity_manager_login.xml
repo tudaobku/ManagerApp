@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/my_bg"
-    tools:context=".Supplier.Login.LoginPage">
+    tools:context=".SupplierSide.Login.LoginPage">
 
     <LinearLayout
         android:layout_width="305dp"
@@ -30,17 +30,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Phone"
+            android:text="Account Name"
             android:textColor="@android:color/holo_blue_bright"
             android:textSize="18sp"
             android:textStyle="bold"
             android:typeface="serif" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtPhone"
+            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0123456789"
+            android:text="tudao"
             android:textSize="20dp"
             android:textStyle="bold"
             android:typeface="serif" />
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:inputType="textPassword"
-            android:text="12345678"
+            android:text="123456"
             android:textSize="20dp"
             android:textStyle="bold"
             android:typeface="serif"
@@ -84,7 +84,8 @@
                 android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Don't have an account yet? Register now"
+                android:layout_gravity="center"
+                android:text="Register a new account"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"

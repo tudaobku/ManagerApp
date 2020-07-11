@@ -9,24 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Manager.ManagerForgotPassword"></activity>
-        <activity android:name=".Manager.VerifyPhoneNo" />
-        <activity android:name=".Manager.SupplierList" />
-        <activity android:name=".Manager.ManagerHomePage" />
-        <activity android:name=".Manager.SignUpManager" />
+        <activity android:name=".ManagerSide.ReportPage"></activity>
+        <activity android:name=".ManagerSide.VerifyPage" />
+        <activity android:name=".ManagerSide.SupplierList" />
+        <activity android:name=".ManagerSide.HomePage" />
+        <activity android:name=".ManagerSide.SignUpPage" />
 
         <service
-            android:name=".Supplier.Service.ComingOrder"
+            android:name=".SupplierSide.Service.ComingOrder"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Manager.NewSupplier" />
-        <activity android:name=".Manager.ManagerLogin" />
-        <activity android:name=".Supplier.Login.LoginPage" />
-        <activity android:name=".Supplier.EditFood.EditFoodActivity" />
-
+        <activity android:name=".ManagerSide.NewSupplier" />
+        <activity android:name=".ManagerSide.LoginPage" />
+        <activity android:name=".SupplierSide.Login.LoginPage" />
+        <activity android:name=".SupplierSide.EditFood.EditFoodActivity" />
         <activity
-            android:name=".Supplier.HomePage"
+            android:name=".SupplierSide.HomePage"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainPage">
