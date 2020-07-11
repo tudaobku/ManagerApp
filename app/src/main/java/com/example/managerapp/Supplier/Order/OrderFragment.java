@@ -1,4 +1,4 @@
-package com.example.managerapp.Supplier;
+package com.example.managerapp.Supplier.Order;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,8 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.managerapp.Supplier.Adapter.OrderAdapter;
-import com.example.managerapp.Supplier.Interface.OrderContract;
 import com.example.managerapp.Supplier.Model.Order;
 import com.example.managerapp.R;
 

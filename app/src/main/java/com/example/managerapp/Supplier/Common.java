@@ -1,9 +1,8 @@
 package com.example.managerapp.Supplier;
 
 import com.example.managerapp.Model.Supplier;
-import com.example.managerapp.Supplier.Model.Food;
 
-public class Common {
+public class  Common {
     static public Supplier supplier;
     static public String supplierPhone;
     static public String REMOVE_OPT = "Remove";

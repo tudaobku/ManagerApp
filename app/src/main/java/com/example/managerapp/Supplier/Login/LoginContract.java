@@ -1,6 +1,6 @@
-package com.example.managerapp.Supplier.Interface;
+package com.example.managerapp.Supplier.Login;
 
-public interface SupplierLoginContract {
+public interface LoginContract {
     interface View{
         void showToast(String message);
         void startHomePage();

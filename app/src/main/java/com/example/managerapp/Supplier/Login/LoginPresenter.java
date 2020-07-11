@@ -1,23 +1,23 @@
-package com.example.managerapp.Supplier;
+package com.example.managerapp.Supplier.Login;
 
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
+import com.example.managerapp.Supplier.Common;
 import com.example.managerapp.Supplier.Model.Account;
 import com.example.managerapp.Model.Supplier;
-import com.example.managerapp.Supplier.Interface.SupplierLoginContract;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginPresenter implements SupplierLoginContract.Presenter{
+public class LoginPresenter implements LoginContract.Presenter{
     Account account;
     DatabaseReference supplierList;
-    SupplierLoginContract.View mILoginPage;
-    public LoginPresenter(SupplierLoginContract.View iLoginCallBack) {
+    LoginContract.View mILoginPage;
+    public LoginPresenter(LoginContract.View iLoginCallBack) {
         mILoginPage = iLoginCallBack;
         supplierList = FirebaseDatabase.getInstance().getReference("Supplier/List");
     }

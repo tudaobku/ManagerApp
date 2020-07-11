@@ -41,7 +41,7 @@ public class HomePage extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_menu, R.id.nav_order, R.id.nav_report, R.id.nav_stall, R.id.nav_logout)
+                R.id.nav_menu, R.id.nav_order, R.id.nav_stall, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

@@ -1,4 +1,4 @@
-package com.example.managerapp.Supplier;
+package com.example.managerapp.Supplier.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,10 +12,10 @@ import android.widget.Toast;
 
 import com.example.managerapp.R;
 
-import com.example.managerapp.Supplier.Interface.SupplierLoginContract;
+import com.example.managerapp.Supplier.HomePage;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-public class LoginPage extends AppCompatActivity implements SupplierLoginContract.View {
+public class LoginPage extends AppCompatActivity implements LoginContract.View {
 
     Button btnLogin;
     MaterialEditText edtPhone, edtPassword;

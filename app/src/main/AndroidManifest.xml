@@ -19,8 +19,8 @@
 
         <activity android:name=".Manager.NewSupplier" />
         <activity android:name=".Manager.ManagerLogin" />
-        <activity android:name=".Supplier.LoginPage" />
-        <activity android:name=".Supplier.EditFoodActivity" />
+        <activity android:name=".Supplier.Login.LoginPage" />
+        <activity android:name=".Supplier.EditFood.EditFoodActivity" />
 
         <activity
             android:name=".Supplier.HomePage"

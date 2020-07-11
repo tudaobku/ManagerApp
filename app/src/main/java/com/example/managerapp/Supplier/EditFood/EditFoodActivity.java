@@ -1,9 +1,7 @@
-package com.example.managerapp.Supplier;
+package com.example.managerapp.Supplier.EditFood;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -15,26 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.managerapp.Supplier.Interface.EditFoodContract;
+import com.example.managerapp.Supplier.Common;
 import com.example.managerapp.Supplier.Model.Food;
 import com.example.managerapp.R;
 import com.example.managerapp.Supplier.Model.MenuItem;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import java.util.UUID;
 
 public class EditFoodActivity extends AppCompatActivity implements EditFoodContract.View {
     EditFoodContract.Presenter presenter;

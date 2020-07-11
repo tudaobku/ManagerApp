@@ -1,4 +1,4 @@
-package com.example.managerapp.Supplier;
+package com.example.managerapp.Supplier.Menu;
 
 import androidx.appcompat.widget.SearchView;
 
@@ -25,13 +25,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.managerapp.Supplier.Adapter.MenuAdapter;
 import com.example.managerapp.Supplier.Common;
-import com.example.managerapp.Supplier.EditFoodActivity;
-import com.example.managerapp.Supplier.Interface.MenuContract;
+import com.example.managerapp.Supplier.EditFood.EditFoodActivity;
 import com.example.managerapp.Supplier.Model.Food;
 import com.example.managerapp.R;
-import com.example.managerapp.Supplier.MenuPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

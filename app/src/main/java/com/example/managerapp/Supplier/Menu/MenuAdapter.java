@@ -1,4 +1,4 @@
-package com.example.managerapp.Supplier.Adapter;
+package com.example.managerapp.Supplier.Menu;
 
 import android.content.Context;
 import android.view.ContextMenu;

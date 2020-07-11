@@ -1,25 +1,17 @@
-package com.example.managerapp.Supplier.Adapter;
+package com.example.managerapp.Supplier.Order;
 
 import android.content.Context;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managerapp.R;
-import com.example.managerapp.Supplier.Common;
-import com.example.managerapp.Supplier.Model.Food;
 import com.example.managerapp.Supplier.Model.Order;
-import com.example.managerapp.UI.ItemClickListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
