@@ -40,8 +40,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.FoodViewHolder
         holder.txtName.setText(foodList.get(position).getName());
         Picasso.with(foodListener.getContext()).load(foodList.get(position).getImage()).into(holder.imgFood);
         String status = foodList.get(position).getStatus();
-        if(status.equals("0")) holder.btnStatus.setBackgroundResource(R.drawable.serving);
-        else holder.btnStatus.setBackgroundResource(R.drawable.outoforder);
+        if(status != null && status.equals("1")) holder.btnStatus.setBackgroundResource(R.drawable.outoforder);
+        else holder.btnStatus.setBackgroundResource(R.drawable.serving);
     }
 
     @Override
