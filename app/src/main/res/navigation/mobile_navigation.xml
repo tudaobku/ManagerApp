@@ -15,13 +15,15 @@
         android:name="com.example.managerapp.Supplier.Order.OrderFragment"
         android:label="Order"
         tools:layout="@layout/order_fragment" />
-
     <fragment
         android:id="@+id/nav_stall"
         android:name="com.example.managerapp.Supplier.StallFragment"
         android:label="Stall"
         tools:layout="@layout/stall_fragment" />
-
-
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.example.managerapp.Supplier.StallFragment"
+        android:label="Stall"
+        tools:layout="@layout/stall_fragment" />
 
 </navigation>
