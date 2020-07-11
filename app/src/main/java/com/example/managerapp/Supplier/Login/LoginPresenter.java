@@ -1,32 +1,32 @@
-package com.example.managerapp.Supplier;
+package com.example.managerapp.Supplier.Login;
 
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
+import com.example.managerapp.Supplier.Common;
 import com.example.managerapp.Supplier.Model.Account;
 import com.example.managerapp.Model.Supplier;
-import com.example.managerapp.Supplier.Interface.SupplierLoginContract;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginPresenter implements SupplierLoginContract.Presenter{
+public class LoginPresenter implements LoginContract.Presenter{
     Account account;
-    DatabaseReference supplierList;
-    SupplierLoginContract.View mILoginPage;
-    public LoginPresenter(SupplierLoginContract.View iLoginCallBack) {
+    DatabaseReference supplierReference;
+    LoginContract.View mILoginPage;
+    public LoginPresenter(LoginContract.View iLoginCallBack) {
         mILoginPage = iLoginCallBack;
-        supplierList = FirebaseDatabase.getInstance().getReference("Supplier/List");
+        supplierReference = FirebaseDatabase.getInstance().getReference("Supplier/List");
     }
 
     @Override
     public void login(String phone, String password) {
         mILoginPage.showWaitingDialog();
         if(checkInput(phone, password)){
-           supplierList.addListenerForSingleValueEvent(new ValueEventListener() {
+           supplierReference.addListenerForSingleValueEvent(new ValueEventListener() {
                @Override
                public void onDataChange(@NonNull DataSnapshot snapshot) {
                    mILoginPage.closeWaitingDialog();
@@ -47,7 +47,8 @@ public class LoginPresenter implements SupplierLoginContract.Presenter{
 
                @Override
                public void onCancelled(@NonNull DatabaseError error) {
-
+                   mILoginPage.closeWaitingDialog();
+                   mILoginPage.showToast("Something wrong");
                }
            });
         }
@@ -73,7 +74,37 @@ public class LoginPresenter implements SupplierLoginContract.Presenter{
     }
     @Override
     public void forgotPassword() {
-
+        mILoginPage.showResetPasswordDialog();
     }
+
+    @Override
+    public void resetPassword(final String phone, final String email, final String password) {
+        mILoginPage.showWaitingDialog();
+        supplierReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mILoginPage.closeWaitingDialog();
+                if (snapshot.child(phone).exists()) {
+                    Supplier supplier = snapshot.child(phone).getValue(Supplier.class);
+                    if (supplier.getEmail().equals(email)) {
+                        supplierReference.child(phone).child("password").setValue(password);
+                        mILoginPage.showToast("Reset Password Successfully");
+                    } else {
+                        mILoginPage.showAccountErrorDialog("Wrong Email", "Please try again");
+                    }
+                }
+                else{
+                    mILoginPage.showAccountErrorDialog("Account doest not exist", "You are the court's supplier. Sure?");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                mILoginPage.closeWaitingDialog();
+                mILoginPage.showToast("Something wrong");
+            }
+        });
+    }
+
 
 }

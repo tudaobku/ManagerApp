@@ -8,7 +8,7 @@
     android:fitsSystemWindows="false"
     android:soundEffectsEnabled="false"
     app:statusBarBackground="#FFFFFF"
-    tools:context=".Supplier.EditFoodActivity">
+    tools:context=".Supplier.EditFood.EditFoodActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
-            />
+                android:src="@drawable/ic_baseline_add_photo_image_24" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -85,6 +85,7 @@
                     app:autoSizeTextType="none" />
 
                 <EditText
+                    android:maxLength="20"
                     android:id="@+id/edtName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -110,6 +111,7 @@
                     android:typeface="serif" />
 
                 <EditText
+                    android:maxLength="7"
                     android:id="@+id/edtPrice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -137,6 +139,7 @@
                 <EditText
                     android:id="@+id/edtDiscount"
                     android:layout_width="0dp"
+                    android:maxLength="2"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textSize="20dp"
@@ -177,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
-                android:background="#91C4EC"
+                android:background="#919DEC"
                 android:text="Update"
                 android:textAlignment="center"
                 android:textSize="18sp"

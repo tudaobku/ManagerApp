@@ -11,20 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="100dp">
+        >
 
         <ImageView
-            android:layout_width="350dp"
+            android:layout_marginTop="50dp"
+            android:layout_width="400dp"
             android:layout_gravity="center"
-            android:layout_height="188dp"
-            android:scaleType="fitEnd"
+            android:layout_height="150dp"
             android:src="@drawable/nameapp"
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteY="181dp" />
 
         <ImageView
-            android:layout_width="291dp"
-            android:layout_height="117dp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:scaleType="fitStart"
             android:layout_gravity="center"
             android:src="@drawable/who"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,9 +36,10 @@
             android:layout_width="307dp"
             android:layout_height="75dp"
             android:layout_marginStart="47dp"
-            android:backgroundTint="#A5E2EC"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A6CD"
             android:text="Supplier"
-            android:textColor="#480953"
+            android:textColor="@android:color/background_dark"
             android:textSize="24sp"
             android:textStyle="bold"
             android:typeface="serif"
@@ -49,8 +51,8 @@
             android:layout_width="303dp"
             android:layout_height="70dp"
             android:layout_marginStart="47dp"
-            android:layout_marginTop="35dp"
-            android:backgroundTint="#B5A6CD"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#D8909F"
             android:text="Court Manager"
             android:textColorHint="#FFFFFF"
             android:textColorLink="#FFFFFF"

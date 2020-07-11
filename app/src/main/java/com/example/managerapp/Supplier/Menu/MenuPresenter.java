@@ -1,6 +1,6 @@
-package com.example.managerapp.Supplier;
+package com.example.managerapp.Supplier.Menu;
 
-import com.example.managerapp.Supplier.Interface.MenuContract;
+import com.example.managerapp.Supplier.Common;
 import com.example.managerapp.Supplier.Model.Food;
 
 

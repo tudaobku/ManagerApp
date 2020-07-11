@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.managerapp.Manager.ManagerLogin;
-import com.example.managerapp.Supplier.LoginPage;
+import com.example.managerapp.Supplier.Login.LoginPage;
 
 public class MainPage extends AppCompatActivity {
 

@@ -1,19 +1,17 @@
-package com.example.managerapp.Supplier;
+package com.example.managerapp.Supplier.Order;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.managerapp.Supplier.Interface.OrderContract;
-import com.example.managerapp.Supplier.Model.Food;
+import com.example.managerapp.Supplier.Common;
+import com.example.managerapp.Supplier.Order.OrderContract;
 import com.example.managerapp.Supplier.Model.Order;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.net.CookieHandler;
 import java.util.ArrayList;
 
 public class OrderPresenter implements OrderContract.Presenter{

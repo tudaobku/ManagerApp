@@ -1,11 +1,9 @@
-package com.example.managerapp.Supplier.Interface;
+package com.example.managerapp.Supplier.EditFood;
 
 import android.net.Uri;
 
 import com.example.managerapp.Supplier.Model.Food;
 import com.example.managerapp.Supplier.Model.MenuItem;
-
-import java.util.ArrayList;
 
 public interface EditFoodContract {
     interface View {

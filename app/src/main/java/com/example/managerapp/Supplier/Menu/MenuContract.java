@@ -1,4 +1,4 @@
-package com.example.managerapp.Supplier.Interface;
+package com.example.managerapp.Supplier.Menu;
 
 import com.example.managerapp.Supplier.Model.Food;
 

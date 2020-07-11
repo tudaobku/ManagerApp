@@ -1,4 +1,4 @@
-package com.example.managerapp.Supplier.Adapter;
+package com.example.managerapp.Supplier.Order;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -37,6 +37,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
     public int getItemCount() {
         return foodList.size();
     }
+
     class OrderItemViewHolder extends RecyclerView.ViewHolder  {
         TextView txtName, txtQuantity;
         OrderItemViewHolder(View itemView){

@@ -5,6 +5,7 @@ public class Food extends MenuItem{
     String supplierID;
     String foodID;
     String status;
+    String rating;
 
     public String getStatus() {
         return status;
@@ -14,15 +15,20 @@ public class Food extends MenuItem{
         this.status = status;
     }
 
-    public Food(String description, String discount, String image, String name, String price, String supplierID, String foodID, String status) {
-        this.description = description;
-        this.discount = discount;
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public Food(String image, String supplierID, String foodID, String status, String rating) {
         this.image = image;
-        this.name = name;
-        this.price = price;
         this.supplierID = supplierID;
         this.foodID = foodID;
         this.status = status;
+        this.rating = rating;
     }
 
     public String getImage() {

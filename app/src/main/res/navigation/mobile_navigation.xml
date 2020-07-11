@@ -7,19 +7,14 @@
 
     <fragment
         android:id="@+id/nav_menu"
-        android:name="com.example.managerapp.Supplier.MenuFragment"
+        android:name="com.example.managerapp.Supplier.Menu.MenuFragment"
         android:label="Menu"
         tools:layout="@layout/menu_fragment" />
     <fragment
         android:id="@+id/nav_order"
-        android:name="com.example.managerapp.Supplier.OrderFragment"
+        android:name="com.example.managerapp.Supplier.Order.OrderFragment"
         android:label="Order"
         tools:layout="@layout/order_fragment" />
-    <fragment
-        android:id="@+id/nav_report"
-        android:name="com.example.managerapp.Supplier.ReportFragment"
-        android:label="Report"
-        tools:layout="@layout/report_fragment" />
     <fragment
         android:id="@+id/nav_stall"
         android:name="com.example.managerapp.Supplier.StallFragment"
@@ -27,8 +22,8 @@
         tools:layout="@layout/stall_fragment" />
     <fragment
         android:id="@+id/nav_logout"
-        android:name="com.example.managerapp.Supplier.ReportFragment"
-        tools:layout="@layout/report_fragment" />
-
+        android:name="com.example.managerapp.Supplier.StallFragment"
+        android:label="Stall"
+        tools:layout="@layout/stall_fragment" />
 
 </navigation>

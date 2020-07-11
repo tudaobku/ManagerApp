@@ -1,8 +1,10 @@
-package com.example.managerapp.Supplier;
+package com.example.managerapp.Supplier.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +14,11 @@ import android.widget.Toast;
 
 import com.example.managerapp.R;
 
-import com.example.managerapp.Supplier.Interface.SupplierLoginContract;
+import com.example.managerapp.Supplier.HomePage;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-public class LoginPage extends AppCompatActivity implements SupplierLoginContract.View {
+public class LoginPage extends AppCompatActivity implements LoginContract.View
+        , ResetPasswordDialog.Listener {
 
     Button btnLogin;
     MaterialEditText edtPhone, edtPassword;
@@ -35,6 +38,7 @@ public class LoginPage extends AppCompatActivity implements SupplierLoginContrac
         txtForgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                presenter.forgotPassword();
             }
         });
 
@@ -68,6 +72,32 @@ public class LoginPage extends AppCompatActivity implements SupplierLoginContrac
     @Override
     public void closeWaitingDialog() {
         mDialog.dismiss();
+    }
 
+    @Override
+    public void showResetPasswordDialog() {
+        ResetPasswordDialog resetPasswordDialog = new ResetPasswordDialog();
+        resetPasswordDialog.show(getSupportFragmentManager(),"reset pass");
+    }
+
+    @Override
+    public void showAccountErrorDialog(String error, String message) {
+        AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
+        alertDialog.setTitle(error)
+                .setMessage(message)
+                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setIcon(R.drawable.error)
+                .create();
+        alertDialog.show();
+    }
+
+    @Override
+    public void resetPassword(String phone, String email, String password) {
+        presenter.resetPassword(phone, email, password);
     }
 }
