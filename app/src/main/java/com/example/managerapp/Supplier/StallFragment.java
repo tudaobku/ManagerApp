@@ -98,6 +98,7 @@ public class StallFragment extends Fragment {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Common.supplier.setImage(uri.toString());
+                                    updateInformation();
                                 }
                             });
                         }
@@ -116,6 +117,7 @@ public class StallFragment extends Fragment {
                             mDialog.setMessage("Uploaded Logo " + progress + "%");
                         }
                     });
+
         }
         else if(Common.supplier.getImage().isEmpty()){
             showUploadLogoDialog();

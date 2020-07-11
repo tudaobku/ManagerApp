@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.managerapp.MainPage;
 import com.example.managerapp.R;
+import com.example.managerapp.Supplier.Login.LoginPage;
 import com.example.managerapp.Supplier.Service.ComingOrder;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
@@ -57,7 +58,7 @@ public class HomePage extends AppCompatActivity {
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 int menuId = destination.getId();
                 if (menuId == R.id.nav_logout) {
-                    Intent login = new Intent(HomePage.this, MainPage.class);
+                    Intent login = new Intent(HomePage.this, LoginPage.class);
                     login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(login);
                 }
@@ -70,7 +71,7 @@ public class HomePage extends AppCompatActivity {
 
         txtStall.setText(Common.supplier.getName());
         if (!Common.supplier.getImage().isEmpty())
-            Picasso.with(getBaseContext()).load(Common.supplier.getImage()).into(imgLogo);
+            Picasso.with(this).load(Common.supplier.getImage()).into(imgLogo);
         service = new Intent(HomePage.this, ComingOrder.class);
         startService(service);
     }

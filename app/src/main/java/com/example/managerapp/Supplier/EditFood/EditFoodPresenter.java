@@ -44,56 +44,69 @@ public class EditFoodPresenter implements EditFoodContract.Presenter {
 
     @Override
     public void saveFood(MenuItem menuItem) {
-        food.setMenuItem(menuItem);
-        if(localUri != null){
-            editFoodView.showProgress("Uploading Image...");
-            String imageName = UUID.randomUUID().toString();
-            final StorageReference imageFolder = storage.child("food-" + imageName);
-            imageFolder.putFile(localUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    food.setImage(uri.toString());
-                                    if(position == -1){
-                                        food.setStatus("0");
-                                        food.setSupplierID(Common.supplier.getSupplierID());
-                                        editFoodInteractor.performAddNewFood(food);
+        if(checkInput(menuItem)){
+            food.setMenuItem(menuItem);
+            if(localUri != null){
+                editFoodView.showProgress("Uploading Image...");
+                String imageName = UUID.randomUUID().toString();
+                final StorageReference imageFolder = storage.child("food-" + imageName);
+                imageFolder.putFile(localUri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        food.setImage(uri.toString());
+                                        if(position == -1){
+                                            food.setSupplierID(Common.supplier.getSupplierID());
+                                            editFoodInteractor.performAddNewFood(food);
+                                        }
+                                        else editFoodInteractor.performUpdateFood(position, food);
+                                        editFoodView.stopProgress();
+                                        editFoodView.closeView();
                                     }
-                                    else editFoodInteractor.performUpdateFood(position, food);
-                                    editFoodView.stopProgress();
-                                    editFoodView.closeView();
-                                }
-                            });
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            editFoodView.stopProgress();
-                            editFoodView.showConnectionError();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                            int progress = (int)(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            editFoodView.showProgress("Uploaded Image " + progress + "%");
-                        }
-                    });
-        }
-        else {
-            if(position == -1) editFoodView.showInvalidMessage("Please add food image");
-            else {
-                editFoodView.showProgress("Updating....");
-                editFoodInteractor.performUpdateFood(position, food);
-                editFoodView.stopProgress();
-                editFoodView.closeView();
+                                });
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                editFoodView.stopProgress();
+                                editFoodView.showConnectionError();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                                int progress = (int)(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                                editFoodView.showProgress("Uploaded Image " + progress + "%");
+                            }
+                        });
             }
+            else {
+                if(position == -1) editFoodView.showInvalidMessage("Please add food image");
+                else {
+                    editFoodView.showProgress("Updating....");
+                    editFoodInteractor.performUpdateFood(position, food);
+                    editFoodView.stopProgress();
+                    editFoodView.closeView();
+                }
 
+            }
         }
+    }
+
+    private boolean checkInput(MenuItem menuItem) {
+        if(menuItem.getName().isEmpty()) {
+            editFoodView.showInvalidMessage("Please fill food name");
+            return false;
+        }
+        if(menuItem.getPrice().isEmpty()) {
+            editFoodView.showInvalidMessage("Please fill food price");
+            return false;
+        }
+        return true;
     }
 
     @Override
