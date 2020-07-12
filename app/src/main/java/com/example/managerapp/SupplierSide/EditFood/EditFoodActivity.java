@@ -61,6 +61,7 @@ public class EditFoodActivity extends AppCompatActivity implements EditFoodContr
                 menuItem.setDescription(edtDes.getText().toString());
                 menuItem.setName(edtName.getText().toString());
                 menuItem.setPrice(edtPrice.getText().toString());
+                if(edtDiscount.getText().toString().isEmpty()) menuItem.setDiscount("0");
                 menuItem.setDiscount(edtDiscount.getText().toString());
                 presenter.saveFood(menuItem);
             }
