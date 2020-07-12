@@ -71,18 +71,14 @@ public class LoginPage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot foodSnapshot: snapshot.getChildren()){
                     Manager manager = foodSnapshot.getValue(Manager.class);
-                    if(manager.getName() != null){
+                    if(manager.getName().equals(name)){
                         if (manager.getPassword().equals(password)) {
                             startActivity(new Intent(LoginPage.this, HomePage.class));
                         } else {
                             Toast.makeText(LoginPage.this, "Wrong Password. Please try to enter password one more time", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else {
-                        Toast.makeText(LoginPage.this, "Account is not exist", Toast.LENGTH_SHORT).show();
-                    }
                 }
-
             }
 
             @Override

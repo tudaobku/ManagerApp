@@ -2,6 +2,7 @@ package com.example.managerapp.SupplierSide.Menu;
 
 import androidx.annotation.NonNull;
 
+import com.example.managerapp.SupplierSide.Common;
 import com.example.managerapp.SupplierSide.EditFood.EditFoodContract;
 import com.example.managerapp.SupplierSide.Model.Food;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -13,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class MenuInteractor implements MenuContract.Interactor, EditFoodContract.Interactor {
     static MenuInteractor menuInteractor;
@@ -22,8 +24,6 @@ public class MenuInteractor implements MenuContract.Interactor, EditFoodContract
     DatabaseReference foodReference;
 
     private MenuInteractor(MenuContract.onOperationListener menuListener) {
-        foodList = new ArrayList<>();
-        keyList = new ArrayList<>();
         foodReference = FirebaseDatabase.getInstance().getReference("Food/List");
         this.menuListener = menuListener;
     }
@@ -39,6 +39,8 @@ public class MenuInteractor implements MenuContract.Interactor, EditFoodContract
 
     @Override
     public void performLoadMenu(final String supplierID) {
+        foodList = new ArrayList<>();
+        keyList = new ArrayList<>();
         foodReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -60,8 +62,8 @@ public class MenuInteractor implements MenuContract.Interactor, EditFoodContract
     }
 
     @Override
-    public Food getFood(int position) {
-        return foodList.get(position);
+    public Food getFood(final int position) {
+       return foodList.get(position);
     }
 
     @Override
@@ -85,9 +87,12 @@ public class MenuInteractor implements MenuContract.Interactor, EditFoodContract
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    foodList.add(food);
-                    keyList.add(key);
-                    menuListener.onLoadMenu(foodList, true);
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    performLoadMenu(Common.supplier.getSupplierID());
                     menuListener.onAddSuccess();
                 }
                 else{
