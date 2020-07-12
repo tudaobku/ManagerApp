@@ -7,16 +7,42 @@
     android:padding="8dp"
     android:orientation="vertical">
 
-    <TextView
-        android:gravity="center"
-        android:id="@+id/txtPhone"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="08997077"
-        android:textColor="@color/design_default_color_on_secondary"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtNumber"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorButtonNormal"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtPhone"
+            android:layout_width="250dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="08997077"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/txtTakeAway"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Red"
+            android:gravity="center"
+            android:text="Take away"
+            android:textColor="@color/fui_bgAnonymous"
+            android:visibility="visible" />
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderList"
@@ -25,13 +51,13 @@
 
     <TextView
         android:id="@+id/txtStatus"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="status"
+        android:layout_height="wrap_content"
+        android:background="#53CD12"
         android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="@color/design_default_color_primary_dark"
-        />
+        android:text="status"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
         
 

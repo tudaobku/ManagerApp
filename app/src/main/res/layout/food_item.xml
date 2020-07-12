@@ -16,19 +16,34 @@
         android:layout_margin="10dp"
         android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/txtName"
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:gravity="center"
-        android:text="Name of Food"
-        android:textColor="@color/design_default_color_on_secondary"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+        app:cardBackgroundColor="@android:color/transparent">
+
+        <Button
+            android:id="@+id/btnStatus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:background="@drawable/serving" />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Name of Food"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+    </androidx.cardview.widget.CardView>
+
 
 
 </LinearLayout>

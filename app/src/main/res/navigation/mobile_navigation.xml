@@ -3,33 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_food">
+    app:startDestination="@+id/nav_menu">
 
     <fragment
-        android:id="@+id/nav_food"
-        android:name="com.example.managerapp.Supplier.Fragment.FoodFragment"
+        android:id="@+id/nav_menu"
+        android:name="com.example.managerapp.SupplierSide.Menu.MenuFragment"
         android:label="Menu"
-        tools:layout="@layout/food_fragment" />
+        tools:layout="@layout/menu_fragment" />
     <fragment
         android:id="@+id/nav_order"
-        android:name="com.example.managerapp.Supplier.Fragment.OrderFragment"
+        android:name="com.example.managerapp.SupplierSide.Order.OrderFragment"
         android:label="Order"
         tools:layout="@layout/order_fragment" />
     <fragment
-        android:id="@+id/nav_report"
-        android:name="com.example.managerapp.Supplier.Fragment.StallReportFragment"
-        android:label="Report"
-        tools:layout="@layout/stall_report_fragment" />
-    <fragment
-        android:id="@+id/nav_account"
-        android:name="com.example.managerapp.Supplier.Fragment.AccountFragment"
-        android:label="Report"
-        tools:layout="@layout/account_fragment" />
+        android:id="@+id/nav_stall"
+        android:name="com.example.managerapp.SupplierSide.StallFragment"
+        android:label="Stall"
+        tools:layout="@layout/stall_fragment" />
     <fragment
         android:id="@+id/nav_logout"
-        android:name="com.example.managerapp.Supplier.Fragment.StallReportFragment"
-        android:label="Menu"
-        tools:layout="@layout/stall_report_fragment" />
-
+        android:name="com.example.managerapp.SupplierSide.StallFragment"
+        android:label="Stall"
+        tools:layout="@layout/stall_fragment" />
 
 </navigation>
