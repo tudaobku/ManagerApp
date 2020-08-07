@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Account Name"
+            android:text="Tên tài khoản"
             android:textColor="@android:color/holo_blue_bright"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -39,17 +39,17 @@
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtName"
             android:layout_width="match_parent"
-            app:met_baseColor="@android:color/white"
             android:layout_height="wrap_content"
             android:text="tudao"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:typeface="serif" />
+            android:typeface="serif"
+            app:met_baseColor="@android:color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="Mật khẩu"
             android:textColor="@android:color/holo_blue_bright"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:inputType="textPassword"
-            android:text="12345"
+            android:text="123456"
             android:textSize="20dp"
             android:textStyle="bold"
             android:typeface="serif"
@@ -76,21 +76,20 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:backgroundTint="@android:color/holo_orange_light"
-            android:text="Login"
+            android:text="Đăng nhập"
             android:textStyle="bold"
             android:typeface="serif" />
 
-            <TextView
-                android:id="@+id/txtRegister"
-                android:layout_marginTop="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Register a new account"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                />
+        <TextView
+            android:id="@+id/txtRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:text="Đăng kí một tài khoản mới"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
 
 

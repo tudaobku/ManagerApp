@@ -20,7 +20,7 @@ public class SignUpPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_manager);
+        setContentView(R.layout.activity_manager_sign_up);
 
         edtName = findViewById(R.id.edit_text_name);
         edtPassword = findViewById(R.id.edit_text_password);
@@ -32,15 +32,14 @@ public class SignUpPage extends AppCompatActivity {
             public void onClick(View view) {
                 String name = edtName.getText().toString();
                 String password = edtPassword.getText().toString();
+                if (name.isEmpty()) {
+                    showToast("Bạn chưa nhập tên tài khoản");
+                }
                 if (password.isEmpty()) {
-                    if (name.isEmpty()) {
-                        showToast("Please enter your name");
-                    }
-                    showToast("Enter password");
-                   }
-
-                else if (password.length() < 6) {
-                    showToast("Password has at least 6 characters");
+                    showToast("Bạn chưa nhập mật khẩu");
+                }
+                if (password.length() < 6) {
+                    showToast("Mật khẩu có ít nhất 6 ký tự");
                 }
                 else{
                     Intent intent = new Intent(SignUpPage.this, VerifyPage.class);

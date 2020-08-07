@@ -23,7 +23,7 @@ public interface MenuContract {
         void onProcessEnd();
     }
     interface Interactor{
-        void performLoadMenu(String supplierID);
+        void performLoadMenu(Integer supplierID);
         void performRemoveFood(int position);
         void performSearchFoods(String key);
         void performChangeStatus(int position);

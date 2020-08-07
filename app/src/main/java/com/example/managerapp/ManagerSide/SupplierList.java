@@ -49,7 +49,7 @@ public class SupplierList extends AppCompatActivity {
 
     private void loadSupplierList() {
         FirebaseRecyclerOptions<Supplier> options = new FirebaseRecyclerOptions.Builder<Supplier>()
-                .setQuery(supplierList, Supplier.class).build();
+                .setQuery(supplierList.orderByChild("supplierID"), Supplier.class).build();
         adapter = new FirebaseRecyclerAdapter<Supplier, SupplierViewHolder>(options) {
             @NonNull
             @Override
@@ -60,13 +60,12 @@ public class SupplierList extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull SupplierViewHolder supplierViewHolder, int i, @NonNull Supplier supplier) {
                 supplierViewHolder.txtName.setText(supplier.getName());
-                supplierViewHolder.txtId.setText(supplier.getSupplierID());
+                supplierViewHolder.txtId.setText(supplier.getSupplierID().toString());
                 if (!supplier.getImage().isEmpty()) {
                     Picasso.with(getBaseContext()).load(supplier.getImage()).into(supplierViewHolder.imgSupplier);
                 }else {
                     supplierViewHolder.imgSupplier.setImageResource(R.drawable.no_image);
                 }
-                final Supplier local = supplier;
                 supplierViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position) {

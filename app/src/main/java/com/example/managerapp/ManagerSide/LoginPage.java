@@ -21,6 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginPage extends AppCompatActivity {
 
     EditText edtName, edtPassword;
@@ -60,23 +63,28 @@ public class LoginPage extends AppCompatActivity {
         final String name = edtName.getText().toString();
         final String password = edtPassword.getText().toString();
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(LoginPage.this, "Please Enter Account Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginPage.this, "Hãy nhập tên tài khoản của bạn", Toast.LENGTH_SHORT).show();
             return;
         } else if (TextUtils.isEmpty(password)) {
-            Toast.makeText(LoginPage.this, "Please Enter Phone", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginPage.this, "Hãy nhập mật khẩu của bạn", Toast.LENGTH_SHORT).show();
             return;
         }
         managerReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Manager manager = null;
                 for(DataSnapshot foodSnapshot: snapshot.getChildren()){
-                    Manager manager = foodSnapshot.getValue(Manager.class);
-                    if(manager.getName().equals(name)){
-                        if (manager.getPassword().equals(password)) {
-                            startActivity(new Intent(LoginPage.this, HomePage.class));
-                        } else {
-                            Toast.makeText(LoginPage.this, "Wrong Password. Please try to enter password one more time", Toast.LENGTH_SHORT).show();
-                        }
+                    if(foodSnapshot.getValue(Manager.class).getName().equals(name)) {
+                        manager = foodSnapshot.getValue(Manager.class);
+                        break;
+                    }
+                }
+                if(manager == null) Toast.makeText(LoginPage.this, "Người dùng không tồn tại", Toast.LENGTH_SHORT).show();
+                else{
+                    if (manager.getPassword().equals(password)) {
+                        startActivity(new Intent(LoginPage.this, HomePage.class));
+                    } else {
+                        Toast.makeText(LoginPage.this, "Mật khẩu không đúng. Hãy thử lại", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

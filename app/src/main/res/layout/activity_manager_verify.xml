@@ -28,7 +28,7 @@
             android:id="@+id/edtOTP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter OTP"
+            android:hint="Nhập mã OTP"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black" />
 
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
-            android:text="Verify"
+            android:text="Xác thực"
             android:textAllCaps="false"
             android:textColor="@android:color/black" />
 

@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class VerifyPage extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class VerifyPage extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verify_phone_no);
+        setContentView(R.layout.activity_manager_verify);
 
         btnVerify = (Button)findViewById(R.id.button_verify);
         edtOTP = (EditText)findViewById(R.id.edtOTP);
@@ -54,7 +55,7 @@ public class VerifyPage extends AppCompatActivity {
         managerReference.child("phone").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ownerPhone = snapshot.getValue().toString();
+                ownerPhone = Objects.requireNonNull(snapshot.getValue()).toString();
                 sendVerificationCodeToUser(ownerPhone);
             }
 
@@ -69,8 +70,8 @@ public class VerifyPage extends AppCompatActivity {
             public void onClick(View view) {
                 String code = edtOTP.getText().toString();
 
-                if (code.isEmpty() || code.length() < 6) {
-                    edtOTP.setError("Wrong OTP...");
+                if (code.isEmpty() || code.length() != 6) {
+                    edtOTP.setError("Mã OTP không hợp lệ");
                     edtOTP.requestFocus();
                     return;
                 }
@@ -125,7 +126,7 @@ public class VerifyPage extends AppCompatActivity {
                             finish();
                             startActivity(new Intent(VerifyPage.this, LoginPage.class));
                         }else {
-                            Toast.makeText(VerifyPage.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(VerifyPage.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
