@@ -38,7 +38,7 @@ public class MenuInteractor implements MenuContract.Interactor, EditFoodContract
     }
 
     @Override
-    public void performLoadMenu(final String supplierID) {
+    public void performLoadMenu(final Integer supplierID) {
         foodList = new ArrayList<>();
         keyList = new ArrayList<>();
         foodReference.addListenerForSingleValueEvent(new ValueEventListener() {

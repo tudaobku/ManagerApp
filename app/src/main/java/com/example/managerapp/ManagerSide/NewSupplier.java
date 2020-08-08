@@ -28,7 +28,7 @@ public class NewSupplier extends AppCompatActivity {
 
     DatabaseReference supplierList;
     FirebaseFunctions function;
-    EditText edtName, edtPhone;
+    EditText edtName, edtPhone, edtStall;
     Button btnAdd;
     TextView txtPassword;
 
@@ -39,6 +39,7 @@ public class NewSupplier extends AppCompatActivity {
 
         edtName = findViewById(R.id.edtName);
         edtPhone = findViewById(R.id.edtPhone);
+        edtStall = findViewById(R.id.edtStall);
         btnAdd = findViewById(R.id.btnAddSupplier);
         txtPassword = findViewById(R.id.txtPassword);
         supplierList = FirebaseDatabase.getInstance().getReference("Supplier/List");
@@ -58,22 +59,26 @@ public class NewSupplier extends AppCompatActivity {
 
         final String name = edtName.getText().toString();
         final String phone = edtPhone.getText().toString();
-
+        final String stall = edtStall.getText().toString();
         if(TextUtils.isEmpty(name)){
-            Toast.makeText(NewSupplier.this, "Please Enter Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewSupplier.this, "Hãy nhập tên", Toast.LENGTH_SHORT).show();
             return;
         }
         else if(TextUtils.isEmpty(phone)){
-            Toast.makeText(NewSupplier.this, "Please Enter Phone", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewSupplier.this, "Hãy nhập số điện thoại", Toast.LENGTH_SHORT).show();
             return;
         }
         else if(phone.length() != 10){
-            Toast.makeText(NewSupplier.this,"Phone is invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewSupplier.this,"Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(phone.length() != 10){
+            Toast.makeText(NewSupplier.this,"Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
             return;
         }
 
         final ProgressDialog mDialog = new ProgressDialog(NewSupplier.this);
-        mDialog.setMessage("Please waiting...");
+        mDialog.setMessage("Vui lòng chờ...");
         mDialog.show();
 
         supplierList.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -81,19 +86,19 @@ public class NewSupplier extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(phone).exists()) {
                     mDialog.dismiss();
-                    Toast.makeText(NewSupplier.this, "Phone number exist!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSupplier.this, "Số điện thoại đã tồn tại", Toast.LENGTH_SHORT).show();
                 } else {
                    mDialog.dismiss();
-                    Supplier newSupplier = new Supplier(name, txtPassword.getText().toString(), "","", "");
+                    Supplier newSupplier = new Supplier(name, txtPassword.getText().toString(), Integer.parseInt(stall),"", "");
                     supplierList.child(phone).setValue(newSupplier).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                            if(task.isSuccessful()){
-                               Toast.makeText(NewSupplier.this, "Add new supplier successfully!", Toast.LENGTH_SHORT).show();
+                               Toast.makeText(NewSupplier.this, "Tạo nhà cung cấp mới thành công", Toast.LENGTH_SHORT).show();
                                finish();
                            }
                            else{
-                               Toast.makeText(NewSupplier.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                               Toast.makeText(NewSupplier.this, "Lỗi hệ thống", Toast.LENGTH_SHORT).show();
                            }
                         }
                     });

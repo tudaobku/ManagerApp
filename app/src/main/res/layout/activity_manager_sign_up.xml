@@ -28,7 +28,7 @@
             android:id="@+id/edit_text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="Tên tài khoản"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black" />
 
@@ -36,11 +36,10 @@
             android:id="@+id/edit_text_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Mật khẩu"
             android:inputType="textPassword"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black" />
-
 
 
         <Button
@@ -48,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
-            android:text="Register"
+            android:text="Đăng kí"
             android:textAllCaps="false"
             android:textColor="@android:color/black" />
 

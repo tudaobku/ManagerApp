@@ -3,11 +3,11 @@ package com.example.managerapp;
 public class Supplier {
     private String name;
     private String password;
-    private String supplierID;
+    private Integer supplierID;
     private String image;
     private String email;
 
-    public void setSupplierID(String supplierID) {
+    public void setSupplierID(Integer supplierID) {
         this.supplierID = supplierID;
     }
 
@@ -35,7 +35,7 @@ public class Supplier {
         this.password = password;
     }
 
-    public String getSupplierID() {
+    public Integer getSupplierID() {
         return supplierID;
     }
 
@@ -50,7 +50,7 @@ public class Supplier {
     public Supplier() {
     }
 
-    public Supplier(String name, String password, String supplierID, String image, String email) {
+    public Supplier(String name, String password, Integer supplierID, String image, String email) {
         this.name = name;
         this.password = password;
         this.supplierID = supplierID;

@@ -29,13 +29,13 @@
 
     <Button
         android:id="@+id/btnAddNewSupplier"
-        android:layout_width="200dp"
-        android:layout_gravity="center"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:background="#0099FF"
-        android:text="Add New Supplier"
+        android:text="Thêm nhà cung cấp"
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="serif" />
@@ -48,13 +48,14 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/or"
         android:gravity="center" />
+
     <Button
         android:id="@+id/btnManageStall"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="#0099FF"
-        android:text="Manage Stall"
+        android:text="Quản lý các Stall"
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="serif" />
@@ -66,13 +67,14 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/or"
         android:gravity="center" />
+
     <Button
         android:id="@+id/btnReport"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="#0099FF"
-        android:text="Report"
+        android:text="Báo cáo"
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="serif" />
