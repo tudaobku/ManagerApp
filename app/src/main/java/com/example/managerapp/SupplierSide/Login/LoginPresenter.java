@@ -37,18 +37,18 @@ public class LoginPresenter implements LoginContract.Presenter{
                            Common.supplierPhone = account.getPhone();
                            mILoginPage.startHomePage();
                        } else {
-                            mILoginPage.showToast("Wrong Password. Please try to enter password one more time");
+                            mILoginPage.showToast("Mật khẩu không đúng");
                        }
                    }
                    else{
-                       mILoginPage.showToast("Account is not exist");
+                       mILoginPage.showToast("Tài khoản không tồn tại");
                    }
                }
 
                @Override
                public void onCancelled(@NonNull DatabaseError error) {
                    mILoginPage.closeWaitingDialog();
-                   mILoginPage.showToast("Something wrong");
+                   mILoginPage.showToast("Lỗi hệ thống");
                }
            });
         }
@@ -58,15 +58,15 @@ public class LoginPresenter implements LoginContract.Presenter{
     }
     private boolean checkInput(String phone, String password){
         if(TextUtils.isEmpty(phone)){
-            mILoginPage.showToast("Please Enter Phone");
+            mILoginPage.showToast("Hãy nhập số điện thoại");
             return false;
         }
-        else if(phone.length() > 11 || phone.length() < 9){
-            mILoginPage.showToast("Phone is invalid");
+        else if(phone.length() != 10){
+            mILoginPage.showToast("Số điện thoại không hợp lệ");
             return false;
         }
         else if(TextUtils.isEmpty(password)){
-            mILoginPage.showToast("Please Enter Phone");
+            mILoginPage.showToast("Hãy nhập mật khẩu");
             return false;
         }
         account = new Account(phone, password);
@@ -78,30 +78,26 @@ public class LoginPresenter implements LoginContract.Presenter{
     }
 
     @Override
-    public void resetPassword(final String phone, final String email, final String password) {
+    public void resetPassword(final String phone, final String password) {
         mILoginPage.showWaitingDialog();
         supplierReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mILoginPage.closeWaitingDialog();
                 if (snapshot.child(phone).exists()) {
-                    Supplier supplier = snapshot.child(phone).getValue(Supplier.class);
-                    if (supplier.getEmail().equals(email)) {
-                        supplierReference.child(phone).child("password").setValue(password);
-                        mILoginPage.showToast("Reset Password Successfully");
-                    } else {
-                        mILoginPage.showAccountErrorDialog("Wrong Email", "Please try again");
-                    }
+                    supplierReference.child(phone).child("password").setValue(password);
+                    mILoginPage.showToast("Thay đổi mật khẩu thành công");
+
                 }
                 else{
-                    mILoginPage.showAccountErrorDialog("Account doest not exist", "You are the court's supplier. Sure?");
+                    mILoginPage.showAccountErrorDialog("Tài khoản không tồn tại", "Bạn có phải là một nhà cung cấp?");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 mILoginPage.closeWaitingDialog();
-                mILoginPage.showToast("Something wrong");
+                mILoginPage.showToast("Lỗi hệ thống");
             }
         });
     }

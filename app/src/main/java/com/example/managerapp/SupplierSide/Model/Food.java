@@ -3,7 +3,6 @@ package com.example.managerapp.SupplierSide.Model;
 public class Food extends MenuItem{
     String image;
     Integer supplierID;
-    String foodID;
     String status;
     String star;
 
@@ -23,10 +22,9 @@ public class Food extends MenuItem{
         this.star = star;
     }
 
-    public Food(String image, Integer supplierID, String foodID, String status, String star) {
+    public Food(String image, Integer supplierID, String status, String star) {
         this.image = image;
         this.supplierID = supplierID;
-        this.foodID = foodID;
         this.status = status;
         this.star = star;
     }
@@ -54,7 +52,5 @@ public class Food extends MenuItem{
     }
     public Food() {
     }
-    public String getFoodID() {
-        return foodID;
-    }
+
 }

@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.managerapp.R;
 
 public class ResetPasswordDialog extends AppCompatDialogFragment {
-    EditText edtPhone, edtEmail, edtPass, edtConfirmPass;
+    EditText edtPhone, edtPass, edtConfirmPass;
     Button btnSubmit;
     Listener listener;
     @NonNull
@@ -27,10 +27,9 @@ public class ResetPasswordDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.reset_password_layout, null);
         builder.setView(view);
-        builder.setTitle("Reset Password");
+        builder.setTitle("Tạo mật khẩu mới");
         builder.setCancelable(true);
         edtPhone = view.findViewById(R.id.edtName);
-        edtEmail = view.findViewById(R.id.edtEmail);
         edtPass = view.findViewById(R.id.edtPass);
         edtConfirmPass = view.findViewById(R.id.edtConfirmPass);
         btnSubmit = view.findViewById(R.id.btnSubmit);
@@ -40,18 +39,14 @@ public class ResetPasswordDialog extends AppCompatDialogFragment {
             public void onClick(View view) {
                 String pass = edtPass.getText().toString();
                 String phone = edtPhone.getText().toString();
-                String email = edtEmail.getText().toString();
                 if(!pass.equals(edtConfirmPass.getText().toString())){
-                    Toast.makeText(getContext(),"Confirm password is wrong",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Mật khẩu không khớp",Toast.LENGTH_SHORT).show();
                 }
                 else if(phone.isEmpty()){
-                    Toast.makeText(getContext(),"Please fill your phone",Toast.LENGTH_SHORT).show();
-                }
-                else if(email.isEmpty()){
-                    Toast.makeText(getContext(),"Please fill your email",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Hãy nhập số điện thoại",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    listener.resetPassword(phone, email, pass);
+                    listener.resetPassword(phone, pass);
                     dismiss();
                 }
 
@@ -67,6 +62,6 @@ public class ResetPasswordDialog extends AppCompatDialogFragment {
     }
 
     public interface Listener {
-        void resetPassword(String phone, String email, String password);
+        void resetPassword(String phone, String password);
     }
 }

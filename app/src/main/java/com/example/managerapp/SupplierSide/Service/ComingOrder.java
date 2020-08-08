@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.IBinder;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class ComingOrder extends Service implements ChildEventListener {
     NotificationManagerCompat managerCompat;
@@ -52,10 +55,11 @@ public class ComingOrder extends Service implements ChildEventListener {
 
     @Override
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-        if(snapshot.child("supplierID").getValue().equals(Common.supplier.getSupplierID())
-                && snapshot.child("status").getValue().equals("0")){
-            Order order = snapshot.getValue(Order.class);
-            String orderDetail = "Customer placed a $" + order.getTotal() + " order";
+        Order order = snapshot.getValue(Order.class);
+        assert order != null;
+        if(order.getSupplierID().equals(Common.supplier.getSupplierID())
+                && order.getStatus().equals("0")){
+            String orderDetail = "Bạn có đơn hàng mới";
             Intent startIntent = new Intent(this, HomePage.class);
             startIntent.putExtra("fragment", "menu");
             PendingIntent content = PendingIntent.getActivity(getBaseContext(), 0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT);

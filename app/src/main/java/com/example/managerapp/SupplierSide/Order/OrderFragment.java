@@ -69,15 +69,15 @@ public class OrderFragment extends Fragment implements OrderContract.View, Order
     @Override
     public void showConfirmDialog(String message, final int position, final String opt) {
         final AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
-        alertDialog.setTitle("Order " + (position + 1) + ": " + message)
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertDialog.setTitle("Đơn hàng " + (position + 1) + ": " + message)
+                .setNegativeButton("Quay lại", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                         presenter.loadOrder();
                     }
                 })
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

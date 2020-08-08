@@ -71,14 +71,14 @@ public class MenuFragment extends Fragment implements MenuContract.View, MenuAda
     public boolean onContextItemSelected(@NonNull final MenuItem item) {
         if(item.getTitle().equals(Common.REMOVE_OPT)) {
             AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
-            alertDialog.setTitle("Do you want to remove this food?")
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+            alertDialog.setTitle("Bán muốn xóa món ăn này?")
+                    .setNegativeButton("Quay lại", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                         }
                     })
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
@@ -105,7 +105,7 @@ public class MenuFragment extends Fragment implements MenuContract.View, MenuAda
         MenuItem searchItem = menu.findItem(R.id.action_search);
         searchView = (SearchView)searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setQueryHint("Search with your food");
+        searchView.setQueryHint("Tìm kiếm món bạn muốn");
         searchAutoComplete = searchView.findViewById(R.id.search_src_text);
         searchAutoComplete.setDropDownBackgroundResource(R.color.white);
         searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -138,9 +138,9 @@ public class MenuFragment extends Fragment implements MenuContract.View, MenuAda
     @Override
     public void showConnectionError() {
         AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
-        alertDialog.setTitle("Connection Error")
-                .setMessage("Please check your connection")
-                .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialog.setTitle("Lỗi kết nối")
+                .setMessage("Vui lòng kiểm tra lại kết nối")
+                .setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -160,9 +160,9 @@ public class MenuFragment extends Fragment implements MenuContract.View, MenuAda
     @Override
     public void showLimitExcessDialog() {
         AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
-        alertDialog.setTitle("Warning")
-                .setMessage("Maximum 50 items are allowed")
-                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+        alertDialog.setTitle("Cảnh báo")
+                .setMessage("Tối đa 50 món ăn")
+                .setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

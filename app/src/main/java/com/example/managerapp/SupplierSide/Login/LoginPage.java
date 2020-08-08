@@ -65,7 +65,7 @@ public class LoginPage extends AppCompatActivity implements LoginContract.View
     @Override
     public void showWaitingDialog() {
         mDialog = new ProgressDialog(this);
-        mDialog.setMessage("Please waiting...");
+        mDialog.setMessage("Đang xác thực...");
         mDialog.show();
     }
 
@@ -77,7 +77,7 @@ public class LoginPage extends AppCompatActivity implements LoginContract.View
     @Override
     public void showResetPasswordDialog() {
         ResetPasswordDialog resetPasswordDialog = new ResetPasswordDialog();
-        resetPasswordDialog.show(getSupportFragmentManager(),"reset pass");
+        resetPasswordDialog.show(getSupportFragmentManager(),"");
     }
 
     @Override
@@ -85,7 +85,7 @@ public class LoginPage extends AppCompatActivity implements LoginContract.View
         AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
         alertDialog.setTitle(error)
                 .setMessage(message)
-                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -97,7 +97,7 @@ public class LoginPage extends AppCompatActivity implements LoginContract.View
     }
 
     @Override
-    public void resetPassword(String phone, String email, String password) {
-        presenter.resetPassword(phone, email, password);
+    public void resetPassword(String phone, String password) {
+        presenter.resetPassword(phone, password);
     }
 }

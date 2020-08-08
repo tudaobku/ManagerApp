@@ -39,11 +39,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.recyclerOrderItem.setLayoutManager(new LinearLayoutManager(orderListener.getContext()));
         holder.recyclerOrderItem.setAdapter(new OrderItemAdapter(order.getFoods() , orderListener.getContext()));
         if(order.getStatus().equals("0")){
-            holder.txtStatus.setText("Preparing");
+            holder.txtStatus.setText("Đang chuẩn bị");
             holder.txtStatus.setBackgroundColor(0xFFC52F2F);
         }
         else{
-            holder.txtStatus.setText("Completed");
+            holder.txtStatus.setText("Đã hoàn thành");
             holder.txtStatus.setBackgroundColor(0xFF72DA76);
         }
         if (order.getType().equals("0")) holder.txtTakeAway.setVisibility(View.INVISIBLE);

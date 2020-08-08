@@ -47,7 +47,7 @@ public class EditFoodPresenter implements EditFoodContract.Presenter {
         if(checkInput(menuItem)){
             food.setMenuItem(menuItem);
             if(localUri != null){
-                editFoodView.showProgress("Uploading Image...");
+                editFoodView.showProgress("Đang tải ảnh...");
                 String imageName = UUID.randomUUID().toString();
                 final StorageReference imageFolder = storage.child("food-" + imageName);
                 imageFolder.putFile(localUri)
@@ -80,14 +80,14 @@ public class EditFoodPresenter implements EditFoodContract.Presenter {
                             @Override
                             public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                                 int progress = (int)(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                                editFoodView.showProgress("Uploaded Image " + progress + "%");
+                                editFoodView.showProgress("Ảnh đã tải " + progress + "%");
                             }
                         });
             }
             else {
-                if(position == -1) editFoodView.showInvalidMessage("Please add food image");
+                if(position == -1) editFoodView.showInvalidMessage("Hãy thêm ảnh món ăn");
                 else {
-                    editFoodView.showProgress("Updating....");
+                    editFoodView.showProgress("Đang cập nhật....");
                     editFoodInteractor.performUpdateFood(position, food);
                     editFoodView.stopProgress();
                     editFoodView.closeView();
@@ -99,11 +99,11 @@ public class EditFoodPresenter implements EditFoodContract.Presenter {
 
     private boolean checkInput(MenuItem menuItem) {
         if(menuItem.getName().isEmpty()) {
-            editFoodView.showInvalidMessage("Please fill food name");
+            editFoodView.showInvalidMessage("Hãy nhập tên món ăn");
             return false;
         }
         if(menuItem.getPrice().isEmpty()) {
-            editFoodView.showInvalidMessage("Please fill food price");
+            editFoodView.showInvalidMessage("Hãy nhập giá món ăn");
             return false;
         }
         return true;
