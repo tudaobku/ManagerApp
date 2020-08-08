@@ -1,0 +1,532 @@
+commit 6f050c1f76230131ff03db95853b8796f5927ff1
+Merge: 9f5341f 256cbce
+Author: Fiction_NTV <thevien898@gmail.com>
+Date:   Sun Jul 12 20:15:52 2020 +0700
+
+    Merge pull request #5 from tudaobku/master
+    
+    Merge pull request #19 from ntvien/master
+
+commit 256cbced8be726149f9599e6cdf9880e1e2c1be8
+Merge: 9c33728 9f5341f
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sun Jul 12 20:13:44 2020 +0700
+
+    Merge pull request #19 from ntvien/master
+    
+    update
+
+commit 9f5341fc3ac142d62147c97e08cad49f61e5a336
+Merge: 5e2e804 9c33728
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sun Jul 12 20:13:31 2020 +0700
+
+    Merge branch 'master' into master
+
+commit 9c337281aa24868a668d27b46d48041ed8717355
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sun Jul 12 11:26:01 2020 +0700
+
+    fixBug
+
+commit 7902628abc7a2020df5b41d881b44dd4aa31170d
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sun Jul 12 10:19:03 2020 +0700
+
+    fixBug(designError)
+
+commit 52eab057f706b6c9e16ad68b832bd4f2d00a4da1
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sun Jul 12 07:50:24 2020 +0700
+
+    Update misc.xml
+
+commit 6a8b5f30583d4fde6ed231956751ae880849af56
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sun Jul 12 02:35:22 2020 +0700
+
+    addCourtManager
+
+commit 48327fbcf221bdac5bea1b60ee6fba34e21e9235
+Merge: 6a519db e43f841
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jul 11 23:09:25 2020 +0700
+
+    Merge pull request #18 from PeterNguyen-BK/thuan_branch
+    
+    Fix authentication for manager account
+
+commit e43f841c896d58fd11501daa20e0deebaf2a429e
+Merge: e5cb3a5 6a519db
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jul 11 23:09:17 2020 +0700
+
+    Merge branch 'master' into thuan_branch
+
+commit 6a519db8b5b4b4d3d8078f7ee19c4509a94ed3f2
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jul 11 22:52:33 2020 +0700
+
+    fixBug(addFood)
+
+commit e5cb3a5df4442bbcf869ce4c4250661886de2638
+Author: PeterNguyen-BK <thuan156109@gmail.com>
+Date:   Sat Jul 11 22:52:02 2020 +0700
+
+    Fix authentication for manager account
+
+commit d94a60309e005b1c834804a83516e721fa9ca3fc
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jul 11 22:29:07 2020 +0700
+
+    fixImageError
+
+commit 3ced8c311c050be2eb1b2172ffd55ee773e8fa77
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jul 11 09:47:27 2020 +0700
+
+    fixBug(menu)
+
+commit 79d2e058fb1ae94c275b914322ce5d8eb6fc0181
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jul 11 08:08:14 2020 +0700
+
+    formatPackage
+
+commit d1f297cb3ddbfcbc5e5806bf950f72849a79e57d
+Merge: 454e7f9 55c2dba
+Author: PeterNguyen-BK <63248141+PeterNguyen-BK@users.noreply.github.com>
+Date:   Fri Jul 10 20:45:41 2020 +0700
+
+    Merge pull request #2 from tudaobku/master
+    
+    Update
+
+commit 55c2dba9695f13e61697a533ed803f8427b81971
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Fri Jul 10 19:44:04 2020 +0700
+
+    updateMVP
+
+commit 577979410a22b432a53ca69b0674fb8f8b91d79a
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Fri Jul 10 13:56:04 2020 +0700
+
+    updatetoMVP
+
+commit cdc96fba1117ec9d89fafd8dd93ec15b262f6a5a
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Tue Jul 7 12:00:36 2020 +0700
+
+    updateFirebaseUI
+
+commit 5e2e8040c320f1e404e688ba1d68b01786d27c99
+Author: ntvien <62584322+ntvien@users.noreply.github.com>
+Date:   Tue Jul 7 11:43:06 2020 +0700
+
+    Update activity_manager_login.xml
+
+commit 454e7f96e1280fd360fb7d18fe18e40c6db72944
+Merge: f273c32 c8c8b83
+Author: PeterNguyen-BK <63248141+PeterNguyen-BK@users.noreply.github.com>
+Date:   Tue Jul 7 11:09:43 2020 +0700
+
+    Merge pull request #1 from tudaobku/master
+    
+    Update
+
+commit c8b80aec461f61bd188a9a146fc62ca167f3a078
+Merge: 3d6ff4b c8c8b83
+Author: Fiction_NTV <thevien898@gmail.com>
+Date:   Tue Jul 7 09:43:09 2020 +0700
+
+    Merge pull request #3 from tudaobku/master
+    
+    tu
+
+commit c8c8b83d4db797f28bccfcfafa18da539c68d047
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Tue Jul 7 09:39:51 2020 +0700
+
+    merge
+
+commit 98b4925d1ec5aab6b274b0edcb8f1f99cc3a26e2
+Merge: 08c0cb9 3d6ff4b
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Tue Jul 7 09:36:23 2020 +0700
+
+    Merge branch 'master' of https://github.com/ntvien/ManagerApp
+
+commit 3d6ff4bcc75a1eb44292c546eb69fe6ea503cb76
+Author: ntvien <62584322+ntvien@users.noreply.github.com>
+Date:   Tue Jul 7 09:27:30 2020 +0700
+
+    fix login
+
+commit 08c0cb94b1038cc8c3ce91ff4f70133eac943f65
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Tue Jul 7 09:24:48 2020 +0700
+
+    fix
+
+commit e8c3c86a377b52d23f2ede5648fb7491ef913865
+Merge: 12cbb86 be3765d
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Mon Jul 6 22:28:07 2020 +0700
+
+    Merge branch 'ntvien-master'
+
+commit be3765dadc441a9b852f4134bd8db5055110567e
+Merge: 12cbb86 496d90d
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Mon Jul 6 22:27:30 2020 +0700
+
+    Merge branch 'master' of https://github.com/ntvien/ManagerApp into ntvien-master
+
+commit 12cbb868f940a935272d30299a3352bb930d4a31
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Mon Jul 6 22:22:03 2020 +0700
+
+    fix
+
+commit 496d90d4a29345a70edcc617c38c89f92aa02b07
+Author: ntvien <62584322+ntvien@users.noreply.github.com>
+Date:   Mon Jul 6 19:25:51 2020 +0700
+
+    update
+
+commit 25ce7ea77e1071050b5996832b609174c182ab03
+Author: ntvien <62584322+ntvien@users.noreply.github.com>
+Date:   Mon Jul 6 19:16:11 2020 +0700
+
+    add report
+
+commit bc6f38558cba2a0eef7eb0628f24bff5b5397a10
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Mon Jul 6 11:03:51 2020 +0700
+
+    addBackend
+
+commit b73d2d432c49a1fd0d229fff731092459ab8f9ba
+Merge: 2fcc527 954d5b0
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Mon Jul 6 07:53:56 2020 +0700
+
+    Merge pull request #14 from tudaobku/PeterNguyen-BK-thuan_branch
+    
+    Peter nguyen bk thuan branch
+
+commit 954d5b00ddb679b3e2949384eb36ab35ae75e22a
+Merge: 2fcc527 4093f92
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Mon Jul 6 07:52:34 2020 +0700
+
+    Merge branch 'thuan_branch' of https://github.com/PeterNguyen-BK/ManagerApp into PeterNguyen-BK-thuan_branch
+
+commit 2fcc527152287f808bc14ce9d03db842ed3a67dc
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Mon Jul 6 07:19:30 2020 +0700
+
+    fix
+
+commit 4093f922469917be1a89482663bed767a5666b8d
+Merge: c7fc50a e4b229c
+Author: PeterNguyen-BK <thuan156109@gmail.com>
+Date:   Mon Jul 6 07:16:44 2020 +0700
+
+    Update function authentication and change manager login method
+
+commit c7fc50ae3ce5249d2bcc07c099a14b29116a182e
+Author: PeterNguyen-BK <thuan156109@gmail.com>
+Date:   Mon Jul 6 07:11:50 2020 +0700
+
+    Update function authentication and change manager login method
+
+commit 57d4500b037ebc080a3a36fd9fa5fb8144c5fd6c
+Merge: 12d5126 d49b302
+Author: Fiction_NTV <thevien898@gmail.com>
+Date:   Sun Jul 5 10:51:23 2020 +0700
+
+    Merge pull request #2 from tudaobku/master
+    
+    merge
+
+commit d49b3029c95745f39536b78f6ff144ed43bd9484
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Fri Jul 3 16:06:04 2020 +0700
+
+    FixNotification(ver>8.0)
+
+commit bae05dc2b96138a683b1fec40e94bd041bc132b2
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Fri Jul 3 11:52:36 2020 +0700
+
+    FixBug
+
+commit 0bdc9d63719c8bbdf63cafd707d4c9bc29850b89
+Merge: f2940e4 e4b229c
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Fri Jul 3 11:51:15 2020 +0700
+
+    Merge pull request #12 from PeterNguyen-BK/thuan_branch
+    
+    Update function delete stall and fix function add stall
+
+commit e4b229c070b99998a51911fffeef8b192beac7da
+Merge: 69d4486 f2940e4
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Fri Jul 3 11:50:45 2020 +0700
+
+    Merge branch 'master' into thuan_branch
+
+commit 69d4486ec4db3f870161526e27292a826198d847
+Author: PeterNguyen-BK <thuan156109@gmail.com>
+Date:   Fri Jul 3 11:49:47 2020 +0700
+
+    Update function delete stall and fix function add stall
+
+commit f2940e4f1bb378c8e2a654a3e007a8c139bf7503
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Fri Jul 3 00:24:07 2020 +0700
+
+    AutoCompleteSearch
+
+commit c04b2c837fe5aad6f7d1310a09c7063437b64c8a
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Wed Jul 1 10:10:43 2020 +0700
+
+    AddChangeStallInformation
+
+commit 84e9122fdd01827312ae3235a10893da33027bdd
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Wed Jul 1 08:31:52 2020 +0700
+
+    ModifyNotification
+
+commit 30b36d39dbb0faa9287b0ce745cbcf61cd292b14
+Merge: 3aa2447 143a738
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Tue Jun 30 23:34:45 2020 +0700
+
+    Merge branch 'master' of https://github.com/tudaobku/ManagerApp
+
+commit 3aa24471cfcc447258910e919c4035885d5b6df5
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Tue Jun 30 23:30:12 2020 +0700
+
+    AddNotification
+
+commit 8381dee209792475f6271c432b261ec11c62f760
+Author: PeterNguyen-BK <thuan156109@gmail.com>
+Date:   Tue Jun 30 22:52:23 2020 +0700
+
+    Update function add new stall
+
+commit 143a738a51cdb96548bdf1e3c9c7064eda480641
+Merge: 26c0112 8381dee
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Tue Jun 30 22:52:23 2020 +0700
+
+    Merge pull request #11 from PeterNguyen-BK/thuan_branch
+    
+    Update function add new stall
+
+commit 26c0112b0a401ff0b3455a1ef17a28ad34b47c1b
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Tue Jun 30 21:21:44 2020 +0700
+
+    OrderStatus
+
+commit f273c32bdd51ce3c74c9f9c45fa65ec7b822d5bc
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sun Jun 28 21:04:46 2020 +0700
+
+    ChangeCart
+
+commit a99ddfa1ba9cbc9ed887b79be54917c876a36875
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sun Jun 28 09:12:10 2020 +0700
+
+    AddOrder
+
+commit 12d5126f3151937fcff3930c7e8dde180209d5be
+Merge: d5f1d8a c4a5351
+Author: ntvien <62584322+ntvien@users.noreply.github.com>
+Date:   Sat Jun 27 16:24:03 2020 +0700
+
+    Merge branch 'master' of https://github.com/ntvien/ManagerApp
+
+commit d5f1d8a967af7890c79b67f8f5909d9cdc589b48
+Author: ntvien <62584322+ntvien@users.noreply.github.com>
+Date:   Sat Jun 27 16:23:21 2020 +0700
+
+    v2
+
+commit 7cd97a29bd9ccd2cd6bc12ea37ac1d8c73f7f1f5
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 16:20:57 2020 +0700
+
+    Update activity_main.xml
+
+commit c4a5351f9639e43e75ba8ac936191d81bb02838f
+Author: Fiction_NTV <thevien898@gmail.com>
+Date:   Sat Jun 27 16:15:52 2020 +0700
+
+    Delete New Text Document.txt
+
+commit 4f43447cec5618545ed2f17ccaf565e51e27b196
+Author: Fiction_NTV <thevien898@gmail.com>
+Date:   Sat Jun 27 16:15:44 2020 +0700
+
+    Delete New Text Document (3).txt
+
+commit e6235a2d1a8ce2b6439340d237c8b888ea0744a1
+Author: Fiction_NTV <thevien898@gmail.com>
+Date:   Sat Jun 27 16:15:37 2020 +0700
+
+    Delete New Text Document (2).txt
+
+commit 83d52fefd5940ebf60394f2113f0e8d0c5a625ac
+Merge: c092f31 b30b03b
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 16:08:25 2020 +0700
+
+    Merge pull request #6 from pipirad/master
+    
+    Add files via upload
+
+commit c092f3159d4bf445a5e8a56861aae55366b705b0
+Merge: 7489472 8373659
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 16:06:59 2020 +0700
+
+    Merge branch 'master' of https://github.com/tudaobku/ManagerApp
+
+commit 74894729d90c93163e81f4d984becb352a886118
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 16:06:33 2020 +0700
+
+    search
+
+commit b30b03bef4d5f07a2b1cf7a8d468b8705fc8a994
+Author: pipirad <66073622+pipirad@users.noreply.github.com>
+Date:   Sat Jun 27 16:06:26 2020 +0700
+
+    Add files via upload
+
+commit 83736591514668c68d50b297748246fd0fa6f489
+Merge: 99d3ee5 29ea9ce
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 16:05:45 2020 +0700
+
+    Merge pull request #4 from pipirad/master
+    
+    t
+
+commit 29ea9ce9485d7ce23d73cf9955f68dc10d27fab4
+Author: pipirad <66073622+pipirad@users.noreply.github.com>
+Date:   Sat Jun 27 16:03:09 2020 +0700
+
+    Update food_item.xml
+
+commit f6dc2234c708e47dd8c283212fc64ed4d5537b98
+Author: pipirad <66073622+pipirad@users.noreply.github.com>
+Date:   Sat Jun 27 16:02:30 2020 +0700
+
+    Update activity_supplier_login.xml
+
+commit 2aa79cee7e5669d6acc12c569de98bd3ec9679ce
+Author: pipirad <66073622+pipirad@users.noreply.github.com>
+Date:   Sat Jun 27 16:01:31 2020 +0700
+
+    Update activity_new_food.xml
+
+commit 9ddd58264b94a316d4784b7affd5773f58cd7c6e
+Author: pipirad <66073622+pipirad@users.noreply.github.com>
+Date:   Sat Jun 27 16:00:42 2020 +0700
+
+    Update activity_food_detail.xml
+
+commit 99d3ee5c5c441864d9e056fcdf607834fee59664
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 16:00:20 2020 +0700
+
+    Delete New Text Document.txt
+
+commit f3395c17c3f7b164b01bde22a8f8846a5440cbad
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 16:00:13 2020 +0700
+
+    Delete New Text Document (3).txt
+
+commit 9897e9c407021f5db2fd83aa0839050e9011bdb2
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 16:00:05 2020 +0700
+
+    Delete New Text Document (2).txt
+
+commit aa71b85cd2363029a8109d8fe2c641fdd41417b3
+Merge: abb9117 59b576f
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 15:59:42 2020 +0700
+
+    Merge pull request #3 from pipirad/master
+    
+    Update
+
+commit 59b576f476d7d4ac3466933fe56bb36bc7f401a8
+Author: pipirad <66073622+pipirad@users.noreply.github.com>
+Date:   Sat Jun 27 15:55:21 2020 +0700
+
+    Update
+
+commit abb91171e61b5a824d5c11bef54407f7b674e8d6
+Merge: 9865a86 276142d
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 15:46:35 2020 +0700
+
+    Merge pull request #2 from ntvien/master
+    
+    hu
+
+commit 276142d1892e06fefacaca637072797bedc87878
+Author: ntvien <62584322+ntvien@users.noreply.github.com>
+Date:   Sat Jun 27 15:44:53 2020 +0700
+
+    Create New Text Document (3).txt
+
+commit f8b2e46ef0bf74c03bc734da100521b5b4ff8d5c
+Author: ntvien <62584322+ntvien@users.noreply.github.com>
+Date:   Sat Jun 27 15:34:56 2020 +0700
+
+    v2
+
+commit a67c0bbef7d34d94c17d6df4af62249610c5604c
+Author: ntvien <62584322+ntvien@users.noreply.github.com>
+Date:   Sat Jun 27 15:25:09 2020 +0700
+
+    fffff
+
+commit 9865a8617075e41c4dbd6beb86f8119a35d7fcf3
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 15:22:58 2020 +0700
+
+    Delete APA-Format.docx
+
+commit f3e81c8dfd713530e5d9009367c293fd1bb78ec0
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Sat Jun 27 15:22:34 2020 +0700
+
+    Add files via upload
+
+commit 4bf2f6f285ed98b12895281817761fda70a2ff4e
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Fri Jun 26 21:58:31 2020 +0700
+
+    v1
+
+commit 4304715a021d7c9a09d607f8216cf3d1981fe227
+Author: tudaobku <45635904+tudaobku@users.noreply.github.com>
+Date:   Fri Jun 26 21:49:57 2020 +0700
+
+    Create README.md
