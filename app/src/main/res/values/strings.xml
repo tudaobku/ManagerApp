@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ManagerApp</string>
+    <string name="app_name">Manager</string>
     <string name="title_activity_home">Home</string>
     <string name="action_settings">Settings</string>
 
