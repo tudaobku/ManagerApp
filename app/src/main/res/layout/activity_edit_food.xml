@@ -30,8 +30,7 @@
             <ImageView
                 android:id="@+id/imageFood"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="centerCrop"
+                android:layout_height="250dp"
                 android:src="@drawable/ic_baseline_add_photo_image_24" />
 
             <androidx.appcompat.widget.Toolbar
@@ -71,7 +70,7 @@
                     android:layout_weight="1"
                     android:autoText="false"
                     android:scrollbarAlwaysDrawHorizontalTrack="false"
-                    android:text="Name"
+                    android:text="Tên món ăn"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="#08114A"
@@ -103,7 +102,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Price"
+                    android:text="Giá"
                     android:textAlignment="center"
                     android:textColor="#08114A"
                     android:textSize="20dp"
@@ -116,6 +115,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:inputType="numberDecimal"
                     android:textSize="20dp"
                     android:typeface="serif" />
             </LinearLayout>
@@ -129,7 +129,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Discount"
+                    android:text="Giảm giá(%)"
                     android:textAlignment="center"
                     android:textColor="#08114A"
                     android:textSize="20dp"
@@ -139,6 +139,7 @@
                 <EditText
                     android:id="@+id/edtDiscount"
                     android:layout_width="0dp"
+                    android:inputType="numberDecimal"
                     android:maxLength="2"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -151,11 +152,12 @@
                 android:layout_height="wrap_content"
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/design_default_color_primary_dark"
-                    android:text="Description"/>
+                    android:text="Mô tả món ăn"
+                    android:textColor="@color/design_default_color_primary_dark" />
                 <EditText
                     android:id="@+id/edtDescription"
                     android:layout_width="match_parent"
@@ -181,7 +183,7 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
                 android:background="#919DEC"
-                android:text="Update"
+                android:text="Cập nhật"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold"

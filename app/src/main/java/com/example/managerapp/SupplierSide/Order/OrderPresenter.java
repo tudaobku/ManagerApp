@@ -74,13 +74,13 @@ public class OrderPresenter implements OrderContract.Presenter{
 
     @Override
     public void removeOrder(int position) {
-        orderView.showConfirmDialog("Remove Order. Sure?", position, Common.REMOVE_OPT);
+        orderView.showConfirmDialog("Xóa đơn hàng", position, Common.REMOVE_OPT);
     }
 
     @Override
     public void completeOrder(int position) {
         Order order = orderList.get(position);
-        if(order.getStatus().equals("0")) orderView.showConfirmDialog("Order is ready?", position, Common.UPDATE_OPT);
+        if(order.getStatus().equals("0")) orderView.showConfirmDialog("Các món ăn đã hoàn thành", position, Common.UPDATE_OPT);
     }
 
     @Override

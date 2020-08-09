@@ -72,7 +72,7 @@ public class EditFoodActivity extends AppCompatActivity implements EditFoodContr
         Intent intent  = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"), Common.RESULT_LOAD_IMAGE);
+        startActivityForResult(Intent.createChooser(intent,"Chọn ảnh"), Common.RESULT_LOAD_IMAGE);
     }
 
     @Override
@@ -86,9 +86,9 @@ public class EditFoodActivity extends AppCompatActivity implements EditFoodContr
     @Override
     public void showInvalidMessage(String message) {
         AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
-        alertDialog.setTitle("Invalid Food")
+        alertDialog.setTitle("Món ăn không hợp lệ")
                 .setMessage(message)
-                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -127,9 +127,9 @@ public class EditFoodActivity extends AppCompatActivity implements EditFoodContr
     @Override
     public void showConnectionError() {
         AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
-        alertDialog.setTitle("Connection Error")
-                .setMessage("Please check your connection")
-                .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialog.setTitle("Lỗi kết nối")
+                .setMessage("Hãy kiểm tra kết nối internet")
+                .setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

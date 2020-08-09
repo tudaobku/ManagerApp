@@ -10,10 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ManagerSide.ReportPage"></activity>
-        <activity android:name=".ManagerSide.VerifyPage" />
+        <activity android:name=".VerifyPage" />
         <activity android:name=".ManagerSide.SupplierList" />
         <activity android:name=".ManagerSide.HomePage" />
-        <activity android:name=".ManagerSide.SignUpPage" />
 
         <service
             android:name=".SupplierSide.Service.ComingOrder"

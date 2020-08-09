@@ -6,14 +6,15 @@ public class Order {
     List<OrderItem> foods;
     String phone;
     String status;
-    String supplierID;
+    Integer supplierID;
     String total;
     String type;
-    public String getSupplierID() {
+
+    public Integer getSupplierID() {
         return supplierID;
     }
 
-    public void setSupplierID(String supplierID) {
+    public void setSupplierID(Integer supplierID) {
         this.supplierID = supplierID;
     }
 
@@ -60,7 +61,7 @@ public class Order {
         this.total = total;
     }
 
-    public Order(List<OrderItem> foods, String phone, String status, String total, String type, String supplierID) {
+    public Order(List<OrderItem> foods, String phone, String status, String total, String type, Integer supplierID) {
         this.foods = foods;
         this.phone = phone;
         this.status = status;

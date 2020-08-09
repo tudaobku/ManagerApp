@@ -12,6 +12,6 @@ public interface LoginContract {
     interface Presenter{
         void login(String phone, String password);
         void forgotPassword();
-        void resetPassword(String phone, String email, String password);
+        void resetPassword(String phone, String password);
     }
 }

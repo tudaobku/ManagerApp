@@ -7,11 +7,11 @@
         <item
             android:id="@+id/nav_menu"
             android:icon="@drawable/ic_baseline_restaurant_menu_24"
-            android:title="Menu" />
+            android:title="Thực đơn" />
         <item
             android:id="@+id/nav_order"
             android:icon="@drawable/order"
-            android:title="Order" />
+            android:title="Đơn hàng" />
        <item
             android:id="@+id/nav_stall"
             android:icon="@drawable/ic_baseline_info_24"
@@ -19,7 +19,7 @@
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_baseline_exit_to_app_24"
-            android:title="Logout" />
+            android:title="Đăng xuất" />
 
     </group>
 </menu>

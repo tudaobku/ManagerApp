@@ -46,7 +46,7 @@ public class MenuPresenter implements MenuContract.Presenter, MenuContract.onOpe
 
     @Override
     public void onAddSuccess() {
-        menuView.showToast("Food added to your menu");
+        menuView.showToast("Món ăn đã được thêm vào thực đơn");
     }
 
     @Override

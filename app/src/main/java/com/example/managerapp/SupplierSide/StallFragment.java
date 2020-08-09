@@ -37,7 +37,7 @@ import static android.app.Activity.RESULT_OK;
 public class StallFragment extends Fragment {
     final private int RESULT_LOAD_IMAGE = 1;
     Uri tempUri;
-    EditText edtName, edtEmail;
+    EditText edtName;
     Button btnUpload, btnUpdate;
     ImageView imgLogo;
     DatabaseReference supplierList;
@@ -49,7 +49,6 @@ public class StallFragment extends Fragment {
         View root = inflater.inflate(R.layout.stall_fragment, container, false);
 
         edtName = root.findViewById(R.id.edtName);
-        edtEmail = root.findViewById(R.id.edtEmail);
         imgLogo = root.findViewById(R.id.imgLogo);
         btnUpload = root.findViewById(R.id.btnUpload);
         btnUpdate = root.findViewById(R.id.btnUpdate);
@@ -78,13 +77,13 @@ public class StallFragment extends Fragment {
         Intent intent  = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"), RESULT_LOAD_IMAGE);
+        startActivityForResult(Intent.createChooser(intent,"Chọn ảnh"), RESULT_LOAD_IMAGE);
     }
 
     private void updateAccount() {
         if(tempUri != null){
             final ProgressDialog mDialog = new ProgressDialog(getContext());
-            mDialog.setMessage("Uploading Logo...");
+            mDialog.setMessage("Đang tải ảnh...");
             mDialog.show();
 
             String imageName = UUID.randomUUID().toString();
@@ -114,7 +113,7 @@ public class StallFragment extends Fragment {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                             int progress = (int)(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mDialog.setMessage("Uploaded Logo " + progress + "%");
+                            mDialog.setMessage("Ảnh đã tải " + progress + "%");
                         }
                     });
 
@@ -127,7 +126,6 @@ public class StallFragment extends Fragment {
 
     private void showAccount() {
         edtName.setText(Common.supplier.getName());
-        edtEmail.setText(Common.supplier.getEmail());
         if(!Common.supplier.getImage().isEmpty()) Picasso.with(getContext()).load(Common.supplier.getImage()).into(imgLogo);
     }
     @Override
@@ -146,23 +144,22 @@ public class StallFragment extends Fragment {
 
     private void updateInformation() {
         Common.supplier.setName(edtName.getText().toString());
-        Common.supplier.setEmail(edtEmail.getText().toString());
         supplierList.child(Common.supplierPhone).setValue(Common.supplier);
         startActivity(new Intent(getContext(), HomePage.class));
     }
 
     private void showUploadLogoDialog() {
         final AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
-        alertDialog.setMessage("You should choose logo for your stall")
-                .setTitle("Warning !!!")
-                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+        alertDialog.setMessage("Bạn nên chọn logo cho stall của bạn")
+                .setTitle("Cảnh báo!!!")
+                .setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                         updateInformation();
                     }
                 })
-                .setNegativeButton("Come back", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Quay lại", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

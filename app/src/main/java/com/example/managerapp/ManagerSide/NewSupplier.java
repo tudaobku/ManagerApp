@@ -89,7 +89,7 @@ public class NewSupplier extends AppCompatActivity {
                     Toast.makeText(NewSupplier.this, "Số điện thoại đã tồn tại", Toast.LENGTH_SHORT).show();
                 } else {
                    mDialog.dismiss();
-                    Supplier newSupplier = new Supplier(name, txtPassword.getText().toString(), Integer.parseInt(stall),"", "");
+                    Supplier newSupplier = new Supplier(name, txtPassword.getText().toString(), Integer.parseInt(stall),"");
                     supplierList.child(phone).setValue(newSupplier).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
