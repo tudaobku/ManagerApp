@@ -1,99 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_manager"
-        tools:context=".SupplierSide.Login.LoginPage"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical"
-        android:paddingTop="100dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_manager"
+    android:orientation="vertical"
+    tools:context=".SupplierSide.Login.LoginPage">
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center"
-            android:src="@drawable/icon" />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/icon" />
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/a1001" />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/a1001" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Số điện thoại"
-            android:textColor="@android:color/holo_blue_bright"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
-            android:typeface="serif" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Số điện thoại"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtName"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edtName"
 
-            android:layout_marginStart="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:met_baseColor="@android:color/white"
-            android:text="0978897607"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:typeface="serif"
-            app:met_maxCharacters="10" />
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="0978897607"
+        android:textSize="20dp"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mật khẩu"
-            android:textColor="@android:color/holo_blue_bright"
-            android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:met_baseColor="@android:color/white"
+        app:met_maxCharacters="10" />
 
-            android:layout_marginStart="20dp"
-            android:textStyle="bold"
-            android:typeface="serif" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Mật khẩu"
+        android:textColor="@android:color/holo_blue_bright"
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:text="123456"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:typeface="serif"
-            android:visibility="visible"
+        android:textSize="18sp"
+        android:textStyle="bold"
+         />
 
-            android:layout_marginStart="20dp"
-            app:met_baseColor="@android:color/white"
-            app:met_singleLineEllipsis="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtForgotPass"
-            android:text="Quên mật khẩu?"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="18sp"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:typeface="serif" />
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="177dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:backgroundTint="@android:color/holo_orange_light"
-            android:text="Đăng nhập"
-            android:textStyle="bold"
-            android:typeface="serif" />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edtPassword"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:inputType="textPassword"
+        android:text="12082000"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:met_baseColor="@android:color/white" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/txtForgotPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Quên mật khẩu?"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="18sp"
+        android:textStyle="bold"
+         />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="177dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:text="Đăng nhập"
+        android:textStyle="bold"
+        />
+
+</LinearLayout>
 

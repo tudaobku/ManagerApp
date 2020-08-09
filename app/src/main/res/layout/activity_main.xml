@@ -13,12 +13,10 @@
 
         <ImageView
             android:layout_marginTop="50dp"
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_gravity="center"
             android:layout_height="150dp"
-            android:src="@drawable/nameapp"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="181dp" />
+            android:src="@drawable/nameapp" />
 
         <ImageView
             android:layout_width="300dp"
@@ -26,37 +24,33 @@
             android:scaleType="fitStart"
             android:layout_gravity="center"
             android:src="@drawable/who"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="340dp" />
+             />
 
         <Button
             android:id="@+id/btnStall"
             android:layout_width="307dp"
             android:layout_height="75dp"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="20dp"
             android:backgroundTint="#B5A6CD"
             android:text="Nhà cung cấp"
+            android:layout_gravity="center"
             android:textColor="@android:color/background_dark"
             android:textSize="24sp"
             android:textStyle="bold"
             android:typeface="serif"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="490dp" />
+             />
 
         <Button
             android:id="@+id/btnCourt"
             android:layout_width="303dp"
             android:layout_height="70dp"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:backgroundTint="#D8909F"
-            android:text="Quản lý "
+            android:text="Quản lý"
             android:textColorHint="#FFFFFF"
             android:textColorLink="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"
             android:typeface="serif"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnStall" />
+          />
     </LinearLayout>
