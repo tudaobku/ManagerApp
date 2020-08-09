@@ -1,4 +1,4 @@
-package com.example.managerapp.ManagerSide;
+package com.example.managerapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +11,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.managerapp.ManagerSide.HomePage;
+import com.example.managerapp.ManagerSide.LoginPage;
 import com.example.managerapp.ManagerSide.Model.Manager;
-import com.example.managerapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -35,9 +36,8 @@ public class VerifyPage extends AppCompatActivity {
     EditText edtOTP;
     ProgressBar progressBar;
     String verificationCode;
-    String name, password;
-    String ownerPhone;
-    DatabaseReference managerReference;
+    String phone;
+    String type;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,28 +49,16 @@ public class VerifyPage extends AppCompatActivity {
 
         progressBar.setVisibility(View.GONE);
 
-        name = getIntent().getStringExtra("name");
-        password = getIntent().getStringExtra("password");
-        managerReference = FirebaseDatabase.getInstance().getReference("Manager");
-        managerReference.child("phone").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ownerPhone = Objects.requireNonNull(snapshot.getValue()).toString();
-                sendVerificationCodeToUser(ownerPhone);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        phone = getIntent().getStringExtra("phone");
+        type = getIntent().getStringExtra("type");
+        sendVerificationCodeToUser(phone);
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String code = edtOTP.getText().toString();
 
-                if (code.isEmpty() || code.length() != 6) {
+                if (code.length() != 6) {
                     edtOTP.setError("Mã OTP không hợp lệ");
                     edtOTP.requestFocus();
                     return;
@@ -121,10 +109,11 @@ public class VerifyPage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Manager manager = new Manager(name, password);
-                            managerReference.child("List").push().setValue(manager);
-                            finish();
-                            startActivity(new Intent(VerifyPage.this, LoginPage.class));
+                            if(type == "manager") startActivity(new Intent(VerifyPage.this, HomePage.class));
+                            else{
+                                setResult(1);
+                                finish();
+                            }
                         }else {
                             Toast.makeText(VerifyPage.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         }

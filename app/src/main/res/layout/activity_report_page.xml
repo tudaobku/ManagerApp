@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="Supplier Number"
+            android:text="Số lượng nhà cung cấp"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
@@ -75,7 +75,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="User Number"
+            android:text="Số lượng người dùng"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
@@ -96,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Order:"
+        android:text="Đơn hàng:"
         android:textAllCaps="true"
 
         android:textColor="@android:color/black"
@@ -112,7 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="Delivered Order"
+            android:text="Thực hiện thành công"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
@@ -139,7 +139,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="Canceled Order"
+            android:text="Bị hủy"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
@@ -166,7 +166,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="Current Order"
+            android:text="Đang thực hiện"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="24sp" />

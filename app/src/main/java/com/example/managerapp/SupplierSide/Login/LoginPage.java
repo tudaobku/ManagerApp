@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.managerapp.R;
 
 import com.example.managerapp.SupplierSide.HomePage;
+import com.example.managerapp.VerifyPage;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class LoginPage extends AppCompatActivity implements LoginContract.View
@@ -25,7 +26,6 @@ public class LoginPage extends AppCompatActivity implements LoginContract.View
     TextView txtForgotPass;
     LoginPresenter presenter;
     ProgressDialog mDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
