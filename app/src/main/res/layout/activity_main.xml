@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_start"
-        tools:context=".MainPage"
-        android:orientation="vertical"
-        >
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_start"
+    tools:context=".MainPage"
+    android:orientation="vertical"
+    >
 
-        <ImageView
-            android:layout_marginTop="50dp"
-            android:layout_width="400dp"
-            android:layout_gravity="center"
-            android:layout_height="150dp"
-            android:src="@drawable/nameapp"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="181dp" />
+    <ImageView
+        android:layout_marginTop="50dp"
+        android:layout_width="400dp"
+        android:layout_gravity="center"
+        android:layout_height="150dp"
+        android:src="@drawable/nameapp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="181dp" />
 
-        <ImageView
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:scaleType="fitStart"
-            android:layout_gravity="center"
-            android:src="@drawable/who"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="340dp" />
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:scaleType="fitStart"
+        android:layout_gravity="center"
+        android:src="@drawable/who"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="340dp" />
 
-        <Button
-            android:id="@+id/btnStall"
-            android:layout_width="307dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#B5A6CD"
-            android:text="Nhà cung cấp"
-            android:textColor="@android:color/background_dark"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:typeface="serif"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="490dp" />
+    <Button
+        android:id="@+id/btnStall"
+        android:layout_width="307dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#B5A6CD"
+        android:text="Nhà cung cấp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="490dp" />
 
-        <Button
-            android:id="@+id/btnCourt"
-            android:layout_width="303dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#D8909F"
-            android:text="Quản lý "
-            android:textColorHint="#FFFFFF"
-            android:textColorLink="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:typeface="serif"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnStall" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnCourt"
+        android:layout_width="303dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#D8909F"
+        android:text="Quản lý "
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStall" />
+</LinearLayout>

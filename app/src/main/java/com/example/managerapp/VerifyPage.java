@@ -109,7 +109,7 @@ public class VerifyPage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            if(type == "manager") startActivity(new Intent(VerifyPage.this, HomePage.class));
+                            if(type.equals("manager")) startActivity(new Intent(VerifyPage.this, HomePage.class));
                             else{
                                 setResult(1);
                                 finish();
